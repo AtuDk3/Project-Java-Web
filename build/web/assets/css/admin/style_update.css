@@ -1,0 +1,40 @@
+main {
+        padding: 0 5%;
+    }
+    h4 {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .form-group {
+        padding: 5px 0;
+    }
+
+    .form-group label {
+        padding: 10px 0;
+        font-size: large;
+    }
+
+    .form-check {
+        padding-top: 10px;
+    }
+    
+    p {
+        padding-top: 10px;
+    }
+
+    .image {
+        object-fit: cover;
+        border-radius: 5%;
+        box-shadow: 5px 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .col {
+        padding: 10px;
+    }
+
+    #btn {
+        margin-top: 10px;
+        width: fit-content;
+        margin-bottom: 20px;
+    }
