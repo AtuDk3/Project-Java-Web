@@ -5,8 +5,8 @@
 
 package controller;
 
-import dal.CategoryProductDAO;
-import dal.ProductDAO;
+import dal.impl.CategoryProductDAOImpl;
+import dal.impl.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,7 +14,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.FileWriter;
 import java.util.List;
 import model.CategoryProduct;
 import model.Product;
@@ -62,7 +61,7 @@ public class ProductDetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         // category
-        CategoryProductDAO categoryProductDAO = new CategoryProductDAO();
+        CategoryProductDAOImpl categoryProductDAO = new CategoryProductDAOImpl();
 
         List<CategoryProduct> listCategory = categoryProductDAO.getAll();
         request.setAttribute("categoryProduct", listCategory);

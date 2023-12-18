@@ -4,8 +4,8 @@
  */
 package controller;
 
-import dal.CategoryProductDAO;
-import dal.ProductDAO;
+import dal.impl.CategoryProductDAOImpl;
+import dal.impl.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -63,7 +63,7 @@ public class ProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // category
-        CategoryProductDAO categoryProductDAO = new CategoryProductDAO();
+        CategoryProductDAOImpl categoryProductDAO = new CategoryProductDAOImpl();
 
         List<CategoryProduct> listCategory = categoryProductDAO.getAll();
         request.setAttribute("categoryProduct", listCategory);

@@ -4,10 +4,34 @@
  */
 package service;
 
+import java.util.List;
+import model.Account;
+
 /**
  *
  * @author Lenovo
  */
 public interface UserService {
     
+    Account login(String userName, String password);
+    
+    Account get(String userName);
+    
+    Account get(int id);
+    
+    void insert (Account account); 
+    
+    void edit(Account account);
+    
+    void delete(int id);
+    
+    boolean register(String userName, String email, String password, String phone);
+    
+    List<Account> getAll();
+    
+    boolean checkExitsEmail(String email);
+    
+    boolean checkExitsUserName(String userName);
+    
+    boolean checkExitsPhone(String phone);
 }

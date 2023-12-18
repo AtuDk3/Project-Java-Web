@@ -1,18 +1,29 @@
 main {
     padding: 0 5%;
 }
-    h4 {
-        text-align: center;
-        padding: 10px;
-    }
+h4 {
+    text-align: center;
+    padding: 10px;
+    color: #006D77;
+}
 
-    .btn a {
-        text-decoration: none;
-        color: white;
-    }
+.btn a {
+    text-decoration: none;
+    color: white;
+}
 
-    .image {
-        object-fit: cover;
-        border-radius: 5%;
-        box-shadow: 5px 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    }
+.image {
+    object-fit: cover;
+    border-radius: 5%;
+    box-shadow: 5px 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#table_list {
+    width: 100%;
+}
+
+.dataTables_info, .dataTables_paginate .paging_simple_numbers {
+    margin-bottom: 50px;
+}
+
+

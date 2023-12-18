@@ -19,38 +19,55 @@
 
             <div class="header-search-container">
                 <form action="search"> <!--Nếu ko ghi method gì thì mặc định là get, get và post khác nhau ở chỗ get sẽ truyền lên url txtSearch , post sẽ ko hiển thị trên url nên post bảo mật nên -->
-                <input type="text" oninput="searchByName(this)" name="txtSearch" value="${txtS}" class="search-field" placeholder="Enter your product name...">
+                    <input type="text" oninput="searchByName(this)" name="txtSearch" value="${txtS}" class="search-field" placeholder="Enter your product name...">
 
-                <button type="submit" class="search-btn">
-                    <ion-icon name="search-outline"></ion-icon>
-                </button>
+                    <button type="submit" class="search-btn">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </button>
                 </form>
             </div>
 
             <div class="header-user-actions">
+                <c:choose>
+                    <c:when test="${sessionScope.account == null}">               
 
-                <a href="#"><button class="action-btn">
-                        <ion-icon name="person-outline"></ion-icon>
-                    </button></a>
+                        <a href="${pageContext.request.contextPath}/login"><button class="action-btn">
+                                <ion-icon name="log-in-outline"></ion-icon>
+                                <p>Log In</p>
+                            </button></a>
 
-                <!-- <button class="action-btn">
-                  <ion-icon name="heart-outline"></ion-icon>
-                  <span class="count">0</span>
-                </button> -->
+                        <a href="${pageContext.request.contextPath}/register"><button class="action-btn">
+                                <ion-icon name="add-circle-outline"></ion-icon>
+                                <p>Register</p>
+                            </button></a>
 
-                <a href="#"><button class="action-btn">
-                        <ion-icon name="bag-handle-outline"></ion-icon>
-                        <span class="count">0</span>
-                    </button></a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${pageContext.request.contextPath}/profile"><button class="action-btn">
+                                <ion-icon name="person-outline"></ion-icon>
+                                <p>${sessionScope.account.userName}</p>
+                            </button></a>
 
-                <a href="login"><button class="action-btn">
-                        <ion-icon name="log-in-outline"></ion-icon>
-                    </button></a>
+                        <a href="${pageContext.request.contextPath}/heart">
+                            <button class="action-btn">
+                                <ion-icon name="heart-outline"></ion-icon>
+                                <span class="count">0</span>
+                                <p>Heart</p>
+                            </button> 
+                        </a>
 
-                <a href="#"><button class="action-btn">
-                        <ion-icon name="log-out-outline"></ion-icon>
-                    </button></a>
+                        <a href="${pageContext.request.contextPath}/cart"><button class="action-btn">
+                                <ion-icon name="bag-handle-outline"></ion-icon>
+                                <span class="count">0</span>
+                                <p>Cart</p>
+                            </button></a>
 
+                        <a href="${pageContext.request.contextPath}/logout"><button class="action-btn">
+                                <ion-icon name="log-out-outline"></ion-icon>
+                                <p>Log Out</p>
+                            </button></a>
+                        </c:otherwise>
+                    </c:choose>
             </div>
 
         </div>
@@ -83,7 +100,7 @@
                     </ul>
 
                 </li>
-                
+
                 <li class="menu-category">
                     <a href="product?cid=${0}" class="menu-title">Products</a>
                 </li>

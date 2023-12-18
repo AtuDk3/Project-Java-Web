@@ -6,28 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<style>
-    h4 {
-        text-align: center;
-        padding: 10px;
-    }
-
-    #table_list {
-        width: 95%;
-    }
-
-    .btn a {
-        text-decoration: none;
-        color: white;
-    }
-
-    .image {
-        object-fit: cover;
-        border-radius: 5%;
-        box-shadow: 5px 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    }
-</style>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -35,7 +13,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <title>AdminSite</title>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/style_list.css">
+        <title>List Order</title>
     </head>
     <body>
 
@@ -47,7 +26,7 @@
 
             <!-- MAIN -->
             <main>
-                <table class="table table-striped">
+                <table class="table table-striped" id="table_list">
     <thead>
         <tr>
             <th>Id Order</th>
