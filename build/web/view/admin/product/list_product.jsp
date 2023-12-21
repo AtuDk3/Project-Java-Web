@@ -5,7 +5,11 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<!--Định dạng giá tiền-->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!--Cắt chuỗi-->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +19,8 @@
         <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/style_list.css">
-        <title>AdminSite</title>
+        <title>Dashboard | List Product</title>
+        <link rel="shortcut icon" href="<c:url value="/assets/images/logo/logo.png" />" type="image/x-icon">
     </head>
     <body>
 
@@ -28,9 +33,10 @@
             <!-- MAIN -->
             <main>
                 <h4>List Product</h4>
-                <table class="table table-striped" id="table_list">
+                <table id="example" class="table table-striped" id="table_list" style="width:100%;">
                     <thead>
                         <tr>
+                            <th>No</th>
                             <th>Id</th>
                             <th>Name Product</th>
                             <th>Iamge Product</th>
@@ -46,31 +52,32 @@
                     </thead>
 
                     <tbody>
-                        <?php
-                        $i = 0;
-                        foreach ($category as $key => $pro) {
-                        $i++;?>
-                        <tr>
-                            <td><?php echo $i ?></td>
-                            <td><?php echo $pro['title_product'] ?></td>
-                            <td><img class="image" src="<?php echo BASE_URL ?>public/uploads/product/imageproduct/<?php echo $pro['image_product'] ?>" height="100px" width="100px"></td>
-                            <td><?php echo $pro['title_category_product'] ?></td>
-                            <td>
-                                <?php
-                                echo is_numeric($pro['price_product']) ? number_format($pro['price_product'], 0, ',', '.') . 'đ' : '0đ';
-                                ?>
-                            </td>
-                            <td><?php echo $pro['quantity_product'] ?></td>
-                            <td><?php if($pro['product_hot'] == 1) echo 'Yes';
-                                else echo 'No'; ?></td>
-                            <td><?php echo $pro['desc_product'] ?></td>
-                            <td><button type="button" class="btn btn-danger"><a href="<?php echo BASE_URL ?>product/deleteProduct/<?php echo $pro['id_product'] ?>">Delete</button>
-                                <button type="button" class="btn btn-warning"><a href="<?php echo BASE_URL ?>product/editProduct/<?php echo $pro['id_product'] ?>">Update</a></button>
-                            </td>
+                        <c:forEach items="${requestScope.productList}" var="productList" varStatus="no" >
+                            <tr>
+                                <td>${no.index + 1}</td>
+                                <td>${productList.idProduct}</td>
+                                <td>${productList.titleProduct}</td>
+                                <td><img class="image" src="${pageContext.request.contextPath}/assets/images/product/${productList.imgProduct}" height="100px" width="100px"></td>
+                                <td>${productList.categoryProduct.titleCategoryProduct}</td>
+                                <td><fmt:formatNumber type="currency" value="${productList.priceProduct * 0.9}" pattern="###,###₫" /></td>
+                        <td>${productList.quantityProduct}</td>
+
+                        <c:choose>
+                            <c:when test="${productList.hotProduct == 1}">
+                                <td>Yes</td>
+                            </c:when>
+                            <c:otherwise>
+                                <td>No</td>
+                            </c:otherwise>
+                        </c:choose>
+
+                        <td>${fn:length(productList.descProduct) <= 100 ? productList.descProduct : fn:substring(productList.descProduct, 0, 100)}...</td>
+                        <td><button type="button" class="btn btn-danger"><a href="<?php echo BASE_URL ?>product/deleteProduct/<?php echo $pro['id_product'] ?>">Delete</button>
+                            <button type="button" class="btn btn-warning"><a href="<?php echo BASE_URL ?>product/editProduct/<?php echo $pro['id_product'] ?>">Update</a></button>
+                        </td>
 
                         </tr>
-                        <?php
-                        } ?>
+                    </c:forEach>
                     </tbody>
                 </table>
             </main>

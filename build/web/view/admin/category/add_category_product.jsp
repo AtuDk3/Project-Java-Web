@@ -24,14 +24,15 @@
             <main>
                 <div class="container-form-add-category-product">
                     <h4>Add New Category Product</h4>
-                    <form action="<?php echo BASE_URL; ?>product/insertCategory" method="post">
+                    <form action="${pageContext.request.contextPath}/admin/category_product/add" method="post">
                         <div class="form-group">
                             <label for="nameCategory">Name Category Product</label>
-                            <input type="text" class="form-control" placeholder="Enter name category product" name="title_category_product" required>
+                            <input type="text" class="form-control" placeholder="Enter name category product" name="titleCategoryProduct" required>
                         </div>
                         <div class="form-group">
                             <label for="describeCategory">Describe Category Product</label>
-                            <input type="textarea" id="editor1" class="form-control" placeholder="Enter describe category product here ..." name="desc_category_product" required>
+                            <textarea type="text" name="descCategoryProduct" placeholder="Enter describe category product here ..." class=" form-control" required></textarea>
+
                         </div>
                         <button id="btn" type="submit" class="btn btn-primary">Add new category product</button>
                     </form>

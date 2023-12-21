@@ -94,7 +94,7 @@
 
 
                 <li class="menu-category">
-                    <a href="product?cid=${0}" class="menu-title">Category Product</a>
+                    <a href="${pageContext.request.contextPath}/product?cid=${0}" class="menu-title">Category Product</a>
                     <ul class="dropdown-list">
                         <c:forEach items="${requestScope.categoryProduct}" var="cateProduct" >
                             <li class="dropdown-item">
@@ -106,7 +106,7 @@
                 </li>
 
                 <li class="menu-category">
-                    <a href="product?cid=${0}" class="menu-title">Products</a>
+                    <a href="${pageContext.request.contextPath}/product?cid=${0}" class="menu-title">Products</a>
                 </li>
 
                 <li class="menu-category">

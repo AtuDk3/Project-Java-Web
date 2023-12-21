@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.admin;
+package controller_admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,8 +12,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.CategoryProduct;
 import service.CategoryProductService;
 import service.impl.CategoryProductServiceImpl;
 
@@ -21,10 +19,9 @@ import service.impl.CategoryProductServiceImpl;
  *
  * @author Lenovo
  */
-@WebServlet(name="CategoryProductServlet", urlPatterns={"/admin/category_product/list"})
-public class ListCategoryProductServlet extends HttpServlet {
+@WebServlet(name="DeleteCategoryProductServlet", urlPatterns={"/admin/category_product/delete"})
+public class DeleteCategoryProductServlet extends HttpServlet {
     CategoryProductService categoryProductService = new CategoryProductServiceImpl();
-    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -40,10 +37,10 @@ public class ListCategoryProductServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CategoryProductServlet</title>");  
+            out.println("<title>Servlet DeleteCategoryProductServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CategoryProductServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet DeleteCategoryProductServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,9 +57,10 @@ public class ListCategoryProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        List<CategoryProduct> listCategoryProducts = categoryProductService.getAll();
-        request.setAttribute("cateProductList", listCategoryProducts);
-        request.getRequestDispatcher("/view/admin/category/list_category_product.jsp").forward(request, response);
+        String cid = request.getParameter("cid");
+        int idCategoryProduct = Integer.parseInt(cid);
+        categoryProductService.delete(idCategoryProduct);
+        response.sendRedirect(request.getContextPath() + "/admin/category_product/list");
     } 
 
     /** 

@@ -10,7 +10,7 @@
 
 <!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="#" class="brand">&nbsp &nbsp <ion-icon name="finger-print-outline"></ion-icon>&nbsp Dashboard</a>
+		<a href="${pageContext.request.contextPath}/admin" class="brand">&nbsp &nbsp <ion-icon name="finger-print-outline"></ion-icon>&nbsp Dashboard</a>
 		<ul class="side-menu">
 			<li><a href="#" class="active"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
 			<li class="divider" data-text="main">Main</li>
@@ -18,15 +18,15 @@
 				<a href="#"><i class='bx bxs-inbox icon' ></i> Category <i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
 					<li><a href="${pageContext.request.contextPath}/admin/category_product/list">List Category</a></li>
-					<li><a href="#">Add Category</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/category_product/add">Add Category</a></li>
 				</ul>
 			</li>
                         
                         <li>
 				<a href="#"><i class='bx bxs-inbox icon' ></i> Product <i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
-					<li><a href="#">List Product</a></li>
-					<li><a href="#">Add Product</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/product/list">List Product</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/product/add">Add Product</a></li>
 				</ul>
 			</li>
 

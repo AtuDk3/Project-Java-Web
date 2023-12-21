@@ -22,4 +22,10 @@ public interface ProductDao {
     
     List<Product> searchProductByName(String txtSearch);
     
+    void insert(Product product);
+
+    void update(Product product);
+
+    void delete(int idProduct);
+    
 }

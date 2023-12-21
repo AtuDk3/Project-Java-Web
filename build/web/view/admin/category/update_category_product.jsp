@@ -29,24 +29,19 @@
             <!-- MAIN -->
             <main>
                 <div class="container-form-update-article">
-    <h4>Edit Category Product</h4>
-    <?php
-    foreach($categorybyid as $key => $cate) {
-        ?> 
-    <form action="<?php echo BASE_URL ?>/product/updateCategoryProduct/<?php echo $cate['id_category_product'] ?>" method="post">
-        <div class="form-group">
-            <label for="nameCategory">Name Category Product</label>
-            <input type="text" value="<?php echo $cate['title_category_product'] ?>" name="title_category_product" class=" form-control" >
-        </div>
-        <div class="form-group">
-            <label for="describeArticle">Describe Category Product</label>
-            <textarea type="text" value="<?php echo $cate['desc_category_product'] ?>" name="desc_category_product" class=" form-control" ></textarea>
-        </div>
-        <button id="btn" type="submit" class="btn btn-primary">Update Category Product</button>
-    </form>
-    <?php
-    } ?>
-</div>
+                    <h4>Edit Category Product</h4>
+                    <form action="${pageContext.request.contextPath}/admin/category_product/update?cid=${cateProduct.idCategoryProduct}" method="post">
+                        <div class="form-group">
+                            <label for="nameCategory">Name Category Product</label>
+                            <input type="text" value="${cateProduct.titleCategoryProduct}" name="titleCategoryProduct" class=" form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="describeArticle">Describe Category Product</label>
+                            <textarea type="text" name="descCategoryProduct" class=" form-control" required>${cateProduct.descCategoryProduct}</textarea>
+                        </div>
+                        <button id="btn" type="submit" class="btn btn-primary">Update Category Product</button>
+                    </form>
+                </div>
             </main>
             <!-- MAIN -->
         </section>

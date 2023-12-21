@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css"/>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/style_list.css">
         <link rel="shortcut icon" href="<c:url value="/assets/images/logo/logo.png" />" type="image/x-icon">
-        <title>List Category</title>
+        <title>Dashboard | List Category</title>
     </head>
     <body>
 
@@ -49,8 +49,8 @@
                                 <td>${cateProductList.titleCategoryProduct}</td>
                                 <td>${cateProductList.descCategoryProduct}</td>
                                 <td>
-                                    <button type="button" class="btn btn-danger"><a href="${pageContext.request.contextPath}/admin/category_product/delete?cid=${cateProductList.idCategoryProduct}">Delete</a></button> 
-                                    <button type="button" class="btn btn-warning"><a href="${pageContext.request.contextPath}/admin/category_product/delete?cid=${cateProductList.idCategoryProduct}">Update</a></button>
+                                    <button type="button" onclick="confirmDelete(${cateProductList.idCategoryProduct})" class="btn btn-danger">Delete</button> 
+                                    <button type="button" class="btn btn-warning"><a href="${pageContext.request.contextPath}/admin/category_product/update?cid=${cateProductList.idCategoryProduct}">Update</a></button>
                                 </td>
                             </tr>
                         </c:forEach>

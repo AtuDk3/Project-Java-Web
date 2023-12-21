@@ -1,6 +1,9 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 
-
-package controller.admin;
+package controller_admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,13 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 import model.CategoryProduct;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
-
 import service.CategoryProductService;
 import service.impl.CategoryProductServiceImpl;
 
@@ -23,10 +20,11 @@ import service.impl.CategoryProductServiceImpl;
  *
  * @author Lenovo
  */
-@WebServlet(name="UpdateCategoryProductServlet", urlPatterns={"/admin/category_product/update"})
-public class UpdateCategoryProductServlet extends HttpServlet {
-    CategoryProductService categoryProductService = new CategoryProductServiceImpl();
+@WebServlet(name="AddCategoryProductServlet", urlPatterns={"/admin/category_product/add"})
+public class AddCategoryProductServlet extends HttpServlet {
    
+    CategoryProductService categoryProductService = new CategoryProductServiceImpl();
+    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -42,10 +40,10 @@ public class UpdateCategoryProductServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdateCategoryProductServlet</title>");  
+            out.println("<title>Servlet AddCategoryProductServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UpdateCategoryProductServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AddCategoryProductServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,11 +60,7 @@ public class UpdateCategoryProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-//        String cid = request.getParameter("cid");
-//        int idCategoryProduct = Integer.parseInt(cid);
-//        CategoryProduct categoryProducts = categoryProductService.get(idCategoryProduct);
-//        request.setAttribute("cateProduct", categoryProducts);
-        request.getRequestDispatcher("/view/admin/category/update_category_product.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/admin/category/add_category_product.jsp").forward(request, response);
     } 
 
     /** 
@@ -81,22 +75,15 @@ public class UpdateCategoryProductServlet extends HttpServlet {
     throws ServletException, IOException {
         CategoryProduct categoryProduct = new CategoryProduct();
         
-        DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
-        ServletFileUpload servletFileUpload = new ServletFileUpload(diskFileItemFactory);
-        servletFileUpload.setHeaderEncoding("UTF-8");
-        try {
-            response.setContentType("text/html");
-            response.setCharacterEncoding("UTF-8");
-            request.setCharacterEncoding("UTF-8");
-            
-            List<FileItem> items = servletFileUpload.parseRequest(request);
-            for(FileItem item: items){
-                
-            }
-        } catch (Exception e) {
-        }
+        String titleCategoryProduct = request.getParameter("titleCategoryProduct");
+        String descCategoryProduct = request.getParameter("descCategoryProduct");
         
+        categoryProduct.setTitleCategoryProduct(titleCategoryProduct);
+        categoryProduct.setDescCategoryProduct(descCategoryProduct);
         
+        categoryProductService.insert(categoryProduct);
+        
+        response.sendRedirect(request.getContextPath() + "/admin/category_product/list");
     }
 
     /** 

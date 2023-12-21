@@ -3,17 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package controller_admin;
 
-import dal.impl.CategoryProductDAOImpl;
-import dal.impl.ProductDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.nio.file.Paths;
 import java.util.List;
 import model.CategoryProduct;
 import model.Product;
@@ -26,8 +28,15 @@ import service.impl.ProductServiceImpl;
  *
  * @author Lenovo
  */
-@WebServlet(name="ProductDetailsServlet", urlPatterns={"/product_details"})
-public class ProductDetailsServlet extends HttpServlet {
+@WebServlet(name="AddProductServlet", urlPatterns={"/admin/product/add"})
+
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+                 maxFileSize = 1024 * 1024 * 10,      // 10MB
+                 maxRequestSize = 1024 * 1024 * 50)   // 50MB
+public class AddProductServlet extends HttpServlet {
+    
+    ProductService productService = new ProductServiceImpl();
+    CategoryProductService categoryProductService = new CategoryProductServiceImpl();
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -44,10 +53,10 @@ public class ProductDetailsServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProductDetailsServlet</title>");  
+            out.println("<title>Servlet AddProductServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ProductDetailsServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AddProductServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -69,24 +78,8 @@ public class ProductDetailsServlet extends HttpServlet {
         List<CategoryProduct> listCategory = categoryProductService.getAll();
         request.setAttribute("categoryProduct", listCategory);
         
-        List<CategoryProduct> listCategoryAccessories = categoryProductService.getByDescCategoryProduct("Accessories");
-        request.setAttribute("categoryAccessories", listCategoryAccessories);
-        List<CategoryProduct> listCategoryPosters = categoryProductService.getByDescCategoryProduct("Posters");
-        request.setAttribute("categoryPosters", listCategoryPosters);
-        List<CategoryProduct> listCategoryFiguresToys = categoryProductService.getByDescCategoryProduct("Figures & Toys");
-        request.setAttribute("categoryFiguresToys", listCategoryFiguresToys);
-        List<CategoryProduct> listCategoryClothers = categoryProductService.getByDescCategoryProduct("Clothers");
-        request.setAttribute("categoryClothers", listCategoryClothers);
         
-        // product
-        ProductService productService = new ProductServiceImpl();
-        
-        String pid = request.getParameter("pid");
-        int idProduct = Integer.parseInt(pid);
-        Product product_details = productService.getProductByID(idProduct);
-        request.setAttribute("product_details", product_details);
-
-        request.getRequestDispatcher("/view/product_details.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/admin/product/add_product.jsp").forward(request, response);
     } 
 
     /** 
@@ -99,7 +92,43 @@ public class ProductDetailsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-
+        String titleProduct = request.getParameter("titleProduct");
+        Part imagePart = request.getPart("imageProduct");
+        String priceProduct = request.getParameter("priceProduct");
+        String quantityProduct = request.getParameter("quantityProduct");
+        String hotProduct = request.getParameter("hotProduct");
+        String idCategoryProduct = request.getParameter("idCategoryProduct");
+        String descProduct = request.getParameter("descProduct");
+        
+        double price = Double.parseDouble(priceProduct);
+        int quantity = Integer.parseInt(quantityProduct);
+        int cid = Integer.parseInt(idCategoryProduct);
+        int hot = Integer.parseInt(hotProduct);
+        
+        String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdir();
+        }
+        
+        String fileName = "product_" + System.currentTimeMillis() + "_" + Paths.get(imagePart.getSubmittedFileName()).getFileName().toString();
+        String filePath = uploadPath + File.separator + fileName;
+        imagePart.write(filePath);
+        
+        Product product = new Product();
+        CategoryProduct categoryProduct = categoryProductService.get(cid);
+        
+        product.setTitleProduct(titleProduct);
+        product.setImgProduct(fileName);
+        product.setPriceProduct(price);
+        product.setQuantityProduct(quantity);
+        product.setHotProduct(hot);
+        product.setCategoryProduct(categoryProduct);
+        product.setDescProduct(descProduct);
+        
+        productService.insert(product);
+        
+        response.sendRedirect(request.getContextPath() + "/admin/product/list");
     }
 
     /** 

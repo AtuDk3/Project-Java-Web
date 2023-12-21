@@ -156,5 +156,62 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
         }
         return listProduct;
     }
+
+    @Override
+    public void insert(Product product) {
+        String sql = "insert into tab_product(title_product, price_product, desc_product, quantity_product, img_product, hot_product, id_category_product) values(?, ?, ?, ?, ?, ?, ?, ?) ";
+        try {           
+            PreparedStatement ps = connection.prepareStatement(sql);
+            
+            ps.setString(1, product.getTitleProduct());
+            ps.setDouble(2, product.getPriceProduct());
+            ps.setString(3, product.getDescProduct());
+            ps.setInt(4, product.getQuantityProduct());
+            ps.setString(5, product.getImgProduct());
+            ps.setInt(6, product.getHotProduct());
+            ps.setInt(7, product.getCategoryProduct().getIdCategoryProduct());
+            
+            ResultSet rs = ps.executeQuery();
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void update(Product product) {
+        String sql = "update tab_product set title_product = ?, price_product = ?, desc_product = ?, quantity_product = ?, img_product = ?, hot_product = ?, id_category_product = ?"
+                + " where id_product = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            
+            ps.setString(1, product.getTitleProduct());
+            ps.setDouble(2, product.getPriceProduct());
+            ps.setString(3, product.getDescProduct());
+            ps.setInt(4, product.getQuantityProduct());
+            ps.setString(5, product.getImgProduct());
+            ps.setInt(6, product.getHotProduct());
+            ps.setInt(7, product.getCategoryProduct().getIdCategoryProduct());
+            ps.setInt(8, product.getIdProduct());
+
+            ResultSet rs = ps.executeQuery();
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    @Override
+    public void delete(int idProduct) {
+        String sql = "delete from tab_product where id_product = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idProduct);
+            ResultSet rs = ps.executeQuery();
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
     
 }

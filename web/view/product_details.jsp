@@ -171,7 +171,7 @@
                         <h3>Total amount:</h3>
                         <h2><fmt:formatNumber type="currency" value="${product_details.priceProduct}" pattern="###,###₫" /></h2>
                         <a href="#"><button class="btn_buy">Buy Now</button></a>
-                        <a href="${pageContext.request.contextPath}/member/cart_add?pid=${product_details.idProduct}&quantity=1"><button class="btn_add_to_cart">Add To Cart</button></a>
+                        <a href="member/cart_add?pid=${product_details.idProduct}&quantity=1"><button class="btn_add_to_cart">Add To Cart</button></a>
                     </form>
                 </div>
             </div>

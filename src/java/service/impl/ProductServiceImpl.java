@@ -42,5 +42,30 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> searchProductByName(String txtSearch) {
         return productDao.searchProductByName(txtSearch);
     }
+
+    @Override
+    public void insert(Product product) {
+        productDao.insert(product);
+    }
+
+    @Override
+    public void update(Product product) {
+        Product oldProduct = productDao.getProductByID(product.getIdProduct());
+        
+        oldProduct.setTitleProduct(product.getTitleProduct());
+        oldProduct.setPriceProduct(product.getPriceProduct());
+        oldProduct.setDescProduct(product.getDescProduct());
+        oldProduct.setQuantityProduct(product.getQuantityProduct());
+        oldProduct.setImgProduct(product.getImgProduct());
+        oldProduct.setHotProduct(product.getHotProduct());
+        oldProduct.setCategoryProduct(product.getCategoryProduct());
+        
+        productDao.update(oldProduct);
+    }
+
+    @Override
+    public void delete(int idProduct) {
+        productDao.delete(idProduct);
+    }
     
 }
