@@ -1,5 +1,6 @@
 package dal.impl;
 
+import dal.ProductDao;
 import java.util.ArrayList;
 import java.util.List;
 import model.CategoryProduct;
@@ -8,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Product;
 
-public class ProductDAO extends DBContext {
+public class ProductDAOImpl extends DBContext implements ProductDao {
 
     public List<Product> getAll() {
         List<Product> listProduct = new ArrayList<>();
@@ -156,117 +157,4 @@ public class ProductDAO extends DBContext {
         return listProduct;
     }
     
-    public static void main(String[] args) {
-        ProductDAO pdao = new ProductDAO();
-    List<Product> p = pdao.searchProductByName("gear");
-        System.out.println(p.toString());
-    }
-    
-
-//    public Customer getCustomerByID(int id) {
-//        String sql = "select * from Customer where customerID = ?";
-//        try {
-//            PreparedStatement pt = connection.prepareStatement(sql);
-//            pt.setInt(1, id);
-//            ResultSet rs = pt.executeQuery();
-//            if (rs.next()) {
-//                Customer c = new Customer(rs.getInt("customerID"),
-//                        rs.getString("lastName"),
-//                        rs.getString("firstName"),
-//                        rs.getString("phone"),
-//                        rs.getString("address"),
-//                        rs.getString("city"),
-//                        rs.getString("country"));
-//                return c;
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        return null;
-//    }
-//    public static void main(String[] args) {
-//        CategoryProductDAOImpl customerDAO = new CategoryProductDAOImpl();
-//        List<Customer> listCustomers = customerDAO.getAll();
-//        System.out.println(listCustomers.get(0).getLastName() + listCustomers.get(0).getFirstName());
-//    }
-//    public void insert(Customer cus) {
-//        String sql = "insert into Customer(customerID, lastName, firstName, phone, address, city, country) values(?,?,?,?,?,?,?)";
-//        try {
-//            PreparedStatement pt = connection.prepareStatement(sql);
-//            pt.setInt(1, cus.getCustomerID());
-//            pt.setString(2, cus.getLastName());
-//            pt.setString(3, cus.getFirstName());
-//            pt.setString(4, cus.getPhone());
-//            pt.setString(5, cus.getAddress());
-//            pt.setString(6, cus.getCity());
-//            pt.setString(7, cus.getCountry());
-//            pt.executeUpdate();
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//    }
-//
-//    public void delete(int id) {
-//        String sql = "delete from Customer where customerID=?";
-//        try {
-//            PreparedStatement pt = connection.prepareStatement(sql);
-//            pt.setInt(1, id);
-//            pt.executeUpdate();
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//
-//    }
-//
-//    public void update(Customer cus) {
-//        String sql = "UPDATE [dbo].[Customer]"
-//                + "   SET [LastName] = ?"
-//                + "      ,[FirstName] = ?"
-//                + "      ,[Phone] = ?"
-//                + "      ,[Address] = ?"
-//                + "      ,[City] = ?"
-//                + "      ,[Country] = ?"
-//                + " WHERE customerID=?";
-//        try {
-//            PreparedStatement pt = connection.prepareStatement(sql);
-//            pt.setString(1, cus.getLastName());
-//            pt.setString(2, cus.getFirstName());
-//            pt.setString(3, cus.getPhone());
-//            pt.setString(4, cus.getAddress());
-//            pt.setString(5, cus.getCity());
-//            pt.setString(6, cus.getCountry());
-//            pt.setInt(7, cus.getCustomerID());
-//            pt.executeUpdate();
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//    }
-//    
-//    public List<Product> getProductByCustomer(int cusID) {
-//        String sql = "select * from Product_New where customerID = ?";
-//        List<Product> list = new ArrayList<>();
-//        try {
-//            PreparedStatement pt = connection.prepareStatement(sql);
-//            pt.setInt(1, cusID);
-//            ResultSet rs = pt.executeQuery();
-//            if (rs.next()) {
-//                Customer cus = getCustomerByID(cusID);
-//                Product p = new Product();
-//                p.setProduct_id(rs.getInt("product_id"));
-//                p.setName(rs.getString("name"));
-//                p.setQuantity(rs.getInt("quantity"));
-//                p.setPrice(rs.getDouble("price"));
-//                p.setImage(rs.getString("image"));
-//                p.setCustomer(cus);
-//                list.add(p);
-//                return list;
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        return null;
-//    }
-
-    public ProductDAO() {
-    }
 }

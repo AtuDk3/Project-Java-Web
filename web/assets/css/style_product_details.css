@@ -101,7 +101,7 @@ body {
     border-radius: 8px;
 }
 
-.custom.pull-left{
+/*.custom.pull-left{
     float:none;
     display:inline-block;
 }
@@ -148,7 +148,7 @@ input, button, select, textarea{
 .custom button.items-count{
     width:35px !important;
     padding:10px 5px !important;
-}
+}*/
 .tabs-animation nav.nav-tabs .name-product{
     display:none;
 }
@@ -259,6 +259,33 @@ input, button, select, textarea{
 .product-main .title {
     color: #006D77;
 }
+
+.payment .wrapper{
+  height: 40px;
+  max-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFF;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+  margin-bottom: 10px;
+}
+.payment .wrapper span{
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+.payment .wrapper span.num{
+  font-size: 18px;
+  border-right: 2px solid rgba(0,0,0,0.2);
+  border-left: 2px solid rgba(0,0,0,0.2);
+  pointer-events: none;
+}
+
 
 @media screen and (max-width: 768px) {
     .contain {

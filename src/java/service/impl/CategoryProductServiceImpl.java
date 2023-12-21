@@ -56,4 +56,9 @@ public class CategoryProductServiceImpl implements CategoryProductService {
         return cDao.search(txtSearch);
     }
 
+    @Override
+    public List<CategoryProduct> getByDescCategoryProduct(String descCategoryProduct) {
+        return cDao.getByDescCategoryProduct(descCategoryProduct);
+    }
+
 }

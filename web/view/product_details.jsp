@@ -148,25 +148,30 @@
                             Quantity: <span>${product_details.quantityProduct}</span>
                             <br>(Status: Còn hàng)
                         </div>
-                        <div class="custom pull-left">
-                            <button onclick="var result = document.getElementById('qty');
-                                    var qty = result.value;
-                                    if (!isNaN(qty) && qty > 0)
-                                        result.value--;
-                                    return false;" class="reduced items-count" type="button">-</button>
-                            <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
-                            <button onclick="var result = document.getElementById('qty');
-                                    var qty = result.value;
-                                    if (!isNaN(qty))
-                                        result.value++;
-                                    return false;" class="increase items-count" type="button">+</button>
-                            <div class="clear"></div>
+                        <!--                        <div class="custom pull-left">
+                                                    <button onclick="var result = document.getElementById('qty');
+                                                            var qty = result.value;
+                                                            if (!isNaN(qty) && qty > 0)
+                                                                result.value--;
+                                                            return false;" class="reduced items-count" type="button">-</button>
+                                                    <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
+                                                    <button onclick="var result = document.getElementById('qty');
+                                                            var qty = result.value;
+                                                            if (!isNaN(qty))
+                                                                result.value++;
+                                                            return false;" class="increase items-count" type="button">+</button>
+                                                    <div class="clear"></div>
+                                                </div>-->
+                        <div class="wrapper">
+                            <span class="minus">-</span>
+                            <span class="num">1</span>
+                            <span class="plus">+</span>
                         </div>
                         <div class="clear"></div>
                         <h3>Total amount:</h3>
                         <h2><fmt:formatNumber type="currency" value="${product_details.priceProduct}" pattern="###,###₫" /></h2>
-                        <button class="btn_buy">Buy Now</button>
-                        <button class="btn_add_to_cart">Add To Cart</button>
+                        <a href="#"><button class="btn_buy">Buy Now</button></a>
+                        <a href="${pageContext.request.contextPath}/member/cart_add?pid=${product_details.idProduct}&quantity=1"><button class="btn_add_to_cart">Add To Cart</button></a>
                     </form>
                 </div>
             </div>
@@ -317,7 +322,7 @@
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
+    <script src="${pageContext.request.contextPath}/assets/js/script_cart.js"></script>
 </body>
 
 </html>

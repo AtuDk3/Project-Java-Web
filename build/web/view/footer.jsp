@@ -251,10 +251,10 @@
 
         <div class="container">
 
-            <img src="./assets/images/payment.png" alt="payment method" class="payment-img">
+            <img src="${pageContext.request.contextPath}/assets/images/payment.png" alt="payment method" class="payment-img">
 
             <p class="copyright">
-                Copyright &copy; <a href="#">Anon</a> all rights reserved.
+                Copyright &copy; <a href="#">ThanhTuD</a> all rights reserved.
             </p>
 
         </div>

@@ -1218,7 +1218,7 @@
                                                     <ion-icon name="heart-outline"></ion-icon>
                                                 </button></a>
 
-                                                <a href="${pageContext.request.contextPath}/product_details?id=${product.idProduct}"><button class="btn-action">
+                                                <a href="${pageContext.request.contextPath}/product_details?pid=${product.idProduct}"><button class="btn-action">
                                                     <ion-icon name="eye-outline"></ion-icon>
                                                 </button></a>
 
@@ -1226,7 +1226,7 @@
                                                     <ion-icon name="repeat-outline"></ion-icon>
                                                 </button></a>
 
-                                                <a href="url"><button class="btn-action">
+                                                <a href="${pageContext.request.contextPath}/member/cart_add?pid=${product.idProduct}&quantity=1"><button class="btn-action">
                                                     <ion-icon name="bag-add-outline"></ion-icon>
                                                 </button></a>
                                             </div>

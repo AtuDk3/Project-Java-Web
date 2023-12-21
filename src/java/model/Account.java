@@ -15,11 +15,12 @@ public class Account {
     private String userName, email, password, fullName, avatar, phone;
     private Date createDate;
     private int roleID;
+    private String address;
 
     public Account() {
     }
 
-    public Account(int id, String userName, String email, String password, String fullName, String avatar, String phone, Date createDate, int roleID) {
+    public Account(int id, String userName, String email, String password, String fullName, String avatar, String phone, Date createDate, int roleID, String address) {
         this.id = id;
         this.userName = userName;
         this.email = email;
@@ -29,6 +30,7 @@ public class Account {
         this.phone = phone;
         this.createDate = createDate;
         this.roleID = roleID;
+        this.address = address;
     }
 
     // Constructor dùng để đăng kí account
@@ -41,9 +43,7 @@ public class Account {
         this.phone = phone;
         this.createDate = createDate;
         this.roleID = roleID;
-    }
-    
-    
+    }   
 
     public int getId() {
         return id;
@@ -117,10 +117,20 @@ public class Account {
         this.roleID = roleID;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
-        return "Account{" + "id=" + id + ", userName=" + userName + ", email=" + email + ", password=" + password + ", fullName=" + fullName + ", avatar=" + avatar + ", phone=" + phone + ", createDate=" + createDate + ", roleID=" + roleID + '}';
+        return "Account{" + "id=" + id + ", userName=" + userName + ", email=" + email + ", password=" + password + ", fullName=" + fullName + ", avatar=" + avatar + ", phone=" + phone + ", createDate=" + createDate + ", roleID=" + roleID + ", address=" + address + '}';
     }
+
+    
 
     
 

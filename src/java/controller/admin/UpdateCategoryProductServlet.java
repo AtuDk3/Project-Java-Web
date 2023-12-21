@@ -11,9 +11,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.CategoryProduct;
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload2.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+
 import service.CategoryProductService;
 import service.impl.CategoryProductServiceImpl;
 
@@ -60,11 +62,11 @@ public class UpdateCategoryProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String cid = request.getParameter("cid");
-        int idCategoryProduct = Integer.parseInt(cid);
-        CategoryProduct categoryProducts = categoryProductService.get(idCategoryProduct);
-        request.setAttribute("cateProduct", categoryProducts);
-        request.getRequestDispatcher("/view/admin/category/update_category.jsp").forward(request, response);
+//        String cid = request.getParameter("cid");
+//        int idCategoryProduct = Integer.parseInt(cid);
+//        CategoryProduct categoryProducts = categoryProductService.get(idCategoryProduct);
+//        request.setAttribute("cateProduct", categoryProducts);
+        request.getRequestDispatcher("/view/admin/category/update_category_product.jsp").forward(request, response);
     } 
 
     /** 

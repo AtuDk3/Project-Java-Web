@@ -13,7 +13,7 @@
 
         <div class="container">
 
-            <a href="home" class="header-logo">
+            <a href="${pageContext.request.contextPath}/home" class="header-logo">
                 <img src="<c:url value="/assets/images/logo/logo.png" />" alt="logo" width="80" height="80">
             </a>
 
@@ -56,9 +56,13 @@
                             </button> 
                         </a>
 
-                        <a href="${pageContext.request.contextPath}/cart"><button class="action-btn">
+                        <a href="${pageContext.request.contextPath}/member/cart"><button class="action-btn">
                                 <ion-icon name="bag-handle-outline"></ion-icon>
-                                <span class="count">0</span>
+                                <c:set var="count" value="${0}"></c:set>
+                            <c:forEach items="${sessionScope.cart}" var="cart" >
+                                <c:set var="count" value="${count + cart.value.quantity}"></c:set>
+                            </c:forEach>
+                                <span class="count">${count}</span>
                                 <p>Cart</p>
                             </button></a>
 
@@ -81,7 +85,7 @@
             <ul class="desktop-menu-category-list">
 
                 <li class="menu-category">
-                    <a href="home" class="menu-title">Home</a>
+                    <a href="${pageContext.request.contextPath}/home" class="menu-title">Home</a>
                 </li>
 
                 <li class="menu-category">

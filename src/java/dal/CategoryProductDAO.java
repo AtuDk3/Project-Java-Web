@@ -25,4 +25,6 @@ public interface CategoryProductDAO {
     List<CategoryProduct> getAll();
     
     List<CategoryProduct> search(String txtSearch);
+    
+    List<CategoryProduct> getByDescCategoryProduct(String descCategoryProduct);
 }

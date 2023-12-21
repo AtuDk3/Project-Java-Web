@@ -15,6 +15,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.CategoryProduct;
+import service.CategoryProductService;
+import service.impl.CategoryProductServiceImpl;
 
 /**
  *
@@ -58,18 +60,18 @@ public class IntroduceServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        CategoryProductDAOImpl categoryProductDAO = new CategoryProductDAOImpl();
-
-        List<CategoryProduct> listCategory = categoryProductDAO.getAll();
+        CategoryProductService categoryProductService = new CategoryProductServiceImpl();
+        
+        List<CategoryProduct> listCategory = categoryProductService.getAll();
         request.setAttribute("categoryProduct", listCategory);
         
-        List<CategoryProduct> listCategoryAccessories = categoryProductDAO.getByDescCategoryProduct("Accessories");
+        List<CategoryProduct> listCategoryAccessories = categoryProductService.getByDescCategoryProduct("Accessories");
         request.setAttribute("categoryAccessories", listCategoryAccessories);
-        List<CategoryProduct> listCategoryPosters = categoryProductDAO.getByDescCategoryProduct("Posters");
+        List<CategoryProduct> listCategoryPosters = categoryProductService.getByDescCategoryProduct("Posters");
         request.setAttribute("categoryPosters", listCategoryPosters);
-        List<CategoryProduct> listCategoryFiguresToys = categoryProductDAO.getByDescCategoryProduct("Figures & Toys");
+        List<CategoryProduct> listCategoryFiguresToys = categoryProductService.getByDescCategoryProduct("Figures & Toys");
         request.setAttribute("categoryFiguresToys", listCategoryFiguresToys);
-        List<CategoryProduct> listCategoryClothers = categoryProductDAO.getByDescCategoryProduct("Clothers");
+        List<CategoryProduct> listCategoryClothers = categoryProductService.getByDescCategoryProduct("Clothers");
         request.setAttribute("categoryClothers", listCategoryClothers);
         
         request.getRequestDispatcher("view/introduce.jsp").forward(request, response);

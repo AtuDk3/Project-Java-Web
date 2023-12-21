@@ -6,7 +6,7 @@
 package controller;
 
 import dal.impl.CategoryProductDAOImpl;
-import dal.impl.ProductDAO;
+import dal.impl.ProductDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,6 +17,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.CategoryProduct;
 import model.Product;
+import service.CategoryProductService;
+import service.ProductService;
+import service.impl.CategoryProductServiceImpl;
+import service.impl.ProductServiceImpl;
 
 /**
  *
@@ -60,27 +64,26 @@ public class ProductDetailsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        // category
-        CategoryProductDAOImpl categoryProductDAO = new CategoryProductDAOImpl();
-
-        List<CategoryProduct> listCategory = categoryProductDAO.getAll();
+        CategoryProductService categoryProductService = new CategoryProductServiceImpl();
+        
+        List<CategoryProduct> listCategory = categoryProductService.getAll();
         request.setAttribute("categoryProduct", listCategory);
         
-        List<CategoryProduct> listCategoryAccessories = categoryProductDAO.getByDescCategoryProduct("Accessories");
+        List<CategoryProduct> listCategoryAccessories = categoryProductService.getByDescCategoryProduct("Accessories");
         request.setAttribute("categoryAccessories", listCategoryAccessories);
-        List<CategoryProduct> listCategoryPosters = categoryProductDAO.getByDescCategoryProduct("Posters");
+        List<CategoryProduct> listCategoryPosters = categoryProductService.getByDescCategoryProduct("Posters");
         request.setAttribute("categoryPosters", listCategoryPosters);
-        List<CategoryProduct> listCategoryFiguresToys = categoryProductDAO.getByDescCategoryProduct("Figures & Toys");
+        List<CategoryProduct> listCategoryFiguresToys = categoryProductService.getByDescCategoryProduct("Figures & Toys");
         request.setAttribute("categoryFiguresToys", listCategoryFiguresToys);
-        List<CategoryProduct> listCategoryClothers = categoryProductDAO.getByDescCategoryProduct("Clothers");
+        List<CategoryProduct> listCategoryClothers = categoryProductService.getByDescCategoryProduct("Clothers");
         request.setAttribute("categoryClothers", listCategoryClothers);
         
         // product
-        ProductDAO productDAO = new ProductDAO();
+        ProductService productService = new ProductServiceImpl();
         
-        String id = request.getParameter("id");
-        int idProduct = Integer.parseInt(id);
-        Product product_details = productDAO.getProductByID(idProduct);
+        String pid = request.getParameter("pid");
+        int idProduct = Integer.parseInt(pid);
+        Product product_details = productService.getProductByID(idProduct);
         request.setAttribute("product_details", product_details);
 
         request.getRequestDispatcher("view/product_details.jsp").forward(request, response);
@@ -96,7 +99,7 @@ public class ProductDetailsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     /** 

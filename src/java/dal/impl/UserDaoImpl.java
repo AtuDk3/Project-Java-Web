@@ -20,8 +20,8 @@ public class UserDaoImpl extends DBContext implements UserDAO {
 
     @Override
     public void insert(Account account) {
-        String sql = "insert into tab_account(user_name, email, password, full_name, avatar, phone, create_date, role_id) "
-                + " values(?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into tab_account(user_name, email, password, full_name, avatar, phone, create_date, role_id, address) "
+                + " values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -34,6 +34,7 @@ public class UserDaoImpl extends DBContext implements UserDAO {
             ps.setString(6, account.getPhone());
             ps.setDate(7, (Date) account.getCreateDate());
             ps.setInt(8, account.getRoleID());
+            ps.setString(9, account.getAddress());
             
             ps.executeUpdate();
         }
@@ -62,6 +63,7 @@ public class UserDaoImpl extends DBContext implements UserDAO {
                 account.setPhone(rs.getString("phone"));
                 account.setCreateDate(rs.getDate("create_date"));
                 account.setRoleID(rs.getInt("role_id"));
+                account.setAddress(rs.getString("address"));
                 
                 return account;
             }           
@@ -74,7 +76,32 @@ public class UserDaoImpl extends DBContext implements UserDAO {
 
     @Override
     public Account get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "select * from tab_account where id = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Account account = new Account();
+
+                account.setUserName(rs.getString("user_name"));
+                account.setEmail(rs.getString("email"));
+                account.setPassword(rs.getString("password"));
+                account.setFullName(rs.getString("full_name"));
+                account.setAvatar(rs.getString("avatar"));
+                account.setPhone(rs.getString("phone"));
+                account.setCreateDate(rs.getDate("create_date"));
+                account.setRoleID(rs.getInt("role_id"));
+                account.setAddress(rs.getString("address"));
+                
+                return account;
+            }           
+        }
+    catch (SQLException e) {
+            System.out.println(e);
+    }
+        return null;
     }
 
     @Override
