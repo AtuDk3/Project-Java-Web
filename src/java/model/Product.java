@@ -3,7 +3,7 @@ package model;
 public class Product {
     private int idProduct;
     private String titleProduct;
-    private double priceProduct;
+    private float priceProduct;
     private String descProduct;
     private int quantityProduct;
     private String imgProduct;
@@ -13,7 +13,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(int idProduct, String titleProduct, double priceProduct, String descProduct, int quantityProduct, String imgProduct, int hotProduct, CategoryProduct categoryProduct) {
+    public Product(int idProduct, String titleProduct, float priceProduct, String descProduct, int quantityProduct, String imgProduct, int hotProduct, CategoryProduct categoryProduct) {
         this.idProduct = idProduct;
         this.titleProduct = titleProduct;
         this.priceProduct = priceProduct;
@@ -44,7 +44,7 @@ public class Product {
         return priceProduct;
     }
 
-    public void setPriceProduct(double priceProduct) {
+    public void setPriceProduct(float priceProduct) {
         this.priceProduct = priceProduct;
     }
 

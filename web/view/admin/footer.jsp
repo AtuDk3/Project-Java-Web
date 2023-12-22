@@ -20,7 +20,7 @@ crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    function confirmDelete(id) {
+    function confirmDeleteCategoryProduct(id) {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-success',
@@ -41,6 +41,37 @@ crossorigin="anonymous"></script>
             if (result.isConfirmed) {
                 // Nếu người dùng chọn xóa, chuyển hướng đến URL xóa với id tương ứng
                 window.location.href = "${pageContext.request.contextPath}/admin/category_product/delete?cid=" + id;
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Your imaginary file is safe :)',
+                        'error'
+                        )
+            }
+        });
+    }
+    
+    function confirmDeleteProduct(id) {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Nếu người dùng chọn xóa, chuyển hướng đến URL xóa với id tương ứng
+                window.location.href = "${pageContext.request.contextPath}/admin/product/delete?pid=" + id;
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 swalWithBootstrapButtons.fire(
                         'Cancelled',

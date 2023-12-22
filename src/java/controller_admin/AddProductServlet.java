@@ -73,7 +73,6 @@ public class AddProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        CategoryProductService categoryProductService = new CategoryProductServiceImpl();
         
         List<CategoryProduct> listCategory = categoryProductService.getAll();
         request.setAttribute("categoryProduct", listCategory);
@@ -100,12 +99,12 @@ public class AddProductServlet extends HttpServlet {
         String idCategoryProduct = request.getParameter("idCategoryProduct");
         String descProduct = request.getParameter("descProduct");
         
-        double price = Double.parseDouble(priceProduct);
+        float price = Float.parseFloat(priceProduct);
         int quantity = Integer.parseInt(quantityProduct);
         int cid = Integer.parseInt(idCategoryProduct);
         int hot = Integer.parseInt(hotProduct);
         
-        String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
+        String uploadPath = getServletContext().getRealPath("") + "/assets/images" + File.separator + "uploads";
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();

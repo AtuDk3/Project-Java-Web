@@ -49,7 +49,7 @@
                                 <td>${cateProductList.titleCategoryProduct}</td>
                                 <td>${cateProductList.descCategoryProduct}</td>
                                 <td>
-                                    <button type="button" onclick="confirmDelete(${cateProductList.idCategoryProduct})" class="btn btn-danger">Delete</button> 
+                                    <button type="button" onclick="confirmDeleteCategoryProduct(${cateProductList.idCategoryProduct})" class="btn btn-danger">Delete</button> 
                                     <button type="button" class="btn btn-warning"><a href="${pageContext.request.contextPath}/admin/category_product/update?cid=${cateProductList.idCategoryProduct}">Update</a></button>
                                 </td>
                             </tr>

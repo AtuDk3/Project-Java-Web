@@ -12,12 +12,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.CategoryProduct;
+import service.CategoryProductService;
+import service.impl.CategoryProductServiceImpl;
 
 /**
  *
  * @author Lenovo
  */
-@WebServlet(name="ProfileServlet", urlPatterns={"/profile"})
+@WebServlet(name="ProfileServlet", urlPatterns={"/member/profile"})
 public class ProfileServlet extends HttpServlet {
    
     /** 
@@ -55,7 +59,22 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("view/admin/profile.jsp").forward(request, response);
+        // category
+        CategoryProductService categoryProductService = new CategoryProductServiceImpl();
+        
+        List<CategoryProduct> listCategory = categoryProductService.getAll();
+        request.setAttribute("categoryProduct", listCategory);
+        
+        List<CategoryProduct> listCategoryAccessories = categoryProductService.getByDescCategoryProduct("Accessories");
+        request.setAttribute("categoryAccessories", listCategoryAccessories);
+        List<CategoryProduct> listCategoryPosters = categoryProductService.getByDescCategoryProduct("Posters");
+        request.setAttribute("categoryPosters", listCategoryPosters);
+        List<CategoryProduct> listCategoryFiguresToys = categoryProductService.getByDescCategoryProduct("Figures & Toys");
+        request.setAttribute("categoryFiguresToys", listCategoryFiguresToys);
+        List<CategoryProduct> listCategoryClothers = categoryProductService.getByDescCategoryProduct("Clothers");
+        request.setAttribute("categoryClothers", listCategoryClothers);
+        
+        request.getRequestDispatcher("/view/profile.jsp").forward(request, response);
     } 
 
     /** 

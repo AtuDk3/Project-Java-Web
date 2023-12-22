@@ -94,7 +94,7 @@ public class CartItemDaoImpl extends DBContext implements CartItemDao{
                 
                 Product product = new Product();
                 product.setTitleProduct(rs.getString("p.title_product"));
-                product.setPriceProduct(rs.getDouble("p.price_product"));
+                product.setPriceProduct(rs.getFloat("p.price_product"));
                 
                 CartItem cartItem = new CartItem();               
                 cartItem.setIdCartItem(rs.getInt("citem.id_cart_item"));
@@ -138,7 +138,7 @@ public class CartItemDaoImpl extends DBContext implements CartItemDao{
                 
                 Product product = new Product();
                 product.setTitleProduct(rs.getString("p.title_product"));
-                product.setPriceProduct(rs.getDouble("p.price_product"));
+                product.setPriceProduct(rs.getFloat("p.price_product"));
                 
                 CartItem cartItem = new CartItem();               
                 cartItem.setIdCartItem(rs.getInt("citem.id_cart_item"));

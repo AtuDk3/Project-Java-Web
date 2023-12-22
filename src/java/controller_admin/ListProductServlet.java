@@ -21,7 +21,7 @@ import service.impl.ProductServiceImpl;
  *
  * @author Lenovo
  */
-@WebServlet(name="AddProductServlet", urlPatterns={"/admin/product/list"})
+@WebServlet(name="ListProductServlet", urlPatterns={"/admin/product/list"})
 public class ListProductServlet extends HttpServlet {
     
     ProductService productService = new ProductServiceImpl();

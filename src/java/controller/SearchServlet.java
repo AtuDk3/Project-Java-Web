@@ -18,7 +18,9 @@ import java.util.List;
 import model.CategoryProduct;
 import model.Product;
 import service.CategoryProductService;
+import service.ProductService;
 import service.impl.CategoryProductServiceImpl;
+import service.impl.ProductServiceImpl;
 
 /**
  *
@@ -78,10 +80,10 @@ public class SearchServlet extends HttpServlet {
         request.setAttribute("categoryClothers", listCategoryClothers);
 
         // product
-        ProductDAOImpl productDAO = new ProductDAOImpl();
+        ProductService productService = new ProductServiceImpl();
         
         String txtSearch = request.getParameter("txtSearch");
-        List<Product> listProduct = productDAO.searchProductByName(txtSearch);
+        List<Product> listProduct = productService.searchProductByName(txtSearch);
         request.setAttribute("product", listProduct);
         request.setAttribute("txtS", txtSearch);
         

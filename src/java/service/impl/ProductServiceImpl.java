@@ -53,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
         Product oldProduct = productDao.getProductByID(product.getIdProduct());
         
         oldProduct.setTitleProduct(product.getTitleProduct());
-        oldProduct.setPriceProduct(product.getPriceProduct());
+        oldProduct.setPriceProduct((float) product.getPriceProduct());
         oldProduct.setDescProduct(product.getDescProduct());
         oldProduct.setQuantityProduct(product.getQuantityProduct());
         oldProduct.setImgProduct(product.getImgProduct());

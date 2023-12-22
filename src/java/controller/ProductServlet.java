@@ -4,7 +4,6 @@
  */
 package controller;
 
-import dal.impl.CategoryProductDAOImpl;
 import dal.impl.ProductDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +16,9 @@ import java.util.List;
 import model.CategoryProduct;
 import model.Product;
 import service.CategoryProductService;
+import service.ProductService;
 import service.impl.CategoryProductServiceImpl;
+import service.impl.ProductServiceImpl;
 
 /**
  *
@@ -79,15 +80,12 @@ public class ProductServlet extends HttpServlet {
         request.setAttribute("categoryClothers", listCategoryClothers);
 
         // product
-        ProductDAOImpl productDAO = new ProductDAOImpl();
+        ProductService productService = new ProductServiceImpl();
 
         String cID = request.getParameter("cid");
         int idCate = Integer.parseInt(cID);
-        List<Product> listProduct = productDAO.getProductByCateID(idCate);
+        List<Product> listProduct = productService.getProductByCateID(idCate);
         request.setAttribute("product", listProduct);
-
-        List<Product> listProductModel = productDAO.getProductModel();
-        request.setAttribute("productModel", listProductModel);
 
         request.getRequestDispatcher("view/products.jsp").forward(request, response);
     }

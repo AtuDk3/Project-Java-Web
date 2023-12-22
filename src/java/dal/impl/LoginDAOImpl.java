@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author Lenovo
  */
-public class LoginDAO extends DBContext {
+public class LoginDAOImpl extends DBContext{
     public Account login(String userName, String password){
         String sql = "select * from tab_account where user_name = ? and password = ?";
         
@@ -42,9 +42,4 @@ public class LoginDAO extends DBContext {
         return null;
     }
     
-    public static void main(String[] args) {
-        LoginDAO ldao = new LoginDAO();
-        Account a = ldao.login("thanhtudzx", "123");
-        System.out.println(a.toString());
-    }
 }

@@ -22,7 +22,7 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
                 CategoryProduct c = cDAO.getCategoryProductByID(rs.getInt("id_category_product"));
                 Product p = new Product(rs.getInt("id_product"),
                         rs.getString("title_product"),
-                        rs.getDouble("price_product"),
+                        rs.getFloat("price_product"),
                         rs.getString("desc_product"),
                         rs.getInt("quantity_product"),
                         rs.getString("img_product"),
@@ -52,7 +52,7 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
 
                 p.setIdProduct(rs.getInt("id_product"));
                 p.setTitleProduct(rs.getString("title_product"));
-                p.setPriceProduct(rs.getDouble("price_product"));
+                p.setPriceProduct(rs.getFloat("price_product"));
                 p.setDescProduct(rs.getString("desc_product"));
                 p.setQuantityProduct(rs.getInt("quantity_product"));
                 p.setImgProduct(rs.getString("img_product"));
@@ -80,7 +80,7 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
 
                 p.setIdProduct(rs.getInt("id_product"));
                 p.setTitleProduct(rs.getString("title_product"));
-                p.setPriceProduct(rs.getDouble("price_product"));
+                p.setPriceProduct(rs.getFloat("price_product"));
                 p.setDescProduct(rs.getString("desc_product"));
                 p.setQuantityProduct(rs.getInt("quantity_product"));
                 p.setImgProduct(rs.getString("img_product"));
@@ -113,7 +113,7 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
                 Product p = new Product();
                 p.setIdProduct(rs.getInt("id_product"));
                 p.setTitleProduct(rs.getString("title_product"));
-                p.setPriceProduct(rs.getDouble("price_product"));
+                p.setPriceProduct(rs.getFloat("price_product"));
                 p.setDescProduct(rs.getString("desc_product"));
                 p.setQuantityProduct(rs.getInt("quantity_product"));
                 p.setImgProduct(rs.getString("img_product"));
@@ -142,7 +142,7 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
 
                 p.setIdProduct(rs.getInt("id_product"));
                 p.setTitleProduct(rs.getString("title_product"));
-                p.setPriceProduct(rs.getDouble("price_product"));
+                p.setPriceProduct(rs.getFloat("price_product"));
                 p.setDescProduct(rs.getString("desc_product"));
                 p.setQuantityProduct(rs.getInt("quantity_product"));
                 p.setImgProduct(rs.getString("img_product"));
@@ -159,7 +159,7 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
 
     @Override
     public void insert(Product product) {
-        String sql = "insert into tab_product(title_product, price_product, desc_product, quantity_product, img_product, hot_product, id_category_product) values(?, ?, ?, ?, ?, ?, ?, ?) ";
+        String sql = "insert into tab_product(title_product, price_product, desc_product, quantity_product, img_product, hot_product, id_category_product) values(?, ?, ?, ?, ?, ?, ?) ";
         try {           
             PreparedStatement ps = connection.prepareStatement(sql);
             

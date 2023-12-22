@@ -57,7 +57,7 @@
                                 <td>${no.index + 1}</td>
                                 <td>${productList.idProduct}</td>
                                 <td>${productList.titleProduct}</td>
-                                <td><img class="image" src="${pageContext.request.contextPath}/assets/images/product/${productList.imgProduct}" height="100px" width="100px"></td>
+                                <td><img class="image" src="${pageContext.request.contextPath}/assets/images/uploads/${productList.imgProduct}" height="100px" width="100px"></td>
                                 <td>${productList.categoryProduct.titleCategoryProduct}</td>
                                 <td><fmt:formatNumber type="currency" value="${productList.priceProduct * 0.9}" pattern="###,###₫" /></td>
                         <td>${productList.quantityProduct}</td>
@@ -72,8 +72,9 @@
                         </c:choose>
 
                         <td>${fn:length(productList.descProduct) <= 100 ? productList.descProduct : fn:substring(productList.descProduct, 0, 100)}...</td>
-                        <td><button type="button" class="btn btn-danger"><a href="<?php echo BASE_URL ?>product/deleteProduct/<?php echo $pro['id_product'] ?>">Delete</button>
-                            <button type="button" class="btn btn-warning"><a href="<?php echo BASE_URL ?>product/editProduct/<?php echo $pro['id_product'] ?>">Update</a></button>
+                        <td>
+                            <button type="button" onclick="confirmDeleteProduct(${productList.idProduct})" class="btn btn-danger">Delete</button>
+                            <a href="${pageContext.request.contextPath}/admin/product/update?pid=${productList.idProduct}"><button type="button" class="btn btn-warning">Update</button></a>
                         </td>
 
                         </tr>
