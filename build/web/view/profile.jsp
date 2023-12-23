@@ -7,6 +7,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<style>
+    #update_info {
+        display: none;
+    }
+</style>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +30,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="<c:url value="/assets/css/style.css" />">
         <link rel="stylesheet" href="<c:url value="/assets/css/style_product_details.css" />">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/style_update.css">
 
         <!--          - google font link-->
 
@@ -36,7 +43,7 @@
 
     <body>
         <!--          - HEADER-->
-        
+
         <%@include file="header.jsp" %>
 
         <!--          - MAIN-->
@@ -60,25 +67,25 @@
                 </ol>
             </div>
 
-            <section style="background-color: #eee; margin: 50px 5%; border-radius: 10px;">
+            <section style="background-color: #eee; margin: 0 5%; border-radius: 10px; font-size: 16px;">
                 <div class="container py-5">
 
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="card mb-4">
                                 <div class="card-body text-center">
-                                    <img src="${pageContext.request.contextPath}/assets/images/upload/avatar/${sessionScope.account.avatar}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
+                                    <img src="${pageContext.request.contextPath}/assets/images/uploads/avatar/${sessionScope.account.avatar}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover; margin: 0 auto;">
                                     <h5 class="my-3">${sessionScope.account.userName}</h5>
                                     <p class="text-muted mb-1">Email: ${sessionScope.account.email}</p>
                                     <p class="text-muted mb-4">Phone: ${sessionScope.account.phone}</p>
                                     <div class="d-flex justify-content-center mb-2">
-                                        <button type="button" class="btn btn-primary">Follow</button>
-                                        <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+                                        <button style="font-size: 16px;" type="button" class="btn btn-primary" onclick="showUpdateInfo()">Update Profile</button>
+                                        <a href="${pageContext.request.contextPath}/member/change_password"><button style="font-size: 16px;" type="button" class="btn btn-outline-primary ms-1">Change Password</button></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-8">
+                        <div class="col-lg-8" id="show_info">
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <div class="row">
@@ -114,6 +121,15 @@
                                         </div>
                                         <div class="col-sm-9">
                                             <p class="text-muted mb-0">${sessionScope.account.phone}</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Address</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">${sessionScope.account.address}</p>
                                         </div>
                                     </div>
                                     <hr>
@@ -158,27 +174,51 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-lg-8" id="update_info">
+                            <form action="${pageContext.request.contextPath}/member/update_profile" method="post" enctype="multipart/form-data">
+                                <input type="hidden" value="${sessionScope.account.userName}" name="userName">
+                                <div class="form-group">
+                                    <label for="fullName">Full Name</label>
+                                    <input value="${sessionScope.account.fullName}" type="text" name="fullName" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                        <label for="image">Image</label>
+                                        <input type="file" name="image" class="form-control">
+                                        <p> <img class="image" src="${pageContext.request.contextPath}/assets/images/uploads/avatar/${sessionScope.account.avatar}" height="100px" width="100px"></p>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <input type="text" class="form-control" value="${sessionScope.account.address}" name="address" required>
+                                    </div> 
+                                    <button id="btn" type="submit" class="btn btn-primary">Update Profile</button>
+                                </form>
+                        </div>
                     </div>
-                </div>
                 </div>
             </section>
 
 
 
-    </main>
-    <!--          - FOOTER-->
+        </main>
+        <!--          - FOOTER-->
 
-    <%@include file="footer.jsp" %>
+        <%@include file="footer.jsp" %>
 
-    <!--          - custom js link-->
+        <!--          - custom js link-->
 
-    <script src="<c:url value="/assets/js/script.js" />"></script>
+        <script src="<c:url value="/assets/js/script.js" />"></script>
 
-    <!--          - ionicon link-->
-
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/script_cart.js"></script>
-</body>
+        <!--          - ionicon link-->
+        <script>
+                                                function showUpdateInfo() {
+                                                    document.getElementById("update_info").style.display = "block";
+                                                    document.getElementById("show_info").style.display = "none";
+                                                }
+        </script>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    </body>
 
 </html>

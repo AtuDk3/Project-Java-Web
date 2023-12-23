@@ -21,7 +21,7 @@ public interface UserService {
     
     void insert (Account account); 
     
-    void edit(Account account);
+    void update(Account account);
     
     void delete(int id);
     
@@ -34,4 +34,6 @@ public interface UserService {
     boolean checkExitsUserName(String userName);
     
     boolean checkExitsPhone(String phone);
+    
+    void changePassword(Account account);
 }

@@ -67,5 +67,21 @@ public class ProductServiceImpl implements ProductService {
     public void delete(int idProduct) {
         productDao.delete(idProduct);
     }
+
+    @Override
+    public int countProduct() {
+        return productDao.countProduct();
+    }
+
+    @Override
+    public int countCategoryProduct(int idCategoryProduct) {
+        return productDao.countCategoryProduct(idCategoryProduct);
+    }
+
+    @Override
+    public List<Product> pagingProduct(int indexPage) {
+        return productDao.pagingProduct(indexPage);
+    }
+
     
 }

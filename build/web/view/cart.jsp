@@ -128,14 +128,14 @@
                                 </div>
                             </li>
                             <li><fmt:formatNumber type="currency" value="${map.value.product.priceProduct * 0.9}" pattern="###,###₫" /></li>
-                            <li>
-                                <div class="wrapper">
-                                    <span class="minus">-</span>
-                                    <span class="num">${map.value.quantity}</span>
-                                    <span class="plus">+</span>
-                                </div>
+                            <li style="padding: 10px 0;">
+                                <div class="quantity-container">
+                            <button class="quantity-btn" id="decrement">-</button>
+                            <input type="text" class="quantity-input" id="quantity" value="${map.value.quantity}" oninput="updateTotal()">
+                            <button class="quantity-btn" id="increment">+</button>
+                        </div>
                             </li>
-                            <li><fmt:formatNumber type="currency" value="${map.value.product.priceProduct*0.9 * map.value.quantity}" pattern="###,###₫" /></li>
+                            <li id="totalAmount"><fmt:formatNumber type="currency" value="${map.value.product.priceProduct*0.9 * map.value.quantity}" pattern="###,###₫" /></li>
                             <li><a href="${pageContext.request.contextPath}/member/cart_delete?pid=${map.value.product.idProduct}"><ion-icon name="trash-outline"></ion-icon></a></li>
                             <c:set var="total" value="${total + map.value.product.priceProduct*0.9 * map.value.quantity}"></c:set>
                         </ul>
@@ -192,7 +192,57 @@
     <script src="<c:url value="/assets/js/script.js" />"></script>
 
     <!--          - ionicon link-->
+        <script>
+        // Lấy các phần tử
+    var quantityInput = document.getElementById('quantity');
+    var totalAmountElement = document.getElementById('totalAmount');
+    var incrementButton = document.getElementById('increment');
+    var decrementButton = document.getElementById('decrement');
+    
+    function addToCart() {
+        //const quantityInput = document.getElementById('quantity');
+        const selectedQuantity = quantityInput.value;
 
+        // Xử lý chuyển hướng đến trang "Add To Cart" với giá trị số lượng mới
+        const productId = "${product_details.idProduct}";
+        const url = "${pageContext.request.contextPath}/member/cart_add?pid=" + productId + "&quantity=" + selectedQuantity;
+        window.location.href = url;
+    }  
+    
+
+    // Thêm lắng nghe sự kiện
+    incrementButton.addEventListener('click', function () {
+        updateTotal();
+        incrementQuantity();
+    });
+
+    decrementButton.addEventListener('click', function () {
+        decrementQuantity();
+        updateTotal();
+    });
+
+    // Hàm tăng số lượng
+    function incrementQuantity() {
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+    }
+
+    // Hàm giảm số lượng
+    function decrementQuantity() {
+        if (parseInt(quantityInput.value) > 1) {
+            quantityInput.value = parseInt(quantityInput.value) - 1;
+        }
+    }
+
+    // Hàm cập nhật tổng cộng
+    function updateTotal() {
+        var quantity = parseInt(quantityInput.value);
+        var price = parseFloat("${product_details.priceProduct}");
+        var totalAmount = quantity * price;
+
+        // Định dạng và cập nhật phần tử tổng cộng
+        totalAmountElement.innerHTML = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalAmount);
+    }
+    </script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 

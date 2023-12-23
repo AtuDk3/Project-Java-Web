@@ -12,19 +12,26 @@ import model.Product;
  * @author Lenovo
  */
 public interface ProductService {
+
     List<Product> getAll();
-    
+
     List<Product> getProductByCateID(int cateID);
-    
+
     Product getProductByID(int productID);
-    
+
     List<Product> getProductModel();
-    
+
     List<Product> searchProductByName(String txtSearch);
-    
+
     void insert(Product product);
+
+    void update(Product product);
+
+    void delete(int idProduct);
+
+    int countProduct();
+
+    int countCategoryProduct(int idCategoryProduct);
     
-     void update(Product product);
-     
-      void delete(int idProduct);
+    List<Product> pagingProduct(int indexPage); 
 }

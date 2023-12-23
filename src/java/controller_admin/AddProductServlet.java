@@ -104,7 +104,7 @@ public class AddProductServlet extends HttpServlet {
         int cid = Integer.parseInt(idCategoryProduct);
         int hot = Integer.parseInt(hotProduct);
         
-        String uploadPath = getServletContext().getRealPath("") + "/assets/images" + File.separator + "uploads";
+        String uploadPath = getServletContext().getRealPath("") + "/assets/images" + File.separator + "uploads/product";
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();

@@ -143,36 +143,22 @@
                     </div>
                 </div>
                 <div class="right">
-                    <form class="payment">
+                    <div class="payment">
                         <div class="payment_quantity">
                             Quantity: <span>${product_details.quantityProduct}</span>
                             <br>(Status: Còn hàng)
                         </div>
-                        <!--                        <div class="custom pull-left">
-                                                    <button onclick="var result = document.getElementById('qty');
-                                                            var qty = result.value;
-                                                            if (!isNaN(qty) && qty > 0)
-                                                                result.value--;
-                                                            return false;" class="reduced items-count" type="button">-</button>
-                                                    <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
-                                                    <button onclick="var result = document.getElementById('qty');
-                                                            var qty = result.value;
-                                                            if (!isNaN(qty))
-                                                                result.value++;
-                                                            return false;" class="increase items-count" type="button">+</button>
-                                                    <div class="clear"></div>
-                                                </div>-->
-                        <div class="wrapper">
-                            <span class="minus">-</span>
-                            <span class="num">1</span>
-                            <span class="plus">+</span>
+                        <div class="quantity-container">
+                            <button class="quantity-btn" id="decrement">-</button>
+                            <input type="text" class="quantity-input" id="quantity" value="1" oninput="updateTotal()">
+                            <button class="quantity-btn" id="increment">+</button>
                         </div>
-                        <div class="clear"></div>
                         <h3>Total amount:</h3>
-                        <h2><fmt:formatNumber type="currency" value="${product_details.priceProduct}" pattern="###,###₫" /></h2>
-                        <a href="#"><button class="btn_buy">Buy Now</button></a>
-                        <a href="member/cart_add?pid=${product_details.idProduct}&quantity=1"><button class="btn_add_to_cart">Add To Cart</button></a>
-                    </form>
+                        <h2 id="totalAmount"><fmt:formatNumber type="currency" value="${product_details.priceProduct}" pattern="###,###₫" /></h2>
+                        <button class="btn_buy">Buy Now</button>
+                        <button  type="button" class="btn_add_to_cart" onclick="addToCart()" >Add To Cart</button>
+                    </div>
+
                 </div>
             </div>
 
@@ -319,6 +305,57 @@
     <script src="<c:url value="/assets/js/script.js" />"></script>
 
     <!--          - ionicon link-->
+    <script>
+        // Lấy các phần tử
+    var quantityInput = document.getElementById('quantity');
+    var totalAmountElement = document.getElementById('totalAmount');
+    var incrementButton = document.getElementById('increment');
+    var decrementButton = document.getElementById('decrement');
+    
+    function addToCart() {
+        //const quantityInput = document.getElementById('quantity');
+        const selectedQuantity = quantityInput.value;
+
+        // Xử lý chuyển hướng đến trang "Add To Cart" với giá trị số lượng mới
+        const productId = "${product_details.idProduct}";
+        const url = "${pageContext.request.contextPath}/member/cart_add?pid=" + productId + "&quantity=" + selectedQuantity;
+        window.location.href = url;
+    }  
+    
+
+    // Thêm lắng nghe sự kiện
+    incrementButton.addEventListener('click', function () {
+        updateTotal();
+        incrementQuantity();
+    });
+
+    decrementButton.addEventListener('click', function () {
+        decrementQuantity();
+        updateTotal();
+    });
+
+    // Hàm tăng số lượng
+    function incrementQuantity() {
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+    }
+
+    // Hàm giảm số lượng
+    function decrementQuantity() {
+        if (parseInt(quantityInput.value) > 1) {
+            quantityInput.value = parseInt(quantityInput.value) - 1;
+        }
+    }
+
+    // Hàm cập nhật tổng cộng
+    function updateTotal() {
+        var quantity = parseInt(quantityInput.value);
+        var price = parseFloat("${product_details.priceProduct}");
+        var totalAmount = quantity * price;
+
+        // Định dạng và cập nhật phần tử tổng cộng
+        totalAmountElement.innerHTML = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalAmount);
+    }
+    </script>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

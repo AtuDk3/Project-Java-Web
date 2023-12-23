@@ -43,7 +43,7 @@
 
                     </c:when>
                     <c:otherwise>
-                        <a href="${pageContext.request.contextPath}/profile"><button class="action-btn">
+                        <a href="${pageContext.request.contextPath}/member/profile"><button class="action-btn">
                                 <ion-icon name="person-outline"></ion-icon>
                                 <p>${sessionScope.account.userName}</p>
                             </button></a>

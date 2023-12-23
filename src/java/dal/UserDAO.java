@@ -19,7 +19,7 @@ public interface UserDAO {
     
     void insert (Account account); 
     
-    void edit(Account account);
+    void update(Account account);
     
     void delete(int id);
     
@@ -31,6 +31,6 @@ public interface UserDAO {
     
     boolean checkExitsPhone(String phone);
     
-    
+    void changePassword(Account account);
     
 }

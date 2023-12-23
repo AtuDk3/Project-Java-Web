@@ -57,7 +57,7 @@
                                 <td>${no.index + 1}</td>
                                 <td>${productList.idProduct}</td>
                                 <td>${productList.titleProduct}</td>
-                                <td><img class="image" src="${pageContext.request.contextPath}/assets/images/uploads/${productList.imgProduct}" height="100px" width="100px"></td>
+                                <td><img class="image" src="${pageContext.request.contextPath}/assets/images/uploads/product/${productList.imgProduct}" height="100px" width="100px"></td>
                                 <td>${productList.categoryProduct.titleCategoryProduct}</td>
                                 <td><fmt:formatNumber type="currency" value="${productList.priceProduct * 0.9}" pattern="###,###₫" /></td>
                         <td>${productList.quantityProduct}</td>

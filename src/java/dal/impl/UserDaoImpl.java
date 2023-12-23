@@ -105,8 +105,21 @@ public class UserDaoImpl extends DBContext implements UserDAO {
     }
 
     @Override
-    public void edit(Account account) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void update(Account account) {
+        String sql = "update tab_account set full_name = ?, avatar = ?, address = ? where user_name = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            
+            ps.setString(1, account.getFullName());
+            ps.setString(2, account.getAvatar());
+            ps.setString(3, account.getAddress());
+            ps.setString(4, account.getUserName());
+
+            ResultSet rs = ps.executeQuery();
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
     @Override
@@ -174,6 +187,24 @@ public class UserDaoImpl extends DBContext implements UserDAO {
             System.out.println(e);
     }
         return duplicate;
+    }
+
+    @Override
+    public void changePassword(Account account) {
+        String sql = "update tab_account set password = ? where user_name = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            
+            ps.setString(1, account.getPassword());
+            ps.setString(2, account.getUserName());
+            
+            ResultSet rs = ps.executeQuery();
+         
+        }
+    catch (SQLException e) {
+            System.out.println(e);
+    }
     }
     
 }

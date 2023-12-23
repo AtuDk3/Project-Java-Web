@@ -14,7 +14,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.File;
-import java.io.FileWriter;
 import java.nio.file.Paths;
 import java.util.List;
 import model.CategoryProduct;
@@ -120,7 +119,7 @@ public class UpdateProductServlet extends HttpServlet {
         // Xử lý upload ảnh (nếu có)
         String fileName = ""; // Tên file ảnh mặc định
         if (imagePart != null && imagePart.getSize() > 0) {
-            String uploadPath = getServletContext().getRealPath("") + "/assets/images/uploads";
+            String uploadPath = getServletContext().getRealPath("") + "/assets/images/uploads/product";
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();

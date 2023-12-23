@@ -28,4 +28,9 @@ public interface ProductDao {
 
     void delete(int idProduct);
     
+    int countProduct();
+
+    int countCategoryProduct(int idCategoryProduct);
+    
+    List<Product> pagingProduct(int indexPage); 
 }

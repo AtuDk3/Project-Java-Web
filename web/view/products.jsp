@@ -8,6 +8,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<style>
+    .active-paging {
+        background-color: blue;
+    }
+</style>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +30,6 @@
 
 
         <!--          - custom css link-->
-
         <link rel="stylesheet" href="<c:url value="/assets/css/style.css" />">
 
 
@@ -42,7 +47,7 @@
 
         <div class="overlay" data-overlay></div>
 
-        
+
         <!--          - NOTIFICATION TOAST-->
 
 
@@ -429,7 +434,19 @@
 
             </div>
 
-
+            <nav class="container-paging">
+                <ul>                   
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <c:forEach begin="1" end="${endPage}" var="i" >
+                    <li class="page-item"><a class="page-link ${tag == i ? "active-paging":""}" href="${pageContext.request.contextPath}/product?cid=${0}&index=${i}">${i}</a></li>
+                    </c:forEach>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>                   
+                </ul>
+            </nav>
         </main>
 
         <!--          - FOOTER-->

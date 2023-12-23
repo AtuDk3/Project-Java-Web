@@ -1,16 +1,26 @@
-const plus = document.querySelector(".plus"),
-    minus = document.querySelector(".minus"),
-    num = document.querySelector(".num");
-    let a = 1;
-    plus.addEventListener("click", ()=>{
-      a++;
-      a = (a < 10) ? a : a;
-      num.innerText = a;
-    });
-    minus.addEventListener("click", ()=>{
-      if(a > 1){
-        a--;
-        a = (a < 10) ? a : a;
-        num.innerText = a;
-      }
-    });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const decrementButton = document.getElementById('decrement');
+            const incrementButton = document.getElementById('increment');
+            const quantityInput = document.getElementById('quantity');
+
+            decrementButton.addEventListener('click', function () {
+                decrementQuantity();
+            });
+
+            incrementButton.addEventListener('click', function () {
+                incrementQuantity();
+            });
+
+            function decrementQuantity() {
+                let currentQuantity = parseInt(quantityInput.value, 10);
+                if (currentQuantity > 1) {
+                    quantityInput.value = currentQuantity - 1;
+                }
+            }
+
+            function incrementQuantity() {
+                let currentQuantity = parseInt(quantityInput.value, 10);
+                quantityInput.value = currentQuantity + 1;
+            }
+        });

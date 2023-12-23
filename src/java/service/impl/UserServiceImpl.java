@@ -43,8 +43,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void edit(Account account) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void update(Account account) {
+        Account oldAccount = userDAO.get(account.getUserName());
+        
+        oldAccount.setFullName(account.getFullName());
+        oldAccount.setAvatar(account.getAvatar());
+        oldAccount.setAddress(account.getAddress());
+        
+        userDAO.update(oldAccount);
     }
 
     @Override
@@ -61,7 +67,7 @@ public class UserServiceImpl implements UserService{
         // Hàm lưu ngày giờ tạo account trong sql
         long millis = System.currentTimeMillis();
         java.sql.Date createDate = new java.sql.Date(millis);
-        userDAO.insert(new Account(userName, email, password, null, null, phone, createDate, 2));
+        userDAO.insert(new Account(userName, email, password, null, "avatar_default.jpg", phone, createDate, 2));
         return true;
     }
 
@@ -83,5 +89,12 @@ public class UserServiceImpl implements UserService{
     @Override
     public boolean checkExitsPhone(String phone) {
         return userDAO.checkExitsPhone(phone);
+    }
+
+    @Override
+    public void changePassword(Account account) {
+        Account oldAccount = userDAO.get(account.getUserName());
+        oldAccount.setPassword(account.getPassword());
+        userDAO.changePassword(oldAccount);
     }
 }

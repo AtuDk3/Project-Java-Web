@@ -4,7 +4,6 @@
  */
 package controller;
 
-import dal.impl.ProductDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -26,6 +25,9 @@ import service.impl.ProductServiceImpl;
  */
 @WebServlet(name = "ProductServlet", urlPatterns = {"/product"})
 public class ProductServlet extends HttpServlet {
+
+    ProductService productService = new ProductServiceImpl();
+    CategoryProductService categoryProductService = new CategoryProductServiceImpl();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -65,11 +67,10 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CategoryProductService categoryProductService = new CategoryProductServiceImpl();
-        
+
         List<CategoryProduct> listCategory = categoryProductService.getAll();
         request.setAttribute("categoryProduct", listCategory);
-        
+
         List<CategoryProduct> listCategoryAccessories = categoryProductService.getByDescCategoryProduct("Accessories");
         request.setAttribute("categoryAccessories", listCategoryAccessories);
         List<CategoryProduct> listCategoryPosters = categoryProductService.getByDescCategoryProduct("Posters");
@@ -80,13 +81,30 @@ public class ProductServlet extends HttpServlet {
         request.setAttribute("categoryClothers", listCategoryClothers);
 
         // product
-        ProductService productService = new ProductServiceImpl();
+//        String cID = request.getParameter("cid");
+//        int idCate = Integer.parseInt(cID);
+//        List<Product> listProduct = productService.getProductByCateID(idCate);
+//        request.setAttribute("product", listProduct);
 
-        String cID = request.getParameter("cid");
-        int idCate = Integer.parseInt(cID);
-        List<Product> listProduct = productService.getProductByCateID(idCate);
-        request.setAttribute("product", listProduct);
+        // Paging
+        String index = request.getParameter("index");
+        if (index == null){
+            index = "1";
+        }
+        int indexPage = Integer.parseInt(index);
 
+        int countProduct = productService.countProduct();
+
+        int endPage = countProduct / 8;
+        if (countProduct % 8 != 0) {
+            endPage++;
+        }
+
+        List<Product> listProduct = productService.pagingProduct(indexPage);
+request.setAttribute("product", listProduct);
+        request.setAttribute("endPage", endPage);
+
+        request.setAttribute("tag", indexPage);
         request.getRequestDispatcher("view/products.jsp").forward(request, response);
     }
 

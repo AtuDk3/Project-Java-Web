@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/style_dashboard.css">      
  
         <title>Dashboard</title>
+        <link rel="shortcut icon" href="<c:url value="/assets/images/logo/logo.png" />" type="image/x-icon">
     </head>
     <body>
 
