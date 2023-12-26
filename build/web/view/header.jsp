@@ -18,7 +18,7 @@
             </a>
 
             <div class="header-search-container">
-                <form action="search"> <!--Nếu ko ghi method gì thì mặc định là get, get và post khác nhau ở chỗ get sẽ truyền lên url txtSearch , post sẽ ko hiển thị trên url nên post bảo mật nên -->
+                <form action="${pageContext.request.contextPath}/search"> <!--Nếu ko ghi method gì thì mặc định là get, get và post khác nhau ở chỗ get sẽ truyền lên url txtSearch , post sẽ ko hiển thị trên url nên post bảo mật nên -->
                     <input type="text" oninput="searchByName(this)" name="txtSearch" value="${txtS}" class="search-field" placeholder="Enter your product name...">
 
                     <button type="submit" class="search-btn">
@@ -94,7 +94,7 @@
 
 
                 <li class="menu-category">
-                    <a href="${pageContext.request.contextPath}/product?cid=${0}" class="menu-title">Category Product</a>
+                    <a href="${pageContext.request.contextPath}/product/list?cid=${0}" class="menu-title">Category Product</a>
                     <ul class="dropdown-list">
                         <c:forEach items="${requestScope.categoryProduct}" var="cateProduct" >
                             <li class="dropdown-item">

@@ -33,5 +33,9 @@ public interface ProductService {
 
     int countCategoryProduct(int idCategoryProduct);
     
-    List<Product> pagingProduct(int indexPage); 
+    List<Product> pagingProduct(int indexP, int indexP1); 
+    
+    List<Product> pagingProduct(int idCategoryProduct, int pageIndex, int pageSize);
+    
+    
 }

@@ -5,8 +5,6 @@
 
 package controller;
 
-import dal.impl.CategoryProductDAOImpl;
-import dal.impl.ProductDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -84,10 +82,10 @@ public class SearchServlet extends HttpServlet {
         
         String txtSearch = request.getParameter("txtSearch");
         List<Product> listProduct = productService.searchProductByName(txtSearch);
-        request.setAttribute("product", listProduct);
+        request.setAttribute("productList", listProduct);
         request.setAttribute("txtS", txtSearch);
         
-        request.getRequestDispatcher("view/products.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/products.jsp").forward(request, response);
     } 
 
     /** 

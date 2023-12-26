@@ -221,15 +221,14 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                 return rs.getInt(1);              
+                return rs.getInt(1);
             }
-          
+
         } catch (SQLException e) {
             System.out.println(e);
         }
         return 0;
     }
-    
 
     @Override
     public int countCategoryProduct(int idCategoryProduct) {
@@ -238,8 +237,10 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, idCategoryProduct);
             ResultSet rs = ps.executeQuery();
-            
-            return rs.getInt(1);
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
 
         } catch (SQLException e) {
             System.out.println(e);
@@ -247,17 +248,22 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
         return 0;
     }
 
+    public static void main(String[] args) {
+        ProductDAOImpl p = new ProductDAOImpl();
+        System.out.println(p.countCategoryProduct(9));
+    }
+
     @Override
-    public List<Product> pagingProduct(int indexPage) {
+    public List<Product> pagingProduct(int indexP, int indexP1) {
         List<Product> listProduct = new ArrayList<>();
-  
+
         String sql = "select p.*, c.* from tab_product as p inner join tab_category_product as c on p.id_category_product = c.id_category_product \n"
-                + "order by p.price_product offset ? rows fetch next 8 rows only";
+                + "order by p.price_product offset ? rows fetch next ? rows only";
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, (indexPage-1)*8);
-
+            ps.setInt(1, (indexP - 1) * indexP1);
+            ps.setInt(2, indexP1);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 CategoryProductDAOImpl cDAO = new CategoryProductDAOImpl();
@@ -279,10 +285,39 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
         return listProduct;
     }
     
-    public static void main(String[] args) {
-        ProductDAOImpl productDAOImpl = new ProductDAOImpl();
-        List<Product> list = productDAOImpl.pagingProduct(1);
-        System.out.println(list.toString());
+    @Override
+    public List<Product> pagingProduct(int idCategoryProduct, int pageIndex, int pageSize) {
+        List<Product> listProduct = new ArrayList<>();
+        String sql = "SELECT p.*, c.* FROM tab_product AS p "
+                + "INNER JOIN tab_category_product AS c ON p.id_category_product = c.id_category_product "
+                + "WHERE p.id_category_product = ? "
+                + "ORDER BY p.price_product OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idCategoryProduct);
+            ps.setInt(2, (pageIndex - 1) * pageSize);
+            ps.setInt(3, pageSize);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                CategoryProductDAOImpl cDAO = new CategoryProductDAOImpl();
+                CategoryProduct c = cDAO.getCategoryProductByID(rs.getInt("id_category_product"));
+                Product p = new Product(rs.getInt("id_product"),
+                        rs.getString("title_product"),
+                        rs.getFloat("price_product"),
+                        rs.getString("desc_product"),
+                        rs.getInt("quantity_product"),
+                        rs.getString("img_product"),
+                        rs.getInt("hot_product"),
+                        c);
+                listProduct.add(p);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        } 
+        return listProduct;
     }
 
 }

@@ -23,7 +23,7 @@ import service.impl.ProductServiceImpl;
  *
  * @author Lenovo
  */
-@WebServlet(name = "ProductServlet", urlPatterns = {"/product"})
+@WebServlet(name = "ProductServlet", urlPatterns = {"/product/list"})
 public class ProductServlet extends HttpServlet {
 
     ProductService productService = new ProductServiceImpl();
@@ -71,41 +71,62 @@ public class ProductServlet extends HttpServlet {
         List<CategoryProduct> listCategory = categoryProductService.getAll();
         request.setAttribute("categoryProduct", listCategory);
 
-        List<CategoryProduct> listCategoryAccessories = categoryProductService.getByDescCategoryProduct("Accessories");
-        request.setAttribute("categoryAccessories", listCategoryAccessories);
-        List<CategoryProduct> listCategoryPosters = categoryProductService.getByDescCategoryProduct("Posters");
-        request.setAttribute("categoryPosters", listCategoryPosters);
-        List<CategoryProduct> listCategoryFiguresToys = categoryProductService.getByDescCategoryProduct("Figures & Toys");
-        request.setAttribute("categoryFiguresToys", listCategoryFiguresToys);
-        List<CategoryProduct> listCategoryClothers = categoryProductService.getByDescCategoryProduct("Clothers");
-        request.setAttribute("categoryClothers", listCategoryClothers);
+        String indexPage = request.getParameter("index");
+        String indexPage1 = request.getParameter("index1");
+        String cID = request.getParameter("cid");
 
-        // product
-//        String cID = request.getParameter("cid");
-//        int idCate = Integer.parseInt(cID);
-//        List<Product> listProduct = productService.getProductByCateID(idCate);
-//        request.setAttribute("product", listProduct);
-
-        // Paging
-        String index = request.getParameter("index");
-        if (index == null){
-            index = "1";
-        }
-        int indexPage = Integer.parseInt(index);
+        int idCate = (cID == null) ? 0 : Integer.valueOf(cID);
+        int indexP = (indexPage == null) ? 1 : Integer.valueOf(indexPage);
+        int indexP1 = (indexPage1 == null) ? 0 : Integer.valueOf(indexPage1);
 
         int countProduct = productService.countProduct();
+        int countCid = productService.countCategoryProduct(idCate);
 
-        int endPage = countProduct / 8;
-        if (countProduct % 8 != 0) {
-            endPage++;
+        int pageSize = 0;
+
+        switch (indexP1) {
+            case 8:
+                pageSize = 8;
+                break;
+            case 12:
+                pageSize = 12;
+                break;
+            case 16:
+                pageSize = 16;
+                break;
+            case -2:
+                pageSize = 8;
+                break;
+            default:
+                pageSize = 8; // Giả sử mặc định là 8 nếu không khớp
+                break;
         }
 
-        List<Product> listProduct = productService.pagingProduct(indexPage);
-request.setAttribute("product", listProduct);
-        request.setAttribute("endPage", endPage);
+        int endPage = (countProduct / pageSize) + ((countProduct % pageSize != 0) ? 1 : 0);
 
-        request.setAttribute("tag", indexPage);
-        request.getRequestDispatcher("view/products.jsp").forward(request, response);
+        List<Product> listProductPagination;
+
+        if ("-1".equals(indexPage1)) {
+            listProductPagination = productService.getAll();
+        } else if ("-2".equals(indexPage1)) {
+            listProductPagination = productService.pagingProduct(idCate, indexP, pageSize);
+        } else {
+            listProductPagination = productService.pagingProduct(indexP, pageSize);
+        }
+
+        request.setAttribute("productList", listProductPagination);
+        request.setAttribute("endPage", endPage);
+        request.setAttribute("tag", indexP);
+        request.setAttribute("tag1", indexP1);
+        request.setAttribute("indexP2", indexPage1);
+
+        if (idCate == 0) {
+            request.setAttribute("countProductAll", countProduct);
+        } else {
+            request.setAttribute("countProductAll", countCid);
+        }
+
+        request.getRequestDispatcher("/view/products.jsp").forward(request, response);
     }
 
     /**

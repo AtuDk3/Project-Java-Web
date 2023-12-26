@@ -79,9 +79,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> pagingProduct(int indexPage) {
-        return productDao.pagingProduct(indexPage);
+    public List<Product> pagingProduct(int indexP, int indexP1) {
+        return productDao.pagingProduct(indexP, indexP1);
     }
+
+    @Override
+    public List<Product> pagingProduct(int idCategoryProduct, int indexP, int indexP1) {
+        return productDao.pagingProduct(idCategoryProduct, indexP, indexP1);
+    }
+
 
     
 }

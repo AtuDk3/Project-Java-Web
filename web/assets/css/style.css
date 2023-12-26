@@ -1726,8 +1726,121 @@ footer {
   color: inherit;
 }
 
+/* paging*/
+.container-paging,
+    .button,
+    .links,
+    .link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .container-paging {
+        padding: 20px;
+        border-radius: 8px;
+        column-gap: 12px;
+        background: #fff;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+    .button {
+        border: none;
+    }
+    .button i {
+        pointer-events: none;
+    }
+    .button:disabled {
+        color: #b3b3b3;
+        pointer-events: none;
+    }
+    .button,
+    .link {
+        height: 30px;
+        width: 30px;
+        font-size: 16px;
+        color: #666666;
+        background-color: #f2f2f2;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    .links {
+        column-gap: 12px;
+    }
+    .link {
+        font-weight: 500;
+        text-decoration: none;
+    }
+    .button:hover,
+    .link:hover {
+        color: #fff;
+        background: #006D77;
+    }
+    .link.active {
+        color: #fff;
+        background: #006D77;
+    }
 
+/* selection*/
+.product-main-top {
+    display: flex;
+    justify-content: space-between;
+}
+.select-menu{
+    width: 300px;
+}
+.select-menu .select-btn{
+    display: flex;
+    height: 50px;
+    background: #fff;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 400;
+    border-radius: 8px;
+    align-items: center;
+    cursor: pointer;
+    justify-content: space-between;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
 
+.select-btn span, .options .option .option-text,.select-btn i {
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.select-menu.active .select-btn i{
+    transform: rotate(-180deg);
+}
+.select-menu .options{
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 0 3px rgba(0,0,0,0.1);
+    display: none;
+}
+.select-menu.active .options{
+    display: block;
+}
+.options .option{
+    display: flex;
+    height: 50px;
+    cursor: pointer;
+    padding: 0 16px;
+    border-radius: 8px;
+    align-items: center;
+    background: #fff;
+}
+.options .option:hover{
+    background: #F2F2F2;
+}
+.option i{
+    font-size: 25px;
+    margin-right: 12px;
+}
+.option .option-text{
+    font-size: 18px;
+    color: #333;
+}
 
 
 /*-----------------------------------*\
@@ -2591,9 +2704,6 @@ footer {
 }
 
 
-
-
-
 /**
  * responsive larger than 1400px screen
  */
@@ -2627,4 +2737,17 @@ footer {
     max-width: 460px;
   }
 
+}
+
+@media screen and (max-width: 768px){
+    .container-paging {
+        padding: 10px;
+        column-gap: 5px;
+    }
+    
+    .link {
+        height: 25px;
+        width: 25px;
+        font-size: 13px;
+    }
 }

@@ -8,12 +8,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<style>
-    .active-paging {
-        background-color: blue;
-    }
-</style>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +15,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Anon - eCommerce Website</title>
+        <title>List Product</title>
 
 
         <!--          - favicon-->
@@ -34,7 +28,7 @@
 
 
         <!--          - google font link-->
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
@@ -112,134 +106,25 @@
 
 
                             <ul class="sidebar-menu-category-list">
+                                <c:forEach var="item" items="${categoryProduct}">
+                                    <c:url var="editURL" value="/product/list">
+                                        <c:param name="cid" value="${item.idCategoryProduct}" /></c:url>
+                                    <li class="sidebar-menu-category ${tag == item.idCategoryProduct ? "active":""}">
 
-                                <li class="sidebar-menu-category">
+                                        <button class="sidebar-accordion-menu" data-accordion-btn>
+                                            <a href="${editURL}&index1=-2" class="menu-title">${item.titleCategoryProduct}</a>
+                                            <c:forEach var="item1" items="${countCate}">
+                                                <c:if test="${item1.idCategoryProduct == item.idCategoryProduct && item1.total != 0}">
 
-                                    <button class="sidebar-accordion-menu" data-accordion-btn>
+                                                    <div>
+                                                        (${item1.total})
+                                                    </div>
+                                                </c:if>
+                                            </c:forEach>
+                                        </button>
 
-                                        <div class="menu-title-flex">
-                                            <img src="./assets/images/icons/posters.png" alt="clothes" width="30" height="30"
-                                                 class="menu-title-img">
-
-                                            <p class="menu-title">Posters</p>
-                                        </div>
-
-                                        <div>
-                                            <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                                            <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-                                        </div>
-
-                                    </button>
-
-                                    <ul class="sidebar-submenu-category-list" data-accordion>
-                                        <c:forEach items="${requestScope.categoryPosters}" var="catePosters" >
-                                            <li class="sidebar-submenu-category">
-                                                <a href="#" class="sidebar-submenu-title">
-                                                    <p class="product-name">${catePosters.titleCategoryProduct}</p>
-                                                    <data value="300" class="stock" title="Available Stock">300</data>
-                                                </a>
-                                            </li>
-
-                                        </c:forEach>
-                                    </ul>
-
-                                </li>
-
-                                <li class="sidebar-menu-category">
-
-                                    <button class="sidebar-accordion-menu" data-accordion-btn>
-
-                                        <div class="menu-title-flex">
-                                            <img src="./assets/images/icons/toy.png" alt="clothes" width="30" height="30"
-                                                 class="menu-title-img">
-
-                                            <p class="menu-title">Figures & Toys</p>
-                                        </div>
-
-                                        <div>
-                                            <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                                            <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-                                        </div>
-
-                                    </button>
-
-                                    <ul class="sidebar-submenu-category-list" data-accordion>
-                                        <c:forEach items="${requestScope.categoryFiguresToys}" var="cateFiguresToys" >
-                                            <li class="sidebar-submenu-category">
-                                                <a href="#" class="sidebar-submenu-title">
-                                                    <p class="product-name">${cateFiguresToys.titleCategoryProduct}</p>
-                                                    <data value="300" class="stock" title="Available Stock">300</data>
-                                                </a>
-                                            </li>
-
-                                        </c:forEach>
-                                    </ul>
-
-                                </li>
-
-                                <li class="sidebar-menu-category">
-
-                                    <button class="sidebar-accordion-menu" data-accordion-btn>
-
-                                        <div class="menu-title-flex">
-                                            <img src="./assets/images/icons/clothers.png" alt="clothes" width="30" height="30"
-                                                 class="menu-title-img">
-
-                                            <p class="menu-title">Clothers</p>
-                                        </div>
-
-                                        <div>
-                                            <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                                            <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-                                        </div>
-
-                                    </button>
-
-                                    <ul class="sidebar-submenu-category-list" data-accordion>
-                                        <c:forEach items="${requestScope.categoryClothers}" var="cateClothers" >
-                                            <li class="sidebar-submenu-category">
-                                                <a href="#" class="sidebar-submenu-title">
-                                                    <p class="product-name">${cateClothers.titleCategoryProduct}</p>
-                                                    <data value="300" class="stock" title="Available Stock">300</data>
-                                                </a>
-                                            </li>
-
-                                        </c:forEach>
-                                    </ul>
-
-                                </li>
-
-                                <li class="sidebar-menu-category">
-
-                                    <button class="sidebar-accordion-menu" data-accordion-btn>
-
-                                        <div class="menu-title-flex">
-                                            <img src="./assets/images/icons/accessories.png" alt="clothes" width="30" height="30"
-                                                 class="menu-title-img">
-
-                                            <p class="menu-title">Accessories</p>
-                                        </div>
-
-                                        <div>
-                                            <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                                            <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-                                        </div>
-
-                                    </button>
-
-                                    <ul class="sidebar-submenu-category-list" data-accordion>
-                                        <c:forEach items="${requestScope.categoryAccessories}" var="cateAccessories" >
-                                            <li class="sidebar-submenu-category">
-                                                <a href="#" class="sidebar-submenu-title">
-                                                    <p class="product-name">${cateAccessories.titleCategoryProduct}</p>
-                                                    <data value="300" class="stock" title="Available Stock">300</data>
-                                                </a>
-                                            </li>
-
-                                        </c:forEach>
-                                    </ul>
-
-                                </li>
+                                    </li>
+                                </c:forEach>
 
                             </ul>
 
@@ -252,17 +137,45 @@
                         <!--                          - PRODUCT GRID-->
 
                         <div class="product-main">
+                            <div class="product-main-top">
+                                <h2 class="title">All Products</h2>
+                                <div class="select-menu">
+                                    <div class="select-btn">
+                                        <span class="sBtn-text">
+                                            <c:choose>
+                                                <c:when test="${tag1 == -1}">All Product</c:when>
+                                                <c:when test="${tag1 == -2}">Products By Category</c:when>
+                                                <c:otherwise>${tag1}</c:otherwise>
+                                            </c:choose>
+                                        </span>
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </div>
 
-                            <h2 class="title">All Products</h2>
-
+                                    <ul class="options">
+                                        <a href="${pageContext.request.contextPath}/product/list?index=${tag}&index1=-1">
+                                            <li class="option"><span class="option-text">All Product</span></li>
+                                        </a>
+                                        <a href="${pageContext.request.contextPath}/product/list?index=${tag}&index1=8">
+                                            <li class="option"><span class="option-text">8</span></li>
+                                        </a>
+                                        <a href="${pageContext.request.contextPath}/product/list?index=${tag}&index1=12">
+                                            <li class="option"><span class="option-text">12</span></li>
+                                        </a>
+                                        <a href="${pageContext.request.contextPath}/product/list?index=${tag}&index1=16">
+                                            <li class="option"><span class="option-text">16</span>
+                                            </li>
+                                        </a>
+                                    </ul>
+                                </div>
+                            </div>
                             <div class="product-grid">
 
                                 <div class="showcase">
 
                                     <div class="showcase-banner">
 
-                                        <img src="./assets/images/products/jacket-3.jpg" alt="Mens Winter Leathers Jackets" width="300" class="product-img default">
-                                        <img src="./assets/images/products/jacket-4.jpg" alt="Mens Winter Leathers Jackets" width="300" class="product-img hover">
+                                        <img src="${pageContext.request.contextPath}/assets/images/products/jacket-3.jpg" alt="Mens Winter Leathers Jackets" width="300" class="product-img default">
+                                        <img src="${pageContext.request.contextPath}/assets/images/products/jacket-4.jpg" alt="Mens Winter Leathers Jackets" width="300" class="product-img hover">
 
                                         <p class="showcase-badge">15%</p>
 
@@ -316,9 +229,9 @@
                                 <div class="showcase">
 
                                     <div class="showcase-banner">
-                                        <img src="./assets/images/products/shirt-1.jpg" alt="Pure Garment Dyed Cotton Shirt" class="product-img default"
+                                        <img src="${pageContext.request.contextPath}/assets/images/products/shirt-1.jpg" alt="Pure Garment Dyed Cotton Shirt" class="product-img default"
                                              width="300">
-                                        <img src="./assets/images/products/shirt-2.jpg" alt="Pure Garment Dyed Cotton Shirt" class="product-img hover"
+                                        <img src="${pageContext.request.contextPath}/assets/images/products/shirt-2.jpg" alt="Pure Garment Dyed Cotton Shirt" class="product-img hover"
                                              width="300">
 
                                         <p class="showcase-badge angle black">sale</p>
@@ -367,13 +280,13 @@
                                 </div>
 
 
-                                <c:forEach items="${requestScope.product}" var="product" >
+                                <c:forEach items="${requestScope.productList}" var="productList" >
                                     <div class="showcase">
 
                                         <div class="showcase-banner">
-                                            <img src="./assets/images/product/${product.imgProduct}" alt="${product.titleProduct}" class="product-img default"
+                                            <img src="${pageContext.request.contextPath}/assets/images/product/${productList.imgProduct}" alt="${productList.titleProduct}" class="product-img default"
                                                  width="300" style="object-fit: cover; height: 250px">
-                                            <img src="./assets/images/product/${product.imgProduct}" alt="${product.titleProduct}" class="product-img hover"
+                                            <img src="${pageContext.request.contextPath}/assets/images/product/${productList.imgProduct}" alt="${productList.titleProduct}" class="product-img hover"
                                                  width="300" style="object-fit: cover; height: 250px">
 
                                             <p class="showcase-badge angle pink">new</p>
@@ -399,10 +312,10 @@
 
 
                                         <div class="showcase-content">
-                                            <a href="#" class="showcase-category">${product.categoryProduct.titleCategoryProduct}</a>
+                                            <a href="#" class="showcase-category">${productList.categoryProduct.titleCategoryProduct}</a>
 
                                             <h3>
-                                                <a href="#" class="showcase-title">${product.titleProduct}</a>
+                                                <a href="#" class="showcase-title">${productList.titleProduct}</a>
                                             </h3>
 
                                             <div class="showcase-rating">
@@ -414,8 +327,8 @@
                                             </div>
 
                                             <div class="price-box">
-                                                <p class="price"><fmt:formatNumber type="currency" value="${product.priceProduct * 0.9}" pattern="###,###đ" /></p>
-                                                <del><fmt:formatNumber type="currency" value="${product.priceProduct}" pattern="###,###đ" /></del>
+                                                <p class="price"><fmt:formatNumber type="currency" value="${productList.priceProduct * 0.9}" pattern="###,###đ" /></p>
+                                                <del><fmt:formatNumber type="currency" value="${productList.priceProduct}" pattern="###,###đ" /></del>
                                             </div>
 
                                         </div>
@@ -434,19 +347,80 @@
 
             </div>
 
-            <nav class="container-paging">
-                <ul>                   
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
-                    <c:forEach begin="1" end="${endPage}" var="i" >
-                    <li class="page-item"><a class="page-link ${tag == i ? "active-paging":""}" href="${pageContext.request.contextPath}/product?cid=${0}&index=${i}">${i}</a></li>
-                    </c:forEach>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>                   
-                </ul>
-            </nav>
+            <c:if test="${indexP2 != -1}">
+                <div class="container-paging">
+                    <button class="button" id="startBtn" disabled>
+                        <i class="fa-solid fa-angles-left"></i>
+                    </button>
+                    <button class="button prevNext" id="prev" disabled>
+                        <i class="fa-solid fa-angle-left"></i>
+                    </button>
+                    <div class="links">
+                        <c:forEach begin="1" end="${endPage}" var="i" >
+                            <a href="${pageContext.request.contextPath}/product/list?index=${i}&index1=${tag1}" class="link ${tag == i ? "active":""}">${i}</a>
+                        </c:forEach>
+                    </div>
+                    <button class="button prevNext" id="next">
+                        <i class="fa-solid fa-angle-right"></i>
+                    </button>
+                    <button class="button" id="endBtn">
+                        <i class="fa-solid fa-angles-right"></i>
+                    </button>
+                </div>
+            </c:if>
+
+            <c:choose>
+                <c:when test="${indexP2 == -2}">
+                    <div class="container-paging">
+                        <button class="button" id="startBtn" disabled>
+                            <i class="fa-solid fa-angles-left"></i>
+                        </button>
+                        <button class="button prevNext" id="prev" disabled>
+                            <i class="fa-solid fa-angle-left"></i>
+                        </button>
+                        <div class="links">
+                            <c:forEach begin="1" end="${(countProductAll / 8) + ((countProductAll % 8 != 0) ? 1 : 0)}" var="i">
+                                <a href="${pageContext.request.contextPath}/product/list?index=${i}&index1=8" class="link ${tag == i ? 'active' : ''}">${i}</a>
+                            </c:forEach>
+                        </div>
+                        <button class="button prevNext" id="next">
+                            <i class="fa-solid fa-angle-right"></i>
+                        </button>
+                        <button class="button" id="endBtn">
+                            <i class="fa-solid fa-angles-right"></i>
+                        </button>
+                    </div>
+                </c:when>
+                
+                <c:when test="${indexP2 != -1}">
+                    <div class="container-paging">
+                        <button class="button" id="startBtn" disabled>
+                            <i class="fa-solid fa-angles-left"></i>
+                        </button>
+                        <button class="button prevNext" id="prev" disabled>
+                            <i class="fa-solid fa-angle-left"></i>
+                        </button>
+                        <div class="links">
+                            <c:forEach begin="1" end="${endPage}" var="i">
+                                <a href="${pageContext.request.contextPath}/product/list?index=${i}&index1=${tag1}" class="link ${tag == i ? 'active' : ''}">${i}</a>
+                            </c:forEach>
+                        </div>
+                        <button class="button prevNext" id="next">
+                            <i class="fa-solid fa-angle-right"></i>
+                        </button>
+                        <button class="button" id="endBtn">
+                            <i class="fa-solid fa-angles-right"></i>
+                        </button>
+                    </div>
+                </c:when>
+                
+                <c:otherwise>
+                    <!-- Code cho trường hợp khác (nếu cần) -->
+                </c:otherwise>
+            </c:choose>
+
+
+
         </main>
 
         <!--          - FOOTER-->
@@ -456,7 +430,8 @@
         <!--          - custom js link-->
 
         <script src="<c:url value="/assets/js/script.js" />"></script>
-
+<!--        <script src="${pageContext.request.contextPath}/assets/js/script_pagination.js"></script>-->
+        <script src="${pageContext.request.contextPath}/assets/js/script_selection.js"></script>
         <!--          - ionicon link-->
 
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
