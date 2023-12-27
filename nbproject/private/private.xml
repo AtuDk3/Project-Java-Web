@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Java_Web">
-            <file>file:/D:/NetBeansProjects/Ecommer_Website/src/java/controller/ProductServlet.java</file>
-            <file>file:/D:/NetBeansProjects/Ecommer_Website/src/java/dal/impl/ProductDAOImpl.java</file>
-            <file>file:/D:/NetBeansProjects/Ecommer_Website/web/view/products.jsp</file>
+            <file>file:/D:/NetBeansProjects/Ecommer_Website/web/view/product_details.jsp</file>
+            <file>file:/D:/NetBeansProjects/Ecommer_Website/web/assets/js/script.js</file>
+            <file>file:/D:/NetBeansProjects/Ecommer_Website/web/view/admin/product/update_product.jsp</file>
+            <file>file:/D:/NetBeansProjects/Ecommer_Website/web/view/home.jsp</file>
+            <file>file:/D:/NetBeansProjects/Ecommer_Website/src/java/controller/LoadMoreAjax.java</file>
+            <file>file:/D:/NetBeansProjects/Ecommer_Website/web/assets/css/style.css</file>
         </group>
     </open-files>
 </project-private>

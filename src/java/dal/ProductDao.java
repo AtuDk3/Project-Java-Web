@@ -28,6 +28,10 @@ public interface ProductDao {
 
     void delete(int idProduct);
     
+    List<Product> getTop4RelatedProducts(int idProduct, int idCategoryProduct);
+    
+    List<Product> getNext4RelatedProducts(int idProduct, int idCategoryProduct, int amount);
+    
     int countProduct();
 
     int countCategoryProduct(int idCategoryProduct);

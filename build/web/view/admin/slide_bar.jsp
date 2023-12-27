@@ -15,7 +15,7 @@
 			<li><a href="#" class="active"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
 			<li class="divider" data-text="main">Main</li>
 			<li>
-				<a href="#"><i class='bx bxs-inbox icon' ></i> Category <i class='bx bx-chevron-right icon-right' ></i></a>
+				<a href="#"><i class='bx bxs-inbox icon' ></i> Category Manager<i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
 					<li><a href="${pageContext.request.contextPath}/admin/category_product/list">List Category</a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/category_product/add">Add Category</a></li>
@@ -23,7 +23,7 @@
 			</li>
                         
                         <li>
-				<a href="#"><i class='bx bxs-inbox icon' ></i> Product <i class='bx bx-chevron-right icon-right' ></i></a>
+				<a href="#"><i class='bx bxs-inbox icon' ></i> Product Manager<i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
 					<li><a href="${pageContext.request.contextPath}/admin/product/list">List Product</a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/product/add">Add Product</a></li>
@@ -31,9 +31,17 @@
 			</li>
 
 			<li>
-				<a href="#"><i class='bx bxs-notepad icon' ></i> Order <i class='bx bx-chevron-right icon-right' ></i></a>
+				<a href="#"><i class='bx bxs-notepad icon' ></i> Order Manager<i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
 					<li><a href="#">List Order</a></li>
+				</ul>
+			</li>
+                        
+                        <li>
+				<a href="#"><i class='bx bxs-notepad icon' ></i> Account Manager<i class='bx bx-chevron-right icon-right' ></i></a>
+				<ul class="side-dropdown">
+					<li><a href="${pageContext.request.contextPath}/admin/account/list">List Account</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/admin/account/add">Add Account</a></li>
 				</ul>
 			</li>
 		</ul>

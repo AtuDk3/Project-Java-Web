@@ -39,7 +39,7 @@
                             <th>No</th>
                             <th>Id</th>
                             <th>Name Product</th>
-                            <th>Iamge Product</th>
+                            <th>Image Product</th>
                             <th>Category Product</th>
 
                             <th>Price</th>

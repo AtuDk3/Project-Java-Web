@@ -23,6 +23,8 @@ public interface UserService {
     
     void update(Account account);
     
+    void updateAdmmin(Account account);
+    
     void delete(int id);
     
     boolean register(String userName, String email, String password, String phone);

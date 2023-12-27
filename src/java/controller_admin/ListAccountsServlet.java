@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package controller_admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,19 +13,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.CategoryProduct;
-import model.Product;
-import service.CategoryProductService;
-import service.ProductService;
-import service.impl.CategoryProductServiceImpl;
-import service.impl.ProductServiceImpl;
+import model.Account;
+import service.UserService;
+import service.impl.UserServiceImpl;
 
 /**
  *
  * @author Lenovo
  */
-@WebServlet(name="ProductDetailsServlet", urlPatterns={"/product_details"})
-public class ProductDetailsServlet extends HttpServlet {
+@WebServlet(name="ListAccountsServlet", urlPatterns={"/admin/account/list"})
+public class ListAccountsServlet extends HttpServlet {
+    
+    UserService userService = new UserServiceImpl();
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -42,10 +41,10 @@ public class ProductDetailsServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProductDetailsServlet</title>");  
+            out.println("<title>Servlet AddProductServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ProductDetailsServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AddProductServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,35 +61,9 @@ public class ProductDetailsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        CategoryProductService categoryProductService = new CategoryProductServiceImpl();
-        
-        List<CategoryProduct> listCategory = categoryProductService.getAll();
-        request.setAttribute("categoryProduct", listCategory);
-        
-        List<CategoryProduct> listCategoryAccessories = categoryProductService.getByDescCategoryProduct("Accessories");
-        request.setAttribute("categoryAccessories", listCategoryAccessories);
-        List<CategoryProduct> listCategoryPosters = categoryProductService.getByDescCategoryProduct("Posters");
-        request.setAttribute("categoryPosters", listCategoryPosters);
-        List<CategoryProduct> listCategoryFiguresToys = categoryProductService.getByDescCategoryProduct("Figures & Toys");
-        request.setAttribute("categoryFiguresToys", listCategoryFiguresToys);
-        List<CategoryProduct> listCategoryClothers = categoryProductService.getByDescCategoryProduct("Clothers");
-        request.setAttribute("categoryClothers", listCategoryClothers);
-        
-        // product
-        ProductService productService = new ProductServiceImpl();
-        
-        String pid = request.getParameter("pid");
-        int idProduct = Integer.parseInt(pid);
-        String cid = request.getParameter("cid");
-        int idCategoryProduct = Integer.parseInt(cid);
-        
-        Product productDetails = productService.getProductByID(idProduct);
-        request.setAttribute("productDetails", productDetails);
-        
-        List<Product> listTop4RelatedProduct = productService.getTop4RelatedProducts(idProduct, idCategoryProduct);
-        request.setAttribute("listTop4RelatedProduct", listTop4RelatedProduct);
-
-        request.getRequestDispatcher("/view/product_details.jsp").forward(request, response);
+        List<Account> listAccounts = userService.getAll();
+        request.setAttribute("listAccounts", listAccounts);
+        request.getRequestDispatcher("/view/admin/account/list_account.jsp").forward(request, response);
     } 
 
     /** 
@@ -103,7 +76,7 @@ public class ProductDetailsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     /** 

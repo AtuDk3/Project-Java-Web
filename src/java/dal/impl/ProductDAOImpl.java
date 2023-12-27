@@ -213,6 +213,69 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
             System.out.println(e);
         }
     }
+    
+    // Ajax load more by Category Product
+    public List<Product> getTop4RelatedProducts(int idProduct, int idCategoryProduct) {
+        List<Product> listProduct = new ArrayList<>();
+        String sql = "select top 4 * from tab_product where id_product != ? and id_category_product = ? order by id_product";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);          
+            ps.setInt(1, idProduct);
+            ps.setInt(2, idCategoryProduct);     
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                CategoryProductDAOImpl cDAO = new CategoryProductDAOImpl();
+
+                p.setIdProduct(rs.getInt("id_product"));
+                p.setTitleProduct(rs.getString("title_product"));
+                p.setPriceProduct(rs.getFloat("price_product"));
+                p.setDescProduct(rs.getString("desc_product"));
+                p.setQuantityProduct(rs.getInt("quantity_product"));
+                p.setImgProduct(rs.getString("img_product"));
+                p.setHotProduct(rs.getInt("hot_product"));
+                CategoryProduct c = cDAO.getCategoryProductByID(rs.getInt("id_category_product"));
+                p.setCategoryProduct(c);
+                listProduct.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return listProduct;
+    }
+    
+    public List<Product> getNext4RelatedProducts(int idProduct, int idCategoryProduct, int amount) {
+        List<Product> listProduct = new ArrayList<>();
+        String sql = "select * from tab_product where id_product != ? and id_category_product = ? order by id_product offset ? rows fetch next 4 rows only";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);          
+            ps.setInt(1, idProduct);
+            ps.setInt(2, idCategoryProduct);   
+            // Set vị trí cho product
+            ps.setInt(3, amount);        
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                CategoryProductDAOImpl cDAO = new CategoryProductDAOImpl();
+
+                p.setIdProduct(rs.getInt("id_product"));
+                p.setTitleProduct(rs.getString("title_product"));
+                p.setPriceProduct(rs.getFloat("price_product"));
+                p.setDescProduct(rs.getString("desc_product"));
+                p.setQuantityProduct(rs.getInt("quantity_product"));
+                p.setImgProduct(rs.getString("img_product"));
+                p.setHotProduct(rs.getInt("hot_product"));
+                CategoryProduct c = cDAO.getCategoryProductByID(rs.getInt("id_category_product"));
+                p.setCategoryProduct(c);
+                listProduct.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return listProduct;
+    }
 
     @Override
     public int countProduct() {
@@ -250,7 +313,7 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
 
     public static void main(String[] args) {
         ProductDAOImpl p = new ProductDAOImpl();
-        System.out.println(p.countCategoryProduct(9));
+        System.out.println(p.getNext4RelatedProducts(1, 9, 4).toString());
     }
 
     @Override

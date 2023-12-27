@@ -88,6 +88,16 @@ public class ProductServiceImpl implements ProductService {
         return productDao.pagingProduct(idCategoryProduct, indexP, indexP1);
     }
 
+    @Override
+    public List<Product> getTop4RelatedProducts(int idProduct, int idCategoryProduct) {
+        return productDao.getTop4RelatedProducts(idProduct, idCategoryProduct);
+    }
+
+    @Override
+    public List<Product> getNext4RelatedProducts(int idProduct, int idCategoryProduct, int amount) {
+        return productDao.getNext4RelatedProducts(idProduct, idCategoryProduct, amount);
+    }
+
 
     
 }

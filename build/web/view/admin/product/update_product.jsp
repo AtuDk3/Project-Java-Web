@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <label for="imageProduct">Image Product</label>
                             <input type="file" name="imageProduct" class="form-control">
-                            <p> <img class="image" src="${pageContext.request.contextPath}/assets/images/uploads/${product.imgProduct}" height="100px" width="100px"></p>
+                            <p> <img class="image" src="${pageContext.request.contextPath}/assets/images/uploads/product/${product.imgProduct}" height="100px" width="100px"></p>
                         </div>
                         <div class="row g-2">
                             <div class="col">

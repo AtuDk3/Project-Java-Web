@@ -28,6 +28,10 @@ public interface ProductService {
     void update(Product product);
 
     void delete(int idProduct);
+    
+    List<Product> getTop4RelatedProducts(int idProduct, int idCategoryProduct);
+    
+    List<Product> getNext4RelatedProducts(int idProduct, int idCategoryProduct, int amount);
 
     int countProduct();
 

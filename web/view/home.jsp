@@ -17,19 +17,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>One Piece Shop</title>
 
-        
-<!--          - favicon-->
-        
+
+        <!--          - favicon-->
+
         <link rel="shortcut icon" href="<c:url value="/assets/images/logo/logo.png" />" type="image/x-icon">
 
-        
-<!--          - custom css link-->
-        
+
+        <!--          - custom css link-->
+
         <link rel="stylesheet" href="<c:url value="/assets/css/style.css" />">
 
-        
-<!--          - google font link-->
-        
+
+        <!--          - google font link-->
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
@@ -41,9 +41,9 @@
 
 
         <div class="overlay" data-overlay></div>
-      
-<!--          - MODAL-->
-        
+
+        <!--          - MODAL-->
+
         <div class="modal" data-modal>
 
             <div class="modal-close-overlay" data-modal-overlay></div>
@@ -84,9 +84,9 @@
 
         </div>
 
-       
-<!--          - NOTIFICATION TOAST-->
-        
+
+        <!--          - NOTIFICATION TOAST-->
+
 
         <div class="notification-toast" data-toast>
 
@@ -116,38 +116,38 @@
 
         </div>
 
-  
-<!--          - HEADER-->
-        
+
+        <!--          - HEADER-->
+
 
         <%@include file="header.jsp" %>
 
-  
-<!--          - MAIN-->
-        
+
+        <!--          - MAIN-->
+
         <main>
 
-            
-<!--              - BANNER-->
-            
+
+            <!--              - BANNER-->
+
 
             <%@include file="banner.jsp" %>
-            
 
 
 
-            
-<!--              - PRODUCT-->
-            
+
+
+            <!--              - PRODUCT-->
+
 
             <div class="product-container">
 
                 <div class="container">
 
 
-                    
-<!--                      - SIDEBAR-->
-                    
+
+                    <!--                      - SIDEBAR-->
+
 
                     <div class="sidebar  has-scrollbar" data-mobile-menu>
 
@@ -433,9 +433,9 @@
 
                     <div class="product-box">
 
-                        
-<!--                          - PRODUCT MINIMAL-->
-                        
+
+                        <!--                          - PRODUCT MINIMAL-->
+
 
                         <div class="product-minimal">
 
@@ -655,29 +655,29 @@
 
                                     <div class="showcase-container">
                                         <c:forEach items="${requestScope.productModel}" var="proModel" >
-                                        <div class="showcase">
+                                            <div class="showcase">
 
-                                            <a href="#" class="showcase-img-box">
-                                                <img src="./assets/images/product/${proModel.imgProduct}" alt="running & trekking shoes - white" class="showcase-img"
-                                                     width="70" height="70">
-                                            </a>
-
-                                            <div class="showcase-content">
-
-                                                <a href="#">
-                                                    <h4 class="showcase-title">${proModel.titleProduct}</h4>
+                                                <a href="#" class="showcase-img-box">
+                                                    <img src="./assets/images/product/${proModel.imgProduct}" alt="running & trekking shoes - white" class="showcase-img"
+                                                         width="70" height="70">
                                                 </a>
 
-                                                <a href="#" class="showcase-category">${proModel.categoryProduct.titleCategoryProduct}</a>
+                                                <div class="showcase-content">
 
-                                                <div class="price-box">
-                                                    <p class="price">${proModel.priceProduct}</p>
-                                                    <del>${proModel.priceProduct}</del>
+                                                    <a href="#">
+                                                        <h4 class="showcase-title">${proModel.titleProduct}</h4>
+                                                    </a>
+
+                                                    <a href="#" class="showcase-category">${proModel.categoryProduct.titleCategoryProduct}</a>
+
+                                                    <div class="price-box">
+                                                        <p class="price">${proModel.priceProduct}</p>
+                                                        <del>${proModel.priceProduct}</del>
+                                                    </div>
+
                                                 </div>
 
                                             </div>
-
-                                        </div>
                                         </c:forEach>
                                     </div>                                
 
@@ -898,9 +898,9 @@
 
 
 
-                        
-<!--                          - PRODUCT FEATURED-->
-                        
+
+                        <!--                          - PRODUCT FEATURED-->
+
 
                         <div class="product-featured">
 
@@ -1082,9 +1082,9 @@
 
 
 
-                        
-<!--                          - PRODUCT GRID-->
-                        
+
+                        <!--                          - PRODUCT GRID-->
+
 
                         <div class="product-main">
 
@@ -1148,60 +1148,6 @@
 
                                 </div>
 
-                                <div class="showcase">
-
-                                    <div class="showcase-banner">
-                                        <img src="./assets/images/products/shirt-1.jpg" alt="Pure Garment Dyed Cotton Shirt" class="product-img default"
-                                             width="300">
-                                        <img src="./assets/images/products/shirt-2.jpg" alt="Pure Garment Dyed Cotton Shirt" class="product-img hover"
-                                             width="300">
-
-                                        <p class="showcase-badge angle black">sale</p>
-
-                                        <div class="showcase-actions">
-                                            <button class="btn-action">
-                                                <ion-icon name="heart-outline"></ion-icon>
-                                            </button>
-
-                                            <button class="btn-action">
-                                                <ion-icon name="eye-outline"></ion-icon>
-                                            </button>
-
-                                            <button class="btn-action">
-                                                <ion-icon name="repeat-outline"></ion-icon>
-                                            </button>
-
-                                            <button class="btn-action">
-                                                <ion-icon name="bag-add-outline"></ion-icon>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <div class="showcase-content">
-                                        <a href="#" class="showcase-category">shirt</a>
-
-                                        <h3>
-                                            <a href="#" class="showcase-title">Pure Garment Dyed Cotton Shirt</a>
-                                        </h3>
-
-                                        <div class="showcase-rating">
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star-outline"></ion-icon>
-                                            <ion-icon name="star-outline"></ion-icon>
-                                        </div>
-
-                                        <div class="price-box">
-                                            <p class="price">$45.00</p>
-                                            <del>$56.00</del>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-
                                 <c:forEach items="${requestScope.product}" var="product" >
                                     <div class="showcase">
 
@@ -1211,24 +1157,31 @@
                                             <img src="./assets/images/product/${product.imgProduct}" alt="${product.titleProduct}" class="product-img hover"
                                                  width="300" style="object-fit: cover; height: 250px">
 
-                                            <p class="showcase-badge angle pink">new</p>
+                                            <c:choose>
+                                                <c:when test="${product.hotProduct == 1}">
+                                                    <p class="showcase-badge angle black">hot</p>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <p class="showcase-badge angle pink">sale</p>
+                                                </c:otherwise>
+                                            </c:choose>
 
                                             <div class="showcase-actions">
                                                 <a href="#"><button class="btn-action">
-                                                    <ion-icon name="heart-outline"></ion-icon>
-                                                </button></a>
+                                                        <ion-icon name="heart-outline"></ion-icon>
+                                                    </button></a>
 
-                                                <a href="${pageContext.request.contextPath}/product_details?pid=${product.idProduct}"><button class="btn-action">
-                                                    <ion-icon name="eye-outline"></ion-icon>
-                                                </button></a>
+                                                <a href="${pageContext.request.contextPath}/product_details?pid=${product.idProduct}&cid=${product.categoryProduct.idCategoryProduct}"><button class="btn-action">
+                                                        <ion-icon name="eye-outline"></ion-icon>
+                                                    </button></a>
 
                                                 <a href="url"><button class="btn-action">
-                                                    <ion-icon name="repeat-outline"></ion-icon>
-                                                </button></a>
+                                                        <ion-icon name="repeat-outline"></ion-icon>
+                                                    </button></a>
 
                                                 <a href="${pageContext.request.contextPath}/member/cart_add?pid=${product.idProduct}&quantity=1"><button class="btn-action">
-                                                    <ion-icon name="bag-add-outline"></ion-icon>
-                                                </button></a>
+                                                        <ion-icon name="bag-add-outline"></ion-icon>
+                                                    </button></a>
                                             </div>
                                         </div>
 
@@ -1273,9 +1226,9 @@
 
 
 
-            
-<!--              - TESTIMONIALS, CTA & SERVICE-->
-            
+
+            <!--              - TESTIMONIALS, CTA & SERVICE-->
+
 
             <div>
 
@@ -1283,9 +1236,9 @@
 
                     <div class="testimonials-box">
 
-                        
-<!--                          - TESTIMONIALS-->
-                        
+
+                        <!--                          - TESTIMONIALS-->
+
 
                         <div class="testimonial">
 
@@ -1312,9 +1265,9 @@
 
 
 
-                        
-<!--                          - CTA-->
-                        
+
+                        <!--                          - CTA-->
+
 
                         <div class="cta-container">
 
@@ -1336,9 +1289,9 @@
 
 
 
-                        
-<!--                          - SERVICE-->
-                        
+
+                        <!--                          - SERVICE-->
+
 
                         <div class="service">
 
@@ -1435,9 +1388,9 @@
 
 
 
-            
-<!--              - BLOG-->
-            
+
+            <!--              - BLOG-->
+
 
             <div class="blog">
 
@@ -1544,21 +1497,21 @@
 
         </main>
 
-        
-<!--          - FOOTER-->
-        
+
+        <!--          - FOOTER-->
+
 
         <%@include file="footer.jsp" %>
 
 
-        
-<!--          - custom js link-->
-        
+
+        <!--          - custom js link-->
+
         <script src="<c:url value="/assets/js/script.js" />"></script>
 
-        
-<!--          - ionicon link-->
-        
+
+        <!--          - ionicon link-->
+
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 

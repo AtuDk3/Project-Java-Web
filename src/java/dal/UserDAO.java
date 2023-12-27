@@ -21,6 +21,8 @@ public interface UserDAO {
     
     void update(Account account);
     
+    void updateAdmmin(Account account);
+    
     void delete(int id);
     
     List<Account> getAll();

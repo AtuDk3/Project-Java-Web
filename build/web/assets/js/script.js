@@ -78,3 +78,32 @@ for (let i = 0; i < accordionBtn.length; i++) {
 
 }
 
+function loadMore(){
+    // Lấy ra coi có bao nhiêu sản phẩm 
+    let amount = document.getElementsByClassName("product_related").length;
+    let urlSearchParams = new URLSearchParams(window.location.search);
+
+    // Lấy giá trị của tham số 'cid' từ URL
+    let cid = urlSearchParams.get('cid');
+
+    // Lấy giá trị của tham số 'pid' từ URL
+    let pid = urlSearchParams.get('pid');
+    $.ajax({
+        url: "/Ecommer_Website/load",
+        type: "get",
+        data:{
+            exits: amount,
+            cid: cid,
+            pid: pid
+            
+        },
+        success: function (data) {
+            let row = document.getElementById("related-product");
+            row.innerHTML += data;
+        },
+        error: function (xhr) {
+            
+        }
+    })
+}
+

@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Account get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return userDAO.get(id);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        userDAO.delete(id);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public List<Account> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return userDAO.getAll();
     }
 
     @Override
@@ -96,5 +96,21 @@ public class UserServiceImpl implements UserService{
         Account oldAccount = userDAO.get(account.getUserName());
         oldAccount.setPassword(account.getPassword());
         userDAO.changePassword(oldAccount);
+    }
+
+    @Override
+    public void updateAdmmin(Account account) {
+         Account oldAccount = userDAO.get(account.getId());
+        
+        oldAccount.setFullName(account.getFullName());
+        oldAccount.setAvatar(account.getAvatar());
+        oldAccount.setAddress(account.getAddress());
+        oldAccount.setUserName(account.getUserName());
+        oldAccount.setEmail(account.getEmail());
+        oldAccount.setPassword(account.getPassword());
+        oldAccount.setPhone(account.getPhone());
+        oldAccount.setRoleID(account.getRoleID());
+        
+        userDAO.update(oldAccount);
     }
 }
