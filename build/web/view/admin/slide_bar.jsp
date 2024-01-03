@@ -12,10 +12,15 @@
 	<section id="sidebar">
 		<a href="${pageContext.request.contextPath}/admin" class="brand">&nbsp &nbsp <ion-icon name="finger-print-outline"></ion-icon>&nbsp Dashboard</a>
 		<ul class="side-menu">
-			<li><a href="#" class="active"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
+			<li class="active"><a href="${pageContext.request.contextPath}/admin" class="active"><i class='bx bxs-dashboard icon' ></i> Dashboard</a></li>
+                        
 			<li class="divider" data-text="main">Main</li>
+                        
+                        <li>
+				<a href="${pageContext.request.contextPath}/home"><i class='bx bx-home icon' ></i> Home Page<i class='bx bx-chevron-right icon-right' ></i></a>
+			</li>
 			<li>
-				<a href="#"><i class='bx bxs-inbox icon' ></i> Category Manager<i class='bx bx-chevron-right icon-right' ></i></a>
+				<a href="#"><i class='bx bx-category icon'></i> Category Manager<i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
 					<li><a href="${pageContext.request.contextPath}/admin/category_product/list">List Category</a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/category_product/add">Add Category</a></li>
@@ -23,7 +28,7 @@
 			</li>
                         
                         <li>
-				<a href="#"><i class='bx bxs-inbox icon' ></i> Product Manager<i class='bx bx-chevron-right icon-right' ></i></a>
+				<a href="#"><i class='bx bxl-product-hunt icon' ></i> Product Manager<i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
 					<li><a href="${pageContext.request.contextPath}/admin/product/list">List Product</a></li>
 					<li><a href="${pageContext.request.contextPath}/admin/product/add">Add Product</a></li>
@@ -31,14 +36,14 @@
 			</li>
 
 			<li>
-				<a href="#"><i class='bx bxs-notepad icon' ></i> Order Manager<i class='bx bx-chevron-right icon-right' ></i></a>
+				<a href="#"><i class='bx bx-cart icon'></i> Order Manager<i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
-					<li><a href="#">List Order</a></li>
+					<li><a href="${pageContext.request.contextPath}/admin/order/list_order">List Order</a></li>
 				</ul>
 			</li>
                         
                         <li>
-				<a href="#"><i class='bx bxs-notepad icon' ></i> Account Manager<i class='bx bx-chevron-right icon-right' ></i></a>
+				<a href="#"><ion-icon name="person-outline" class="icon"></ion-icon> Account Manager<i class='bx bx-chevron-right icon-right' ></i></a>
 				<ul class="side-dropdown">
 					<li><a href="${pageContext.request.contextPath}/admin/account/list">List Account</a></li>
                                         <li><a href="${pageContext.request.contextPath}/admin/account/add">Add Account</a></li>

@@ -94,11 +94,14 @@
 
 
                 <li class="menu-category">
-                    <a href="${pageContext.request.contextPath}/product/list?cid=${0}" class="menu-title">Category Product</a>
+                    
+                    <a href="${pageContext.request.contextPath}/product/list?index1=-1" class="menu-title">Category Product</a>
                     <ul class="dropdown-list">
-                        <c:forEach items="${requestScope.categoryProduct}" var="cateProduct" >
+                        <c:forEach items="${requestScope.categoryProduct}" var="categoryProduct" >
+                            <c:url var="editURL" value="/product/list">
+                                        <c:param name="cid" value="${categoryProduct.idCategoryProduct}" /></c:url>
                             <li class="dropdown-item">
-                                <a href="product?cid=${cateProduct.idCategoryProduct}">${cateProduct.titleCategoryProduct}</a>
+                                <a href="${editURL}&index1=-2">${categoryProduct.titleCategoryProduct}</a>
                             </li>
                         </c:forEach>
                     </ul>

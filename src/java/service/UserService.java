@@ -38,4 +38,8 @@ public interface UserService {
     boolean checkExitsPhone(String phone);
     
     void changePassword(Account account);
+    
+    Account getEmail(String email);
+    
+    Account getPhone(String phone);
 }

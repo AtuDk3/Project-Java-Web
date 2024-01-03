@@ -33,7 +33,7 @@
                         <div class="col-lg-4">
                             <div class="card mb-4">
                                 <div class="card-body text-center">
-                                    <img src="${pageContext.request.contextPath}/assets/images/upload/avatar/${sessionScope.account.avatar}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
+                                    <img src="${pageContext.request.contextPath}/assets/images/uploads/avatar/${sessionScope.account.avatar}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
                                     <h5 class="my-3">${sessionScope.account.userName}</h5>
                                     <p class="text-muted mb-1">Email: ${sessionScope.account.email}</p>
                                     <p class="text-muted mb-4">Phone: ${sessionScope.account.phone}</p>

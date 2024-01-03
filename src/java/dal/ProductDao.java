@@ -39,4 +39,8 @@ public interface ProductDao {
     List<Product> pagingProduct(int indexP, int indexP1); 
 
     List<Product> pagingProduct(int idCategoryProduct, int pageIndex, int pageSize);
+    
+    List<Product> getTop4ProductsByCategory();
+    
+    List<Product> getTop5HotProduct();
 }

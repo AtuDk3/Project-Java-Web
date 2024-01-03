@@ -31,8 +31,12 @@
                 <form action="${pageContext.request.contextPath}/register" method="post">
                     <h1>Create Account</h1>
                     <div class="social-icons">
-                        <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-                        <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email+profile&redirect_uri=http://localhost:8080/Ecommer_Website/login_google&response_type=code&client_id=288596023635-pb9seo9cn3ntnb6927ap5tr6diclgnq3.apps.googleusercontent.com&approval_prompt=force" class="icon">
+                            <i class="fa-brands fa-google-plus-g"></i>
+                        </a>
+                        <a href="https://www.facebook.com/v12.0/dialog/oauth?client_id=777265654415501&redirect_uri=http://localhost:8080/Ecommer_Website/login_facebook&scope=email+public_profile" class="icon">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
                     </div>
                     <span>or use your email for registeration</span>
                     <input type="text" name="userName" value="${uName}" placeholder="User Name" required>

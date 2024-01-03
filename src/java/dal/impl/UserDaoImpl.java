@@ -73,6 +73,68 @@ public class UserDaoImpl extends DBContext implements UserDAO {
         }
         return null;
     }
+    
+    // Xác thực GG
+    @Override
+    public Account getEmail(String email) {
+        String sql = "select * from tab_account where email = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Account account = new Account();
+                
+                account.setId(rs.getInt("id"));
+                account.setUserName(rs.getString("user_name"));
+                account.setEmail(rs.getString("email"));
+                account.setPassword(rs.getString("password"));
+                account.setFullName(rs.getString("full_name"));
+                account.setAvatar(rs.getString("avatar"));
+                account.setPhone(rs.getString("phone"));
+                account.setCreateDate(rs.getDate("create_date"));
+                account.setRoleID(rs.getInt("role_id"));
+                account.setAddress(rs.getString("address"));
+
+                return account;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
+    //Xác thực fb
+    @Override
+    public Account getPhone(String phone) {
+        String sql = "select * from tab_account where phone = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, phone);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Account account = new Account();
+                
+                account.setId(rs.getInt("id"));
+                account.setUserName(rs.getString("user_name"));
+                account.setEmail(rs.getString("email"));
+                account.setPassword(rs.getString("password"));
+                account.setFullName(rs.getString("full_name"));
+                account.setAvatar(rs.getString("avatar"));
+                account.setPhone(rs.getString("phone"));
+                account.setCreateDate(rs.getDate("create_date"));
+                account.setRoleID(rs.getInt("role_id"));
+                account.setAddress(rs.getString("address"));
+
+                return account;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 
     @Override
     public Account get(int id) {

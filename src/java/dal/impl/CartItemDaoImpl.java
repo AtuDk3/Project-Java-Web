@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Timestamp;
 import model.Account;
 import model.Cart;
 import model.CartItem;
@@ -34,7 +35,7 @@ public class CartItemDaoImpl extends DBContext implements CartItemDao{
             ps.setInt(1, cartItem.getQuantity());
             ps.setDouble(2, cartItem.getUnitPrice());
             ps.setInt(3, cartItem.getProduct().getIdProduct());
-            ps.setInt(4, cartItem.getCart().getIdCart());
+            ps.setString(4, cartItem.getCart().getIdCart());
             
             ResultSet rs = ps.executeQuery();
             
@@ -52,7 +53,7 @@ public class CartItemDaoImpl extends DBContext implements CartItemDao{
             ps.setInt(1, cartItem.getQuantity());
             ps.setDouble(2, cartItem.getUnitPrice());
             ps.setInt(3, cartItem.getProduct().getIdProduct());
-            ps.setInt(4, cartItem.getCart().getIdCart());
+            ps.setString(4, cartItem.getCart().getIdCart());
             ps.setInt(5, cartItem.getIdCartItem());
             
             ResultSet rs = ps.executeQuery();
@@ -90,7 +91,7 @@ public class CartItemDaoImpl extends DBContext implements CartItemDao{
                 
                 Cart cart = new Cart();
                 cart.setBuyer(user);
-                cart.setBuyDate(rs.getDate("c.buy_date"));
+                cart.setBuyDate((Timestamp) rs.getTimestamp("c.buy_date"));
                 
                 Product product = new Product();
                 product.setTitleProduct(rs.getString("p.title_product"));
@@ -110,6 +111,50 @@ public class CartItemDaoImpl extends DBContext implements CartItemDao{
             System.out.println(e);
         }
         return null;
+    }
+    
+    //check lại
+    @Override
+    public CartItem getByCart(int idCart) {
+        String sql = "select citem.id_cart_item, citem.quantity, citem.unit_price, c.user_id, c.buy_date, p.title_product, p.price_product"
+                + " from tab_cart_item as citem inner join tab_cart as c on c.id_cart = citem.id_cart_item "
+                + " inner join tab_product as p on citem.id_product = p.id_product where c.id_cart = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idCart);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()){
+                Account user = userService.get(rs.getInt("user_id"));               
+                
+                Cart cart = new Cart();
+                cart.setBuyer(user);
+                cart.setBuyDate((Timestamp) rs.getTimestamp("buy_date"));
+                
+                Product product = new Product();
+                product.setTitleProduct(rs.getString("title_product"));
+                product.setPriceProduct(rs.getFloat("price_product"));
+                
+                CartItem cartItem = new CartItem();               
+                cartItem.setIdCartItem(rs.getInt("id_cart_item"));
+                cartItem.setQuantity(rs.getInt("quantity"));
+                cartItem.setUnitPrice(rs.getInt("unit_price"));
+                cartItem.setProduct(product);
+                cartItem.setCart(cart);
+                
+                return cartItem;
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
+    public static void main(String[] args) {
+        CartItemDaoImpl cartItemDaoImpl = new CartItemDaoImpl();
+        cartItemDaoImpl.getByCart(1);
+        System.out.println(cartItemDaoImpl.toString());
     }
 
     // viết sau
@@ -134,7 +179,7 @@ public class CartItemDaoImpl extends DBContext implements CartItemDao{
                 
                 Cart cart = new Cart();
                 cart.setBuyer(user);
-                cart.setBuyDate(rs.getDate("c.buy_date"));
+                cart.setBuyDate((Timestamp) rs.getTimestamp("c.buy_date"));
                 
                 Product product = new Product();
                 product.setTitleProduct(rs.getString("p.title_product"));

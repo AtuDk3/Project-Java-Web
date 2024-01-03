@@ -382,5 +382,69 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
         } 
         return listProduct;
     }
+    
+    // home
+    public List<Product> getTop4ProductsByCategory() {
+    List<Product> top4ProductsHomePage = new ArrayList<>();
+    String sql = "SELECT * FROM ( " +
+                     "SELECT ROW_NUMBER() OVER (PARTITION BY id_category_product ORDER BY id_product desc) as row_num, " +
+                     "id_product, title_product, price_product, desc_product, quantity_product, img_product, hot_product, id_category_product " +
+                     "FROM tab_product) AS numbered " +
+                     "WHERE row_num <= 4";
+
+    try (
+            PreparedStatement ps = connection.prepareStatement(sql)) {
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            CategoryProductDAOImpl cDAO = new CategoryProductDAOImpl();
+                CategoryProduct c = cDAO.getCategoryProductByID(rs.getInt("id_category_product"));
+                Product p = new Product(rs.getInt("id_product"),
+                        rs.getString("title_product"),
+                        rs.getFloat("price_product"),
+                        rs.getString("desc_product"),
+                        rs.getInt("quantity_product"),
+                        rs.getString("img_product"),
+                        rs.getInt("hot_product"),
+                        c);
+
+            top4ProductsHomePage.add(p);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return top4ProductsHomePage;
+}
+    
+    // top 5 hot product in home
+    public List<Product> getTop5HotProduct() {
+        List<Product> listProduct = new ArrayList<>();
+        String sql = "select top 5 * from tab_product where hot_product = 1 order by id_product desc";
+
+        try {
+            PreparedStatement pt = connection.prepareStatement(sql);
+
+            ResultSet rs = pt.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                CategoryProductDAOImpl cDAO = new CategoryProductDAOImpl();
+
+                p.setIdProduct(rs.getInt("id_product"));
+                p.setTitleProduct(rs.getString("title_product"));
+                p.setPriceProduct(rs.getFloat("price_product"));
+                p.setDescProduct(rs.getString("desc_product"));
+                p.setQuantityProduct(rs.getInt("quantity_product"));
+                p.setImgProduct(rs.getString("img_product"));
+                p.setHotProduct(rs.getInt("hot_product"));
+                CategoryProduct c = cDAO.getCategoryProductByID(rs.getInt("id_category_product"));
+                p.setCategoryProduct(c);
+                listProduct.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return listProduct;
+    }
 
 }

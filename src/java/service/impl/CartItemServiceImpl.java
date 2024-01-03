@@ -55,6 +55,11 @@ public class CartItemServiceImpl implements CartItemService{
         return cartItemDao.search(txtSearch);
     }
 
+    @Override
+    public CartItem getByCart(int idCart) {
+        return cartItemDao.getByCart(idCart);
+    }
+
    
     
 }

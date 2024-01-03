@@ -99,10 +99,11 @@ nav .form-group .icon {
 nav .nav-link {
 	position: relative;
 }
-nav .nav-link .icon {
+nav .nav-link {
 	font-size: 18px;
 	color: var(--dark);
 }
+
 nav .nav-link .badge {
 	position: absolute;
 	top: -12px;
@@ -226,6 +227,7 @@ main .card .head .icon {
 main .card .head .icon.down {
 	color: var(--red);
 }
+
 main .card .progress {
 	display: block;
 	margin-top: 24px;

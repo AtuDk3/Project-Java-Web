@@ -110,7 +110,20 @@ public class UserServiceImpl implements UserService{
         oldAccount.setPassword(account.getPassword());
         oldAccount.setPhone(account.getPhone());
         oldAccount.setRoleID(account.getRoleID());
+        long millis = System.currentTimeMillis();
+        java.sql.Date createDate = new java.sql.Date(millis);
+        oldAccount.setCreateDate(createDate);
         
-        userDAO.update(oldAccount);
+        userDAO.updateAdmmin(oldAccount);
+    }
+    
+     @Override
+    public Account getEmail(String email) {
+        return userDAO.getEmail(email);
+    }
+    
+    @Override
+    public Account getPhone(String phone) {
+        return userDAO.getPhone(phone);
     }
 }

@@ -122,11 +122,14 @@ public class UpdateAccountServlet extends HttpServlet {
         if (!fileName.isEmpty()) {
             account.setAvatar(fileName);
         }
-         account.setEmail(email);
+        account.setEmail(email);
         account.setPassword(password);
         account.setPhone(phone);
         account.setRoleID(idRole);
         account.setAddress(address);
+        long millis = System.currentTimeMillis();
+        java.sql.Date createDate = new java.sql.Date(millis);
+        account.setCreateDate(createDate);
 
 //         Gọi phương thức cập nhật trong UserService
         userService.updateAdmmin(account);

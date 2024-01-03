@@ -4,7 +4,6 @@
  */
 package model;
 
-import java.util.Objects;
 
 /**
  *
@@ -19,6 +18,13 @@ public class CartItem {
 
     public CartItem(int idCartItem, int quantity, double unitPrice, Product product, Cart cart) {
         this.idCartItem = idCartItem;
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+        this.product = product;
+        this.cart = cart;
+    }
+
+    public CartItem(int quantity, double unitPrice, Product product, Cart cart) {
         this.quantity = quantity;
         this.unitPrice = unitPrice;
         this.product = product;

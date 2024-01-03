@@ -25,7 +25,7 @@
 
         <!--          - custom css link-->
 
-        <link rel="stylesheet" href="<c:url value="/assets/css/style.css" />">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
 
 
         <!--          - google font link-->
@@ -441,207 +441,39 @@
 
                             <div class="product-showcase">
 
-                                <h2 class="title">New Arrivals</h2>
+                                <h2 class="title">Hot Product</h2>
 
                                 <div class="showcase-wrapper has-scrollbar">
 
                                     <div class="showcase-container">
+                                        <c:forEach items="${requestScope.top5HotProducts}" var="top5HotProducts" >
+                                            <div class="showcase">
 
-                                        <div class="showcase">
-
-                                            <a href="#" class="showcase-img-box">
-                                                <img src="./assets/images/products/clothes-1.jpg" alt="relaxed short full sleeve t-shirt" width="70" class="showcase-img">
-                                            </a>
-
-                                            <div class="showcase-content">
-
-                                                <a href="#">
-                                                    <h4 class="showcase-title">Relaxed Short full Sleeve T-Shirt</h4>
+                                                <a href="${pageContext.request.contextPath}/product_details?pid=${top5HotProducts.idProduct}&cid=${top5HotProducts.categoryProduct.idCategoryProduct}" class="showcase-img-box">
+                                                    <img src="${pageContext.request.contextPath}/assets/images/uploads/product/${top5HotProducts.imgProduct}" alt="${top5HotProducts.titleProduct}" class="showcase-img"
+                                                         width="70" height="70">
                                                 </a>
 
-                                                <a href="#" class="showcase-category">Clothes</a>
+                                                <div class="showcase-content">
 
-                                                <div class="price-box">
-                                                    <p class="price">$45.00</p>
-                                                    <del>$12.00</del>
+                                                    <a href="${pageContext.request.contextPath}/product_details?pid=${top5HotProducts.idProduct}&cid=${top5HotProducts.categoryProduct.idCategoryProduct}">
+                                                        <h4 class="showcase-title">${top5HotProducts.titleProduct}</h4>
+                                                    </a>
+
+                                                    <c:url var="editURL" value="/product/list">
+                                                <c:param name="cid" value="${top5HotProducts.categoryProduct.idCategoryProduct}" /></c:url>
+                                                    <a href="${editURL}&index1=-2" class="showcase-category">${top5HotProducts.categoryProduct.titleCategoryProduct}</a>
+
+                                                    <div class="price-box">
+                                                        <p class="price"><fmt:formatNumber type="currency" value="${top5HotProducts.priceProduct * 0.9}" pattern="###,###đ" /></p>
+                                                        <del><fmt:formatNumber type="currency" value="${top5HotProducts.priceProduct}" pattern="###,###đ" /></del>
+                                                    </div>
+
                                                 </div>
 
                                             </div>
-
-                                        </div>
-
-                                        <div class="showcase">
-
-                                            <a href="#" class="showcase-img-box">
-                                                <img src="./assets/images/products/clothes-2.jpg" alt="girls pink embro design top" class="showcase-img" width="70">
-                                            </a>
-
-                                            <div class="showcase-content">
-
-                                                <a href="#">
-                                                    <h4 class="showcase-title">Girls pnk Embro design Top</h4>
-                                                </a>
-
-                                                <a href="#" class="showcase-category">Clothes</a>
-
-                                                <div class="price-box">
-                                                    <p class="price">$61.00</p>
-                                                    <del>$9.00</del>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="showcase">
-
-                                            <a href="#" class="showcase-img-box">
-                                                <img src="./assets/images/products/clothes-3.jpg" alt="black floral wrap midi skirt" class="showcase-img"
-                                                     width="70">
-                                            </a>
-
-                                            <div class="showcase-content">
-
-                                                <a href="#">
-                                                    <h4 class="showcase-title">Black Floral Wrap Midi Skirt</h4>
-                                                </a>
-
-                                                <a href="#" class="showcase-category">Clothes</a>
-
-                                                <div class="price-box">
-                                                    <p class="price">$76.00</p>
-                                                    <del>$25.00</del>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="showcase">
-
-                                            <a href="#" class="showcase-img-box">
-                                                <img src="./assets/images/products/shirt-1.jpg" alt="pure garment dyed cotton shirt" class="showcase-img"
-                                                     width="70">
-                                            </a>
-
-                                            <div class="showcase-content">
-
-                                                <a href="#">
-                                                    <h4 class="showcase-title">Pure Garment Dyed Cotton Shirt</h4>
-                                                </a>
-
-                                                <a href="#" class="showcase-category">Mens Fashion</a>
-
-                                                <div class="price-box">
-                                                    <p class="price">$68.00</p>
-                                                    <del>$31.00</del>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="showcase-container">
-
-                                        <div class="showcase">
-
-                                            <a href="#" class="showcase-img-box">
-                                                <img src="./assets/images/products/jacket-5.jpg" alt="men yarn fleece full-zip jacket" class="showcase-img"
-                                                     width="70">
-                                            </a>
-
-                                            <div class="showcase-content">
-
-                                                <a href="#">
-                                                    <h4 class="showcase-title">MEN Yarn Fleece Full-Zip Jacket</h4>
-                                                </a>
-
-                                                <a href="#" class="showcase-category">Winter wear</a>
-
-                                                <div class="price-box">
-                                                    <p class="price">$61.00</p>
-                                                    <del>$11.00</del>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="showcase">
-
-                                            <a href="#" class="showcase-img-box">
-                                                <img src="./assets/images/products/jacket-1.jpg" alt="mens winter leathers jackets" class="showcase-img"
-                                                     width="70">
-                                            </a>
-
-                                            <div class="showcase-content">
-
-                                                <a href="#">
-                                                    <h4 class="showcase-title">Mens Winter Leathers Jackets</h4>
-                                                </a>
-
-                                                <a href="#" class="showcase-category">Winter wear</a>
-
-                                                <div class="price-box">
-                                                    <p class="price">$32.00</p>
-                                                    <del>$20.00</del>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="showcase">
-
-                                            <a href="#" class="showcase-img-box">
-                                                <img src="./assets/images/products/jacket-3.jpg" alt="mens winter leathers jackets" class="showcase-img"
-                                                     width="70">
-                                            </a>
-
-                                            <div class="showcase-content">
-
-                                                <a href="#">
-                                                    <h4 class="showcase-title">Mens Winter Leathers Jackets</h4>
-                                                </a>
-
-                                                <a href="#" class="showcase-category">Jackets</a>
-
-                                                <div class="price-box">
-                                                    <p class="price">$50.00</p>
-                                                    <del>$25.00</del>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="showcase">
-
-                                            <a href="#" class="showcase-img-box">
-                                                <img src="./assets/images/products/shorts-1.jpg" alt="better basics french terry sweatshorts" class="showcase-img"
-                                                     width="70">
-                                            </a>
-
-                                            <div class="showcase-content">
-
-                                                <a href="#">
-                                                    <h4 class="showcase-title">Better Basics French Terry Sweatshorts</h4>
-                                                </a>
-
-                                                <a href="#" class="showcase-category">Shorts</a>
-
-                                                <div class="price-box">
-                                                    <p class="price">$20.00</p>
-                                                    <del>$10.00</del>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
+                                        </c:forEach>
+                                    </div>                          
 
                                 </div>
 
@@ -1087,133 +919,86 @@
 
 
                         <div class="product-main">
+                            <c:forEach items="${requestScope.categoryProduct}" var="categoryProduct" >
+                                <div class="product-main-top">
+                                    <h2 class="title">${categoryProduct.titleCategoryProduct}</h2>
 
-                            <h2 class="title">New Products</h2>
+                                    <c:url var="editURL" value="/product/list">
+                                        <c:param name="cid" value="${categoryProduct.idCategoryProduct}" /></c:url>
 
-                            <div class="product-grid">
+                                        <a href="${editURL}&index1=-2"><button class="btn_see_more">See more</button></a>
+                                </div>
+                                <div class="product-grid">
+                                    <c:forEach items="${requestScope.topProducts}" var="topProducts" >
+                                        <c:if test="${categoryProduct.idCategoryProduct == topProducts.categoryProduct.idCategoryProduct}">
+                                            <div class="showcase">
 
-                                <div class="showcase">
+                                                <div class="showcase-banner">
 
-                                    <div class="showcase-banner">
+                                                    <img src="${pageContext.request.contextPath}/assets/images/uploads/product/${topProducts.imgProduct}" alt="Mens Winter Leathers Jackets" width="300" class="product-img default">
+                                                    <img src="${pageContext.request.contextPath}/assets/images/uploads/product/${topProducts.imgProduct}" alt="Mens Winter Leathers Jackets" width="300" class="product-img hover">
 
-                                        <img src="./assets/images/products/jacket-3.jpg" alt="Mens Winter Leathers Jackets" width="300" class="product-img default">
-                                        <img src="./assets/images/products/jacket-4.jpg" alt="Mens Winter Leathers Jackets" width="300" class="product-img hover">
+                                                    <c:choose>
+                                                        <c:when test="${topProducts.hotProduct == 1}">
+                                                            <p class="showcase-badge angle black">hot</p>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <p class="showcase-badge angle pink">sale</p>
+                                                        </c:otherwise>
+                                                    </c:choose>
 
-                                        <p class="showcase-badge">15%</p>
+                                                    <div class="showcase-actions">
 
-                                        <div class="showcase-actions">
+                                                        <a href="#"><button class="btn-action">
+                                                                <ion-icon name="heart-outline"></ion-icon>
+                                                            </button></a>
 
-                                            <button class="btn-action">
-                                                <ion-icon name="heart-outline"></ion-icon>
-                                            </button>
+                                                        <a href="${pageContext.request.contextPath}/product_details?pid=${topProducts.idProduct}&cid=${topProducts.categoryProduct.idCategoryProduct}"><button class="btn-action">
+                                                                <ion-icon name="eye-outline"></ion-icon>
+                                                            </button></a>
 
-                                            <button class="btn-action">
-                                                <ion-icon name="eye-outline"></ion-icon>
-                                            </button>
+                                                        <a href="url"><button class="btn-action">
+                                                                <ion-icon name="repeat-outline"></ion-icon>
+                                                            </button></a>
 
-                                            <button class="btn-action">
-                                                <ion-icon name="repeat-outline"></ion-icon>
-                                            </button>
+                                                        <a href="${pageContext.request.contextPath}/member/cart_add?pid=${topProducts.idProduct}&quantity=1"><button class="btn-action">
+                                                                <ion-icon name="bag-add-outline"></ion-icon>
+                                                            </button></a>
 
-                                            <button class="btn-action">
-                                                <ion-icon name="bag-add-outline"></ion-icon>
-                                            </button>
+                                                    </div>
 
-                                        </div>
+                                                </div>
 
-                                    </div>
+                                                <div class="showcase-content">
 
-                                    <div class="showcase-content">
+                                                    <a href="${editURL}&index1=-2" class="showcase-category">${topProducts.categoryProduct.titleCategoryProduct}</a>
 
-                                        <a href="#" class="showcase-category">jacket</a>
+                                                    <a href="${pageContext.request.contextPath}/product_details?pid=${topProducts.idProduct}&cid=${topProducts.categoryProduct.idCategoryProduct}">
+                                                        <h3 class="showcase-title">${topProducts.titleProduct}</h3>
+                                                    </a>
 
-                                        <a href="#">
-                                            <h3 class="showcase-title">Mens Winter Leathers Jackets</h3>
-                                        </a>
+                                                    <div class="showcase-rating">
+                                                        <ion-icon name="star"></ion-icon>
+                                                        <ion-icon name="star"></ion-icon>
+                                                        <ion-icon name="star"></ion-icon>
+                                                        <ion-icon name="star-outline"></ion-icon>
+                                                        <ion-icon name="star-outline"></ion-icon>
+                                                    </div>
 
-                                        <div class="showcase-rating">
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star-outline"></ion-icon>
-                                            <ion-icon name="star-outline"></ion-icon>
-                                        </div>
+                                                    <div class="price-box">
+                                                        <p class="price"><fmt:formatNumber type="currency" value="${topProducts.priceProduct * 0.9}" pattern="###,###₫" /></p>
+                                                        <del><fmt:formatNumber type="currency" value="${topProducts.priceProduct}" pattern="###,###₫" /></del>
+                                                    </div>
 
-                                        <div class="price-box">
-                                            <p class="price">$48.00</p>
-                                            <del>$75.00</del>
-                                        </div>
+                                                </div>
 
-                                    </div>
+                                            </div>
+                                        </c:if>
+
+                                    </c:forEach>                                  
 
                                 </div>
-
-                                <c:forEach items="${requestScope.product}" var="product" >
-                                    <div class="showcase">
-
-                                        <div class="showcase-banner">
-                                            <img src="./assets/images/product/${product.imgProduct}" alt="${product.titleProduct}" class="product-img default"
-                                                 width="300" style="object-fit: cover; height: 250px">
-                                            <img src="./assets/images/product/${product.imgProduct}" alt="${product.titleProduct}" class="product-img hover"
-                                                 width="300" style="object-fit: cover; height: 250px">
-
-                                            <c:choose>
-                                                <c:when test="${product.hotProduct == 1}">
-                                                    <p class="showcase-badge angle black">hot</p>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <p class="showcase-badge angle pink">sale</p>
-                                                </c:otherwise>
-                                            </c:choose>
-
-                                            <div class="showcase-actions">
-                                                <a href="#"><button class="btn-action">
-                                                        <ion-icon name="heart-outline"></ion-icon>
-                                                    </button></a>
-
-                                                <a href="${pageContext.request.contextPath}/product_details?pid=${product.idProduct}&cid=${product.categoryProduct.idCategoryProduct}"><button class="btn-action">
-                                                        <ion-icon name="eye-outline"></ion-icon>
-                                                    </button></a>
-
-                                                <a href="url"><button class="btn-action">
-                                                        <ion-icon name="repeat-outline"></ion-icon>
-                                                    </button></a>
-
-                                                <a href="${pageContext.request.contextPath}/member/cart_add?pid=${product.idProduct}&quantity=1"><button class="btn-action">
-                                                        <ion-icon name="bag-add-outline"></ion-icon>
-                                                    </button></a>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="showcase-content">
-                                            <a href="#" class="showcase-category">${product.categoryProduct.titleCategoryProduct}</a>
-
-                                            <h3>
-                                                <a href="product_details?id=${product.idProduct}" class="showcase-title">${product.titleProduct}</a>
-                                            </h3>
-
-                                            <div class="showcase-rating">
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                            </div>
-
-                                            <div class="price-box">
-                                                <p class="price"><fmt:formatNumber type="currency" value="${product.priceProduct * 0.9}" pattern="###,###₫" /></p>
-                                                <del><fmt:formatNumber type="currency" value="${product.priceProduct}" pattern="###,###₫" /></del>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </c:forEach>
-
-
-                            </div>
-
+                            </c:forEach>
                         </div>
 
                     </div>
@@ -1514,6 +1299,13 @@
 
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  intent="WELCOME"
+  chat-title="Chat Bot One Piece Shop"
+  agent-id="a5ff5270-615e-45c8-9577-8776b8221e70"
+  language-code="vi"
+></df-messenger>
 
     </body>
 

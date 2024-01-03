@@ -37,40 +37,6 @@
 
     <body>
 
-
-        <div class="overlay" data-overlay></div>
-
-        <!--          - NOTIFICATION TOAST-->
-
-
-        <div class="notification-toast" data-toast>
-
-            <button class="toast-close-btn" data-toast-close>
-                <ion-icon name="close-outline"></ion-icon>
-            </button>
-
-            <div class="toast-banner">
-                <img src="./assets/images/products/jewellery-1.jpg" alt="Rose Gold Earrings" width="80" height="70">
-            </div>
-
-            <div class="toast-detail">
-
-                <p class="toast-message">
-                    Someone in new just bought
-                </p>
-
-                <p class="toast-title">
-                    Rose Gold Earrings
-                </p>
-
-                <p class="toast-meta">
-                    <time datetime="PT2M">2 Minutes</time> ago
-                </p>
-
-            </div>
-
-        </div>
-
         <!--          - HEADER-->
 
 
@@ -148,15 +114,15 @@
                             Quantity: <span>${productDetails.quantityProduct}</span>
                             <br>(Status: Còn hàng)
                         </div>
+                            <h5 style="font-weight: 600">Quantity purchased:</h5>
                         <div class="quantity-container">
-                            <button class="quantity-btn" id="decrement">-</button>
-                            <input type="text" class="quantity-input" id="quantity" value="1" oninput="updateTotal()">
-                            <button class="quantity-btn" id="increment">+</button>
+                            <input type="number" class="quantity-input" min="1" id="quantity" value="1" oninput="updateTotal()">
+
                         </div>
                         <h3>Total amount:</h3>
                         <h2 id="totalAmount"><fmt:formatNumber type="currency" value="${productDetails.priceProduct}" pattern="###,###₫" /></h2>
                         <button class="btn_buy">Buy Now</button>
-                        <button  type="button" class="btn_add_to_cart" onclick="addToCart()" >Add To Cart</button>
+                        <button  type="button" class="btn_add_to_cart" onclick="addToCart(${productDetails.idProduct})" >Add To Cart</button>
                     </div>
 
                 </div>
@@ -173,6 +139,7 @@
                         <h2 class="title">Related Products</h2>
 
                         <div class="product-grid" id="related-product">
+
                             <c:forEach items="${requestScope.listTop4RelatedProduct}" var="listTop4RelatedProduct" >
                                 <div class="showcase product_related">
 
@@ -183,42 +150,45 @@
                                              width="300" style="object-fit: cover; height: 250px">
 
                                         <c:choose>
-                                                <c:when test="${listTop4RelatedProduct.hotProduct == 1}">
-                                                    <p class="showcase-badge angle black">hot</p>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <p class="showcase-badge angle pink">sale</p>
-                                                </c:otherwise>
-                                            </c:choose>
+                                            <c:when test="${listTop4RelatedProduct.hotProduct == 1}">
+                                                <p class="showcase-badge angle black">hot</p>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <p class="showcase-badge angle pink">sale</p>
+                                            </c:otherwise>
+                                        </c:choose>
 
                                         <div class="showcase-actions">
                                             <a href="#">
-                                            <button class="btn-action">
-                                                <ion-icon name="heart-outline"></ion-icon>
-                                            </button></a>
-                                            
+                                                <button class="btn-action">
+                                                    <ion-icon name="heart-outline"></ion-icon>
+                                                </button></a>
+
                                             <a href="${pageContext.request.contextPath}/product_details?pid=${listTop4RelatedProduct.idProduct}&cid=${listTop4RelatedProduct.categoryProduct.idCategoryProduct}">
-                                            <button class="btn-action">
-                                                <ion-icon name="eye-outline"></ion-icon>
-                                            </button></a>
+                                                <button class="btn-action">
+                                                    <ion-icon name="eye-outline"></ion-icon>
+                                                </button></a>
 
                                             <a href="#">
-                                            <button class="btn-action">
-                                                <ion-icon name="repeat-outline"></ion-icon>
-                                            </button></a>
+                                                <button class="btn-action">
+                                                    <ion-icon name="repeat-outline"></ion-icon>
+                                                </button></a>
 
                                             <a href="${pageContext.request.contextPath}/member/cart_add?pid=${listTop4RelatedProduct.idProduct}&quantity=1"><button class="btn-action">
-                                                <ion-icon name="bag-add-outline"></ion-icon>
-                                            </button></a>
+                                                    <ion-icon name="bag-add-outline"></ion-icon>
+                                                </button></a>
                                         </div>
                                     </div>
 
 
                                     <div class="showcase-content">
-                                        <a href="#" class="showcase-category">${listTop4RelatedProduct.categoryProduct.titleCategoryProduct}</a>
+
+                                        <c:url var="editURL" value="/product/list">
+                                            <c:param name="cid" value="${listTop4RelatedProduct.categoryProduct.idCategoryProduct}" /></c:url>
+                                        <a href="${editURL}&index1=-2" class="showcase-category">${listTop4RelatedProduct.categoryProduct.titleCategoryProduct}</a>
 
                                         <h3>
-                                            <a href="#" class="showcase-title">${listTop4RelatedProduct.titleProduct}</a>
+                                            <a href="${pageContext.request.contextPath}/product_details?pid=${listTop4RelatedProduct.idProduct}&cid=${listTop4RelatedProduct.categoryProduct.idCategoryProduct}" class="showcase-title">${listTop4RelatedProduct.titleProduct}</a>
                                         </h3>
 
                                         <div class="showcase-rating">
@@ -238,7 +208,7 @@
 
                                 </div>
                             </c:forEach>
-                          
+
                         </div>
                         <button class="btn_see_more" onclick="loadMore()">See more</button>
 
@@ -258,88 +228,59 @@
 
     <!--          - custom js link-->
 
-    <script src="<c:url value="/assets/js/script.js" />"></script>
-
     <!--          - ionicon link-->
     <script>
-                                // Lấy các phần tử
-                                var quantityInput = document.getElementById('quantity');
-                                var totalAmountElement = document.getElementById('totalAmount');
-                                var incrementButton = document.getElementById('increment');
-                                var decrementButton = document.getElementById('decrement');
+// Lấy các phần tử
+        var quantityInput = document.getElementById('quantity');
+        var totalAmountElement = document.getElementById('totalAmount');
 
-                                function addToCart() {
-                                    //const quantityInput = document.getElementById('quantity');
-                                    const selectedQuantity = quantityInput.value;
+        // Hàm cập nhật tổng cộng
+        function updateTotal() {
 
-                                    // Xử lý chuyển hướng đến trang "Add To Cart" với giá trị số lượng mới
-                                    const productId = "${product_details.idProduct}";
-                                    const url = "${pageContext.request.contextPath}/member/cart_add?pid=" + productId + "&quantity=" + selectedQuantity;
-                                    window.location.href = url;
-                                }
+            var quantity = parseInt(quantityInput.value);
+            var price = parseFloat("${productDetails.priceProduct}");
+            var totalAmount = quantity * price;
 
+            // Định dạng và cập nhật phần tử tổng cộng
+            totalAmountElement.innerHTML = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(totalAmount);
+        }
 
-                                // Thêm lắng nghe sự kiện
-                                incrementButton.addEventListener('click', function () {
-                                    updateTotal();
-                                    incrementQuantity();
-                                });
+        function addToCart(id) {
+            //const quantityInput = document.getElementById('quantity');
+            const selectedQuantity = quantityInput.value;
 
-                                decrementButton.addEventListener('click', function () {
-                                    decrementQuantity();
-                                    updateTotal();
-                                });
+            const url = "${pageContext.request.contextPath}/member/cart_add?pid=" + id + "&quantity=" + selectedQuantity;
+            window.location.href = url;
+        }
 
-                                // Hàm tăng số lượng
-                                function incrementQuantity() {
-                                    quantityInput.value = parseInt(quantityInput.value) + 1;
-                                }
+        function loadMore() {
+            // Lấy ra coi có bao nhiêu sản phẩm 
+            let amount = document.getElementsByClassName("product_related").length;
+            let urlSearchParams = new URLSearchParams(window.location.search);
 
-                                // Hàm giảm số lượng
-                                function decrementQuantity() {
-                                    if (parseInt(quantityInput.value) > 1) {
-                                        quantityInput.value = parseInt(quantityInput.value) - 1;
-                                    }
-                                }
+            // Lấy giá trị của tham số 'cid' từ URL
+            let cid = urlSearchParams.get('cid');
 
-                                // Hàm cập nhật tổng cộng
-                                function updateTotal() {
-                                    var quantity = parseInt(quantityInput.value);
-                                    var price = parseFloat("${product_details.priceProduct}");
-                                    var totalAmount = quantity * price;
+            // Lấy giá trị của tham số 'pid' từ URL
+            let pid = urlSearchParams.get('pid');
+            $.ajax({
+                url: "/Ecommer_Website/load",
+                type: "get",
+                data: {
+                    exits: amount,
+                    cid: cid,
+                    pid: pid
 
-                                    // Định dạng và cập nhật phần tử tổng cộng
-                                    totalAmountElement.innerHTML = new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(totalAmount);
-                                }
+                },
+                success: function (data) {
+                    let row = document.getElementById("related-product");
+                    row.innerHTML += data;
+                },
+                error: function (xhr) {
 
-                                function loadMore() {
-                                    // Lấy ra coi có bao nhiêu sản phẩm 
-                                    let amount = document.getElementsByClassName("product_related").length;
-                                    let urlSearchParams = new URLSearchParams(window.location.search);
-
-                                    // Lấy giá trị của tham số 'cid' từ URL
-                                    let cid = urlSearchParams.get('cid');
-
-                                    // Lấy giá trị của tham số 'pid' từ URL
-                                    let pid = urlSearchParams.get('pid');
-                                    $.ajax({
-                                        url: "/Ecommer_Website/load",
-                                        type: "get",
-                                        data: {
-                                            exits: amount,
-                                            cid: cid,
-                                            pid: pid
-
-                                        },
-                                        success: function (data) {
-                                            let row = document.getElementById("related-product");
-                                            row.innerHTML += data;
-                                        },
-                                        error: function (xhr) {
-
-                                        }
-                                    })
-                                }
+                }
+            })
+        }
     </script>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

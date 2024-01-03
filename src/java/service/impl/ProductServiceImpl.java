@@ -88,6 +88,7 @@ public class ProductServiceImpl implements ProductService {
         return productDao.pagingProduct(idCategoryProduct, indexP, indexP1);
     }
 
+    // ajax load more related product
     @Override
     public List<Product> getTop4RelatedProducts(int idProduct, int idCategoryProduct) {
         return productDao.getTop4RelatedProducts(idProduct, idCategoryProduct);
@@ -97,6 +98,19 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getNext4RelatedProducts(int idProduct, int idCategoryProduct, int amount) {
         return productDao.getNext4RelatedProducts(idProduct, idCategoryProduct, amount);
     }
+
+    // Top 4 product in home
+    @Override
+    public List<Product> getTop4ProductsByCategory() {
+        return productDao.getTop4ProductsByCategory();
+    }
+
+    @Override
+    public List<Product> getTop5HotProduct() {
+        return productDao.getTop5HotProduct();
+    }
+
+    
 
 
     

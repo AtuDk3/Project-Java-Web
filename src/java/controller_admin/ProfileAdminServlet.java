@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Lenovo
  */
-@WebServlet(name="ProfileServlet", urlPatterns={"/admin/profile"})
+@WebServlet(name="ProfileAdminServlet", urlPatterns={"/admin/profile"})
 public class ProfileAdminServlet extends HttpServlet {
    
     /** 

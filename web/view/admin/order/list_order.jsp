@@ -14,7 +14,8 @@
         <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/style_list.css">
-        <title>List Order</title>
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/logo/logo.png" type="image/x-icon">
+        <title>Dashboard | List Order</title>
     </head>
     <body>
 
@@ -26,40 +27,35 @@
 
             <!-- MAIN -->
             <main>
-                <table class="table table-striped" id="table_list">
-    <thead>
-        <tr>
-            <th>Id Order</th>
-            <th>Code Order</th>
-            <th>Date Order</th>
-            <th>Status Order</th>
-            <th>Manager</th>
-        </tr>
-    </thead>
+                <table id="example" class="table table-striped" id="table_list" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Id Order</th>
+                            <th>Date Order</th>
+                            <th>ID customer</th>
+                            <th>Email</th>
+                            <th>Status Order</th>
+                            <th>Manager</th>
+                        </tr>
+                    </thead>
 
-    <tbody>
-        <?php
-        $i = 0;
-        foreach($orders as $key => $order){
-            $i++; ?>
-
-    <tr>
-        <td><?php echo $i ?></td>
-        <td><?php echo $order['code_order'] ?></td> 
-        <td><?php echo $order['date_order'] ?></td>
-        <td><?php if ($order['status_order'] == 0) {
-            echo 'Not yet received!';
-        } else {
-            echo 'Processed!';
-        } ?></td>
-        <td>
-            <button type="button" class="btn btn-warning"><a href="<?php echo BASE_URL ?>order/detailsOrder/<?php echo $order['code_order'] ?>">View Orders</button>          
-        </td>
-    </tr>
-<?php
-} ?>
-</tbody>
-</table>
+                    <tbody>
+                        <c:forEach items="${requestScope.listCarts}" var="listCarts" varStatus="no" >
+                            <tr>
+                                <td>${no.index + 1}</td>
+                                <td>${listCarts.idCart}</td> 
+                                <td>${listCarts.buyDate}</td>
+                                <td>${listCarts.buyer.id}</td>
+                                <td>${listCarts.buyer.email}</td>
+     
+                                <td>
+                                    <a href="${pageContext.request.contextPath}/admin/order/order_details?cid=${listCarts.idCart}"><button type="button" class="btn btn-warning">View Orders</button></a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
             </main>
             <!-- MAIN -->
         </section>

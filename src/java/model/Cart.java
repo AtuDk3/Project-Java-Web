@@ -1,30 +1,38 @@
 package model;
 
-import java.util.Date;
+import java.sql.Timestamp;
+
+
 
 /**
  *
  * @author Lenovo
  */
 public class Cart {
-    private int idCart;
+    private String idCart;
     private Account buyer;
-    private Date buyDate;
+    private Timestamp buyDate;
 
-    public Cart(int idCart, Account buyer, Date buyDate) {
+    public Cart(String idCart, Account buyer, Timestamp  buyDate) {
         this.idCart = idCart;
         this.buyer = buyer;
         this.buyDate = buyDate;
     }
 
+    public Cart(Account buyer, Timestamp  buyDate) {
+        this.buyer = buyer;
+        this.buyDate = buyDate;
+    }
+    
+
     public Cart() {
     }
 
-    public int getIdCart() {
+    public String getIdCart() {
         return idCart;
     }
 
-    public void setIdCart(int idCart) {
+    public void setIdCart(String idCart) {
         this.idCart = idCart;
     }
 
@@ -36,11 +44,11 @@ public class Cart {
         this.buyer = buyer;
     }
 
-    public Date getBuyDate() {
+    public Timestamp  getBuyDate() {
         return buyDate;
     }
 
-    public void setBuyDate(Date buyDate) {
+    public void setBuyDate(Timestamp  buyDate) {
         this.buyDate = buyDate;
     }
 

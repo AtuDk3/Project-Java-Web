@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/style_header.css">
@@ -27,10 +28,11 @@
     </a>
     <span class="divider"></span>
     <div class="profile">
-        <img src="${pageContext.request.contextPath}/assets/images/upload/avatar/${sessionScope.account.avatar}" alt="">
+
+                <img src="${pageContext.request.contextPath}/assets/images/uploads/avatar/${sessionScope.account.avatar}" alt="">
         <p>${sessionScope.account.userName}</p>
         <ul class="profile-link">
-            <li><a href="${pageContext.request.contextPath}/profile"><i class='bx bxs-user-circle icon' ></i> Profile</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/profile"><i class='bx bxs-user-circle icon' ></i> Profile</a></li>
             <li><a href="#"><i class='bx bxs-cog' ></i> Settings</a></li>
             <li><a href="${pageContext.request.contextPath}/logout"><i class='bx bxs-log-out-circle' ></i> Logout</a></li>
         </ul>

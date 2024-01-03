@@ -79,11 +79,15 @@ public class HomeServlet extends HttpServlet {
         
         // product
         ProductService productService = new ProductServiceImpl();
-        List<Product> listProduct = productService.getAll();
-        request.setAttribute("product", listProduct);
         
         List<Product> listProductModel = productService.getProductModel();
         request.setAttribute("productModel", listProductModel);
+        
+        List<Product> top4Products = productService.getTop4ProductsByCategory();
+        request.setAttribute("topProducts", top4Products);
+        
+        List<Product> top5HotProducts = productService.getTop5HotProduct();
+        request.setAttribute("top5HotProducts", top5HotProducts);
 
     request.getRequestDispatcher("/view/home.jsp").forward(request, response);
     } 
