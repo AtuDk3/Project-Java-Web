@@ -34,7 +34,7 @@ public interface ProductDao {
     
     int countProduct();
 
-    int countCategoryProduct(int idCategoryProduct);
+    List<Integer> numberProductsPerCategory();
     
     List<Product> pagingProduct(int indexP, int indexP1); 
 
@@ -43,4 +43,6 @@ public interface ProductDao {
     List<Product> getTop4ProductsByCategory();
     
     List<Product> getTop5HotProduct();
+    
+    List<Product> getTop5BestSellerProduct();
 }

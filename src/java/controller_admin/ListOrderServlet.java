@@ -3,9 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package controller_admin;
 
-import dal.impl.CategoryProductDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,14 +13,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.CategoryProduct;
+import model.Cart;
+import service.CartService;
+import service.impl.CartServiceImpl;
 
 /**
  *
  * @author Lenovo
  */
-@WebServlet(name="CartServlet", urlPatterns={"/member/cart"})
-public class CartServlet extends HttpServlet {
+@WebServlet(name="ListOrder", urlPatterns={"/admin/order/list_order"})
+public class ListOrderServlet extends HttpServlet {
+    
+    CartService cartService = new CartServiceImpl();
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +41,10 @@ public class CartServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CartServlet</title>");  
+            out.println("<title>Servlet ListOrder</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CartServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ListOrder at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,13 +61,11 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        // category
-        CategoryProductDAOImpl categoryProductDAO = new CategoryProductDAOImpl();
+        List<Cart> listCarts = cartService.getAll();
+        request.setAttribute("listCarts", listCarts);
         
-        List<CategoryProduct> listCategory = categoryProductDAO.getAll();
-        request.setAttribute("categoryProduct", listCategory);
         
-        request.getRequestDispatcher("/view/cart.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/admin/order/list_order.jsp").forward(request, response);
     } 
 
     /** 

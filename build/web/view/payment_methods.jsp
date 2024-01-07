@@ -75,7 +75,7 @@
                                         </div>
                                     </form>
 
-                                    <form class="" method="POST" target="_blank" enctype="application/x-www-form-urlencoded" action="<?php echo BASE_URL ?>cart/momoQRProcessing">
+                                    <form class="" method="POST" target="_blank" enctype="application/x-www-form-urlencoded" action="">
                                         <div class="d-flex flex-row pb-3">
                                             <button name="momo" id="btn-pay-method" type="submit" class="rounded border d-flex w-100 p-3 align-items-center"><img src="${pageContext.request.contextPath}/assets/images/logo-momo.webp" alt="Momo Logo" class="logo-momo">Payment Via MOMO QR</button>
                                         </div>
@@ -87,7 +87,7 @@
                                         </div>
                                     </form>
 
-                                    <form>
+                                    <form action="${pageContext.request.contextPath}/member/payment_vnp" method="post" enctype="application/x-www-form-urlencoded">
                                         <div class="d-flex flex-row pb-3">
                                             <button id="btn-pay-method" type="submit" class="rounded border d-flex w-100 p-3 align-items-center"><img src="${pageContext.request.contextPath}/assets/images/logo-vnpay.jpg" alt="VNPAY Logo" class="logo">Payment Via VNPAY</button>
                                         </div>

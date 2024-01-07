@@ -38,41 +38,6 @@
 
     <body>
 
-
-        <div class="overlay" data-overlay></div>
-
-
-        <!--          - NOTIFICATION TOAST-->
-
-
-        <div class="notification-toast" data-toast>
-
-            <button class="toast-close-btn" data-toast-close>
-                <ion-icon name="close-outline"></ion-icon>
-            </button>
-
-            <div class="toast-banner">
-                <img src="./assets/images/products/jewellery-1.jpg" alt="Rose Gold Earrings" width="80" height="70">
-            </div>
-
-            <div class="toast-detail">
-
-                <p class="toast-message">
-                    Someone in new just bought
-                </p>
-
-                <p class="toast-title">
-                    Rose Gold Earrings
-                </p>
-
-                <p class="toast-meta">
-                    <time datetime="PT2M">2 Minutes</time> ago
-                </p>
-
-            </div>
-
-        </div>
-
         <!--          - HEADER-->
 
 
@@ -113,14 +78,15 @@
 
                                         <button class="sidebar-accordion-menu" data-accordion-btn>
                                             <a href="${editURL}&index1=-2" class="menu-title">${item.titleCategoryProduct}</a>
-                                            <c:forEach var="item1" items="${countCate}">
-                                                <c:if test="${item1.idCategoryProduct == item.idCategoryProduct && item1.total != 0}">
 
-                                                    <div>
-                                                        (${item1.total})
-                                                    </div>
-                                                </c:if>
+                                            <c:forEach var="countProductAll" items="${requestScope.countProductAll}">
+                                                <c:if test="countProductAll.idCategoryProduct == categoryProduct.idCategoryProduct">
+                                                <div class="menu-title">
+                                                    1
+                                                </div>
+                                                    </c:if>
                                             </c:forEach>
+
                                         </button>
 
                                     </li>
@@ -170,123 +136,13 @@
                             </div>
                             <div class="product-grid">
 
-                                <div class="showcase">
-
-                                    <div class="showcase-banner">
-
-                                        <img src="${pageContext.request.contextPath}/assets/images/products/jacket-3.jpg" alt="Mens Winter Leathers Jackets" width="300" class="product-img default">
-                                        <img src="${pageContext.request.contextPath}/assets/images/products/jacket-4.jpg" alt="Mens Winter Leathers Jackets" width="300" class="product-img hover">
-
-                                        <p class="showcase-badge">15%</p>
-
-                                        <div class="showcase-actions">
-
-                                            <button class="btn-action">
-                                                <ion-icon name="heart-outline"></ion-icon>
-                                            </button>
-
-                                            <button class="btn-action">
-                                                <ion-icon name="eye-outline"></ion-icon>
-                                            </button>
-
-                                            <button class="btn-action">
-                                                <ion-icon name="repeat-outline"></ion-icon>
-                                            </button>
-
-                                            <button class="btn-action">
-                                                <ion-icon name="bag-add-outline"></ion-icon>
-                                            </button>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="showcase-content">
-
-                                        <a href="#" class="showcase-category">jacket</a>
-
-                                        <a href="#">
-                                            <h3 class="showcase-title">Mens Winter Leathers Jackets</h3>
-                                        </a>
-
-                                        <div class="showcase-rating">
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star-outline"></ion-icon>
-                                            <ion-icon name="star-outline"></ion-icon>
-                                        </div>
-
-                                        <div class="price-box">
-                                            <p class="price">$48.00</p>
-                                            <del>$75.00</del>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="showcase">
-
-                                    <div class="showcase-banner">
-                                        <img src="${pageContext.request.contextPath}/assets/images/products/shirt-1.jpg" alt="Pure Garment Dyed Cotton Shirt" class="product-img default"
-                                             width="300">
-                                        <img src="${pageContext.request.contextPath}/assets/images/products/shirt-2.jpg" alt="Pure Garment Dyed Cotton Shirt" class="product-img hover"
-                                             width="300">
-
-                                        <p class="showcase-badge angle black">sale</p>
-
-                                        <div class="showcase-actions">
-                                            <button class="btn-action">
-                                                <ion-icon name="heart-outline"></ion-icon>
-                                            </button>
-
-                                            <button class="btn-action">
-                                                <ion-icon name="eye-outline"></ion-icon>
-                                            </button>
-
-                                            <button class="btn-action">
-                                                <ion-icon name="repeat-outline"></ion-icon>
-                                            </button>
-
-                                            <button class="btn-action">
-                                                <ion-icon name="bag-add-outline"></ion-icon>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <div class="showcase-content">
-                                        <a href="#" class="showcase-category">shirt</a>
-
-                                        <h3>
-                                            <a href="#" class="showcase-title">Pure Garment Dyed Cotton Shirt</a>
-                                        </h3>
-
-                                        <div class="showcase-rating">
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star"></ion-icon>
-                                            <ion-icon name="star-outline"></ion-icon>
-                                            <ion-icon name="star-outline"></ion-icon>
-                                        </div>
-
-                                        <div class="price-box">
-                                            <p class="price">$45.00</p>
-                                            <del>$56.00</del>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-
                                 <c:forEach items="${requestScope.productList}" var="productList" >
                                     <div class="showcase">
 
                                         <div class="showcase-banner">
-                                            <img src="${pageContext.request.contextPath}/assets/images/product/${productList.imgProduct}" alt="${productList.titleProduct}" class="product-img default"
+                                            <img src="${pageContext.request.contextPath}/assets/images/uploads/product/${productList.imgProduct}" alt="${productList.titleProduct}" class="product-img default"
                                                  width="300" style="object-fit: cover; height: 250px">
-                                            <img src="${pageContext.request.contextPath}/assets/images/product/${productList.imgProduct}" alt="${productList.titleProduct}" class="product-img hover"
+                                            <img src="${pageContext.request.contextPath}/assets/images/uploads/product/${productList.imgProduct}" alt="${productList.titleProduct}" class="product-img hover"
                                                  width="300" style="object-fit: cover; height: 250px">
 
                                             <p class="showcase-badge angle pink">new</p>
@@ -391,7 +247,7 @@
                         </button>
                     </div>
                 </c:when>
-                
+
                 <c:when test="${indexP2 != -1}">
                     <div class="container-paging">
                         <button class="button" id="startBtn" disabled>
@@ -413,7 +269,7 @@
                         </button>
                     </div>
                 </c:when>
-                
+
                 <c:otherwise>
                     <!-- Code cho trường hợp khác (nếu cần) -->
                 </c:otherwise>

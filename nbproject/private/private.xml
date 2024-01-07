@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Java_Web">
-            <file>file:/D:/NetBeansProjects/Ecommer_Website/src/java/controller_admin/ListOrder.java</file>
-            <file>file:/D:/NetBeansProjects/Ecommer_Website/web/view/admin/order/list_order.jsp</file>
-            <file>file:/D:/NetBeansProjects/Ecommer_Website/web/view/admin/account/list_account.jsp</file>
-            <file>file:/D:/NetBeansProjects/Ecommer_Website/src/java/controller_admin/ListProductServlet.java</file>
-            <file>file:/D:/NetBeansProjects/Ecommer_Website/src/java/dal/impl/CartDaoImpl.java</file>
+            <file>file:/D:/NetBeansProjects/Ecommer_Website/src/java/dal/impl/ProductDAOImpl.java</file>
+            <file>file:/D:/NetBeansProjects/Ecommer_Website/src/java/controller/HomeServlet.java</file>
+            <file>file:/D:/NetBeansProjects/Ecommer_Website/web/view/home.jsp</file>
+            <file>file:/D:/NetBeansProjects/Ecommer_Website/web/view/products.jsp</file>
         </group>
     </open-files>
 </project-private>

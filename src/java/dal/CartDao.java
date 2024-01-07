@@ -16,13 +16,15 @@ public interface CartDao {
     
     void edit(Cart cart);
     
-    void delete(int idCart);
+    void delete(String idCart);
     
-    Cart get(int idCart);
-    
-    Cart get(String name);
+    Cart get(String idCart);
     
     List<Cart> getAll();
     
     List<Cart> search(String txtSearch);
+    
+    void processedOrder(Cart cart);
+    
+    List<Cart> getByUser(int id);
 }

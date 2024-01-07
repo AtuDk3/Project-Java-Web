@@ -121,7 +121,7 @@
                         </div>
                         <h3>Total amount:</h3>
                         <h2 id="totalAmount"><fmt:formatNumber type="currency" value="${productDetails.priceProduct}" pattern="###,###₫" /></h2>
-                        <button class="btn_buy">Buy Now</button>
+                        <button type="button" class="btn_buy" onclick="addToCart(${productDetails.idProduct})">Buy Now</button>
                         <button  type="button" class="btn_add_to_cart" onclick="addToCart(${productDetails.idProduct})" >Add To Cart</button>
                     </div>
 

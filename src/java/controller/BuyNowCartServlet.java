@@ -31,7 +31,7 @@ import service.impl.ProductServiceImpl;
  * @author Lenovo
  */
 @WebServlet(name = "BuyNowServlet", urlPatterns = {"/member/cart/buy"})
-public class BuyNowServlet extends HttpServlet {
+public class BuyNowCartServlet extends HttpServlet {
 
     CartService cartService = new CartServiceImpl();
     CartItemService cartItemService = new CartItemServiceImpl();
@@ -101,12 +101,12 @@ public class BuyNowServlet extends HttpServlet {
             Cart cart = new Cart();
             String idCart = generateIDCart();
             cart.setIdCart(idCart);
-
             cart.setBuyer(buyer);
 
             long millis = System.currentTimeMillis();
             java.sql.Timestamp buyDate = new java.sql.Timestamp(millis);
             cart.setBuyDate(buyDate);
+            cart.setStatusOrder(0);
 
             // Call the insert method from your DAO
             cartService.insert(cart);

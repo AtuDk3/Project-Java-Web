@@ -5,7 +5,6 @@
 
 package controller;
 
-import dal.impl.CategoryProductDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,14 +13,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.CategoryProduct;
+import model.CartItem;
+import service.CartItemService;
+import service.impl.CartItemServiceImpl;
 
 /**
  *
  * @author Lenovo
  */
-@WebServlet(name="CartServlet", urlPatterns={"/member/cart"})
-public class CartServlet extends HttpServlet {
+@WebServlet(name="OrderDetailsServlet", urlPatterns={"/member/profile/order_details"})
+public class OrderDetailsServlet extends HttpServlet {
+    
+    CartItemService cartItemService = new CartItemServiceImpl();
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +41,10 @@ public class CartServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CartServlet</title>");  
+            out.println("<title>Servlet OrderDetailsServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CartServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet OrderDetailsServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,13 +61,13 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        // category
-        CategoryProductDAOImpl categoryProductDAO = new CategoryProductDAOImpl();
+        String cid = request.getParameter("cid");
+        List<CartItem> listCartItems = cartItemService.getByCart(cid);
+        request.setAttribute("listCartItems", listCartItems);
+        request.setAttribute("cid", cid);
         
-        List<CategoryProduct> listCategory = categoryProductDAO.getAll();
-        request.setAttribute("categoryProduct", listCategory);
         
-        request.getRequestDispatcher("/view/cart.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/details_order.jsp").forward(request, response);
     } 
 
     /** 

@@ -74,11 +74,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int countCategoryProduct(int idCategoryProduct) {
-        return productDao.countCategoryProduct(idCategoryProduct);
-    }
-
-    @Override
     public List<Product> pagingProduct(int indexP, int indexP1) {
         return productDao.pagingProduct(indexP, indexP1);
     }
@@ -108,6 +103,16 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getTop5HotProduct() {
         return productDao.getTop5HotProduct();
+    }
+
+    @Override
+    public List<Integer> numberProductsPerCategory() {
+        return productDao.numberProductsPerCategory();
+    }
+
+    @Override
+    public List<Product> getTop5BestSellerProduct() {
+        return productDao.getTop5BestSellerProduct();
     }
 
     

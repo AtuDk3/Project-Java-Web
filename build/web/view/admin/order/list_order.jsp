@@ -46,11 +46,21 @@
                                 <td>${no.index + 1}</td>
                                 <td>${listCarts.idCart}</td> 
                                 <td>${listCarts.buyDate}</td>
-                                <td>${listCarts.buyer.id}</td>
+                                <td>${listCarts.buyer.id}</td>                             
                                 <td>${listCarts.buyer.email}</td>
-     
+
+                                <c:choose>
+                                    <c:when test="${listCarts.statusOrder eq  0}">
+                                        <td><ion-icon name="close-outline"></ion-icon> Not yet processed</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td><ion-icon name="checkmark-outline"></ion-icon> Processed</td>
+                                    </c:otherwise>
+                                </c:choose>                      
+
                                 <td>
                                     <a href="${pageContext.request.contextPath}/admin/order/order_details?cid=${listCarts.idCart}"><button type="button" class="btn btn-warning">View Orders</button></a>
+                                    <button type="button" onclick="confirmDeleteCart('${listCarts.idCart}')" class="btn btn-danger">Delete</button>
                                 </td>
                             </tr>
                         </c:forEach>

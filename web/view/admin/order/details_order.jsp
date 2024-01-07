@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +16,8 @@
         <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/style_details_order.css">
-        <title>Detail Order</title>
+        <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/logo/logo.png" type="image/x-icon">
+        <title>Dashboard | Detail Order</title>
     </head>
     <body>
 
@@ -36,47 +39,45 @@
                                     <div class="card-header p-4">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div>                              
-                                                <?php
-                                                foreach ($details_info as $key => $info) {
-                                                ?>
-                                                <p class="text-muted mb-2"> Details Order: <span class="fw-bold text-body"><?php echo $info['code_order'] ?></span></p>
+
+                                                <p class="text-muted mb-2"> Details Order: <span class="fw-bold text-body">${cid}</span></p>
+                                                
                                                 <div class="d-flex flex-row mb-4 pb-2">
+                                                    <c:forEach items="${requestScope.listCartItems}" var="cartItems" varStatus="no" >
+                                                        <c:if test="${no.index eq 0}">
                                                     <div class="flex-fill">
-                                                        <p class="bold">Name Customer: <span class="fw-bold text-body"><?php echo $info['name'] ?></span></p>
-                                                        <p class="text-muted">Phone: <span class="fw-bold text-body"><?php echo $info['phone'] ?></span></p>
-                                                        <p class="text-muted">Address: <span class="fw-bold text-body"><?php echo $info['address'] ?></span></p>
-                                                        <p class="text-muted">Email: <span class="fw-bold text-body"><?php echo $info['email'] ?></span></p>
-                                                        <p class="text-muted">Note: <span class="fw-bold text-body"><?php echo $info['content'] ?></span></p>
+                                                        <p class="bold">Name Customer: <span class="fw-bold text-body">${cartItems.cart.buyer.fullName}</span></p>
+                                                        <p class="text-muted">Phone: <span class="fw-bold text-body">${cartItems.cart.buyer.phone}</span></p>
+                                                        <p class="text-muted">Address: <span class="fw-bold text-body">${cartItems.cart.buyer.address}</span></p>
+                                                        <p class="text-muted">Email: <span class="fw-bold text-body">${cartItems.cart.buyer.email}</span></p>
                                                     </div>
+
+                                                    </c:if>
+                                                     </c:forEach>
                                                 </div>
-                                                <?php
-                                                }
-                                                ?>
+
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="card-body p-4">
-                                        <?php
-                                        $total = 0;
-                                        foreach ($details_orders as $key => $details) {
-                                        $total += $details['price_product'] * $details['quantity_product'];
-                                        ?>
+                                        <c:set var="total" value="${0}"></c:set>
+                                        <c:forEach items="${requestScope.listCartItems}" var="cartItems" varStatus="no" >
+                                            <c:set var="total" value="${total + cartItems.quantity * cartItems.unitPrice}"></c:set>
+
                                         <div class="d-flex flex-row mb-4 pb-2">
                                             <div class="flex-fill">
-                                                <h5 class="bold">Name Product: <?php echo $details['title_product'] ?></h5>
-                                                <p class="text-muted">Quantity: <?php echo $details['quantity_product'] ?></p>
-                                                <h6 class="mb-3"> <?php echo number_format($details['price_product'], 0, ',', '.') . 'đ/1' ?></h6>
-                                                <h5 class="mb-3"> The total amount: <?php echo number_format($details['price_product'] * $details['quantity_product'], 0, ',', '.') . 'đ' ?></h5>
-                                                <p class="text-muted">Time Order: <span class="text-body"><?php echo $details['date_order'] ?></span></p>
+                                                <h5 class="bold">Name Product: ${cartItems.product.titleProduct}</h5>
+                                                <p class="text-muted">Quantity: ${cartItems.quantity}</p>
+                                                <h6 class="mb-3">Unit Price: <fmt:formatNumber type="currency" value="${cartItems.unitPrice}" pattern="###,###₫" />/1</h6>
+                                                <h5 class="mb-3"> The total amount: <fmt:formatNumber type="currency" value="${cartItems.unitPrice * cartItems.quantity}" pattern="###,###₫" /></h5>
+                                                <p class="text-muted">Time Order: <span class="text-body">${cartItems.cart.buyDate}</span></p>
                                             </div>
                                             <div>
-                                                <img class="align-self-center img-fluid" id="image" src="<?php echo BASE_URL ?>public/uploads/product/imageproduct/<?php echo $details['image_product'] ?>" width="250">
+                                                <img class="align-self-center img-fluid" id="image" src="${pageContext.request.contextPath}/assets/images/uploads/product/${cartItems.product.imgProduct}" width="250">
                                             </div>
                                         </div>
-                                        <?php
-                                        }
-                                        ?>
+                                        </c:forEach>
 
                                         <ul id="progressbar-1" class="mx-0 mt-0 mb-5 px-0 pt-0 pb-4">
                                             <li class="step0 active" id="step1"><span style="margin-left: 22px; margin-top: 12px;">PLACED</span></li>
@@ -85,8 +86,8 @@
                                         </ul>
                                     </div>
                                     <div class="card-footer p-4">
-                                        <h6 class="text-muted mb-2"> Total amount: <span class="fw-bold text-body"><?php echo number_format($total, 0, ',', '.') . 'đ' ?></span></h6>
-                                        <button type="submit" class="btn btn-warning"><a style="text-decoration: none; color: black;" href="<?php echo BASE_URL ?>order/orderConfirm/<?php echo $details['code_order'] ?>">Processed</a></button>
+                                        <h6 class="text-muted mb-2"> Total amount: <span class="fw-bold text-body"><fmt:formatNumber type="currency" value="${total}" pattern="###,###₫" /></span></h6>
+                                        <button type="submit" class="btn btn-warning"><a style="text-decoration: none; color: black;" href="${pageContext.request.contextPath}/admin/order/processed?cid=${cid}">Processed</a></button>
                                     </div>
                                 </div>
 

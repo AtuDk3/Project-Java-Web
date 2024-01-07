@@ -22,7 +22,5 @@ public interface CartItemService {
     
     List<CartItem> getAll();
     
-    List<CartItem> search(String txtSearch);
-    
-    CartItem getByCart(int idCart);
+    List<CartItem> getByCart(String idCart);
 }

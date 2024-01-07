@@ -303,124 +303,37 @@
                             <div class="showcase-wrapper">
 
                                 <div class="showcase-container">
+                                    <c:forEach items="${requestScope.top5BestSellerProduct}" var="top5BestSellerProduct" >
+                                        <div class="showcase">
 
-                                    <div class="showcase">
-
-                                        <a href="#" class="showcase-img-box">
-                                            <img src="./assets/images/products/1.jpg" alt="baby fabric shoes" width="75" height="75"
-                                                 class="showcase-img">
-                                        </a>
-
-                                        <div class="showcase-content">
-
-                                            <a href="#">
-                                                <h4 class="showcase-title">baby fabric shoes</h4>
+                                            <a href="${pageContext.request.contextPath}/product_details?pid=${top5BestSellerProduct.idProduct}&cid=${top5BestSellerProduct.categoryProduct.idCategoryProduct}" class="showcase-img-box">
+                                                <img src="${pageContext.request.contextPath}/assets/images/uploads/product/${top5BestSellerProduct.imgProduct}" alt="${top5BestSellerProduct.titleProduct}" width="75" height="75"
+                                                     class="showcase-img">
                                             </a>
 
-                                            <div class="showcase-rating">
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                            </div>
+                                            <div class="showcase-content">
 
-                                            <div class="price-box">
-                                                <del>$5.00</del>
-                                                <p class="price">$4.00</p>
+                                                <a href="${pageContext.request.contextPath}/product_details?pid=${top5BestSellerProduct.idProduct}&cid=${top5BestSellerProduct.categoryProduct.idCategoryProduct}">
+                                                    <h4 class="showcase-title">${top5BestSellerProduct.imgProduct}</h4>
+                                                </a>
+
+                                                <div class="showcase-rating">
+                                                    <ion-icon name="star"></ion-icon>
+                                                    <ion-icon name="star"></ion-icon>
+                                                    <ion-icon name="star"></ion-icon>
+                                                    <ion-icon name="star"></ion-icon>
+                                                    <ion-icon name="star"></ion-icon>
+                                                </div>
+
+                                                <div class="price-box">
+                                                    <del><fmt:formatNumber type="currency" value="${top5BestSellerProduct.priceProduct}" pattern="###,###đ" /></del>
+                                                    <p class="price"><fmt:formatNumber type="currency" value="${top5BestSellerProduct.priceProduct * 0.9}" pattern="###,###đ" /></p>
+                                                </div>
+
                                             </div>
 
                                         </div>
-
-                                    </div>
-
-                                    <div class="showcase">
-
-                                        <a href="#" class="showcase-img-box">
-                                            <img src="./assets/images/products/2.jpg" alt="men's hoodies t-shirt" class="showcase-img"
-                                                 width="75" height="75">
-                                        </a>
-
-                                        <div class="showcase-content">
-
-                                            <a href="#">
-                                                <h4 class="showcase-title">men's hoodies t-shirt</h4>
-                                            </a>
-                                            <div class="showcase-rating">
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star-half-outline"></ion-icon>
-                                            </div>
-
-                                            <div class="price-box">
-                                                <del>$17.00</del>
-                                                <p class="price">$7.00</p>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="showcase">
-
-                                        <a href="#" class="showcase-img-box">
-                                            <img src="./assets/images/products/3.jpg" alt="girls t-shirt" class="showcase-img" width="75"
-                                                 height="75">
-                                        </a>
-
-                                        <div class="showcase-content">
-
-                                            <a href="#">
-                                                <h4 class="showcase-title">girls t-shirt</h4>
-                                            </a>
-                                            <div class="showcase-rating">
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star-half-outline"></ion-icon>
-                                            </div>
-
-                                            <div class="price-box">
-                                                <del>$5.00</del>
-                                                <p class="price">$3.00</p>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="showcase">
-
-                                        <a href="#" class="showcase-img-box">
-                                            <img src="./assets/images/products/4.jpg" alt="woolen hat for men" class="showcase-img" width="75"
-                                                 height="75">
-                                        </a>
-
-                                        <div class="showcase-content">
-
-                                            <a href="#">
-                                                <h4 class="showcase-title">woolen hat for men</h4>
-                                            </a>
-                                            <div class="showcase-rating">
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                            </div>
-
-                                            <div class="price-box">
-                                                <del>$15.00</del>
-                                                <p class="price">$12.00</p>
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
+                                    </c:forEach>
                                 </div>
 
                             </div>
@@ -461,7 +374,7 @@
                                                     </a>
 
                                                     <c:url var="editURL" value="/product/list">
-                                                <c:param name="cid" value="${top5HotProducts.categoryProduct.idCategoryProduct}" /></c:url>
+                                                        <c:param name="cid" value="${top5HotProducts.categoryProduct.idCategoryProduct}" /></c:url>
                                                     <a href="${editURL}&index1=-2" class="showcase-category">${top5HotProducts.categoryProduct.titleCategoryProduct}</a>
 
                                                     <div class="price-box">
@@ -1300,13 +1213,13 @@
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
         <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-  intent="WELCOME"
-  chat-title="Chat Bot One Piece Shop"
-  agent-id="a5ff5270-615e-45c8-9577-8776b8221e70"
-  language-code="vi"
-></df-messenger>
+    <df-messenger
+        intent="WELCOME"
+        chat-title="Chat Bot One Piece Shop"
+        agent-id="a5ff5270-615e-45c8-9577-8776b8221e70"
+        language-code="vi"
+        ></df-messenger>
 
-    </body>
+</body>
 
 </html>

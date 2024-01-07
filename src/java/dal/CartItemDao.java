@@ -20,11 +20,7 @@ public interface CartItemDao {
     
     CartItem get(int idCartItem);
     
-    CartItem get(String name);
-    
     List<CartItem> getAll();
     
-    List<CartItem> search(String txtSearch);
-    
-    CartItem getByCart(int idCart);
+    List<CartItem> getByCart(String idCart);
 }

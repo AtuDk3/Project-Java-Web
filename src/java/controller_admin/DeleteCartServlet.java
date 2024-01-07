@@ -12,8 +12,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Cart;
 import service.CartService;
 import service.impl.CartServiceImpl;
 
@@ -21,11 +19,9 @@ import service.impl.CartServiceImpl;
  *
  * @author Lenovo
  */
-@WebServlet(name="ListOrder", urlPatterns={"/admin/order/list_order"})
-public class ListOrder extends HttpServlet {
-    
+@WebServlet(name="DeleteCartServlet", urlPatterns={"/admin/order/delete"})
+public class DeleteCartServlet extends HttpServlet {
     CartService cartService = new CartServiceImpl();
-   
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -41,10 +37,10 @@ public class ListOrder extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListOrder</title>");  
+            out.println("<title>Servlet DeleteCartServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ListOrder at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet DeleteCartServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,10 +57,10 @@ public class ListOrder extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        List<Cart> listCarts = cartService.getAll();
-        request.setAttribute("listCarts", listCarts);
+        String cid = request.getParameter("cid");
         
-        request.getRequestDispatcher("/view/admin/order/list_order.jsp").forward(request, response);
+        cartService.delete(cid);
+        response.sendRedirect(request.getContextPath() + "/admin/order/list_order");
     } 
 
     /** 

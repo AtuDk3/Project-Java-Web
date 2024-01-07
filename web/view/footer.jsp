@@ -8,52 +8,6 @@
 
 <footer>
 
-    <div class="footer-category">
-
-        <div class="container">
-
-            <h2 class="footer-category-title">Brand directory</h2>
-
-            <div class="footer-category-box">
-
-                <h3 class="category-box-title">Accessories</h3>
-
-                <c:forEach items="${requestScope.categoryAccessories}" var="cateAccessories" >
-                    <a href="#" class="footer-category-link">${cateAccessories.titleCategoryProduct}</a>
-                </c:forEach>
-            </div>
-
-            <div class="footer-category-box">
-
-                <h3 class="category-box-title">Posters</h3>
-
-                <c:forEach items="${requestScope.categoryPosters}" var="catePosters" >
-                    <a href="#" class="footer-category-link">${catePosters.titleCategoryProduct}</a>
-                </c:forEach>
-            </div>
-
-            <div class="footer-category-box">
-
-                <h3 class="category-box-title">Figures & Toys</h3>
-
-                <c:forEach items="${requestScope.categoryFiguresToys}" var="cateFiguresToys" >
-                    <a href="#" class="footer-category-link">${cateFiguresToys.titleCategoryProduct}</a>
-                </c:forEach>
-            </div>
-
-            <div class="footer-category-box">
-
-                <h3 class="category-box-title">Clothers</h3>
-
-                <c:forEach items="${requestScope.categoryClothers}" var="cateClothers" >
-                    <a href="#" class="footer-category-link">${cateClothers.titleCategoryProduct}</a>
-                </c:forEach>
-            </div>
-
-        </div>
-
-    </div>
-
     <div class="footer-nav">
 
         <div class="container">
@@ -64,26 +18,11 @@
                     <h2 class="nav-title">Popular Categories</h2>
                 </li>
 
-                <li class="footer-nav-item">
-                    <a href="#" class="footer-nav-link">Fashion</a>
-                </li>
-
-                <li class="footer-nav-item">
-                    <a href="#" class="footer-nav-link">Electronic</a>
-                </li>
-
-                <li class="footer-nav-item">
-                    <a href="#" class="footer-nav-link">Cosmetic</a>
-                </li>
-
-                <li class="footer-nav-item">
-                    <a href="#" class="footer-nav-link">Health</a>
-                </li>
-
-                <li class="footer-nav-item">
-                    <a href="#" class="footer-nav-link">Watches</a>
-                </li>
-
+                <c:forEach items="${requestScope.categoryProduct}" var="categoryProduct" >
+                    <li class="footer-nav-item">
+                        <a href="#" class="footer-nav-link">${categoryProduct.titleCategoryProduct}</a>
+                    </li>
+                </c:forEach>
             </ul>
 
             <ul class="footer-nav-list">
@@ -182,8 +121,7 @@
                     </div>
 
                     <address class="content">
-                        419 State 414 Rte
-                        Beaver Dams, New York(NY), 14812, USA
+                        Da Nang, Viet Nam
                     </address>
                 </li>
 
@@ -192,7 +130,7 @@
                         <ion-icon name="call-outline"></ion-icon>
                     </div>
 
-                    <a href="tel:+607936-8058" class="footer-nav-link">(607) 936-8058</a>
+                    <a href="tel:+607936-8058" class="footer-nav-link">0763794399</a>
                 </li>
 
                 <li class="footer-nav-item flex">
@@ -200,7 +138,7 @@
                         <ion-icon name="mail-outline"></ion-icon>
                     </div>
 
-                    <a href="mailto:example@gmail.com" class="footer-nav-link">example@gmail.com</a>
+                    <a href="mailto:thanhtudzx@gmail.com" class="footer-nav-link">thanhtudzx@gmail.com</a>
                 </li>
 
             </ul>

@@ -6,6 +6,7 @@ package service.impl;
 
 import dal.CartDao;
 import dal.impl.CartDaoImpl;
+import java.util.ArrayList;
 import java.util.List;
 import model.Cart;
 import service.CartService;
@@ -35,12 +36,12 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void delete(int idCart) {
+    public void delete(String idCart) {
         cartDao.delete(idCart);
     }
 
     @Override
-    public Cart get(int idCart) {
+    public Cart get(String idCart) {
         return cartDao.get(idCart);
     }
 
@@ -52,6 +53,20 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<Cart> search(String txtSearch) {
         return cartDao.search(txtSearch);
+    }
+
+    @Override
+    public void processedOrder(Cart cart) {
+        Cart oldCart = cartDao.get(cart.getIdCart());
+        
+        oldCart.setStatusOrder(cart.getStatusOrder());
+        
+        cartDao.processedOrder(oldCart);
+    }
+
+    @Override
+    public List<Cart> getByUser(int id) {
+        return cartDao.getByUser(id);
     }
     
 }

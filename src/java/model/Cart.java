@@ -12,16 +12,19 @@ public class Cart {
     private String idCart;
     private Account buyer;
     private Timestamp buyDate;
+    private int statusOrder;
 
-    public Cart(String idCart, Account buyer, Timestamp  buyDate) {
+    public Cart(String idCart, Account buyer, Timestamp  buyDate, int statusOrder) {
         this.idCart = idCart;
         this.buyer = buyer;
         this.buyDate = buyDate;
+        this.statusOrder = statusOrder;
     }
 
-    public Cart(Account buyer, Timestamp  buyDate) {
+    public Cart(Account buyer, Timestamp  buyDate, int statusOrder) {
         this.buyer = buyer;
         this.buyDate = buyDate;
+        this.statusOrder = statusOrder;
     }
     
 
@@ -52,10 +55,20 @@ public class Cart {
         this.buyDate = buyDate;
     }
 
+    public int getStatusOrder() {
+        return statusOrder;
+    }
+
+    public void setStatusOrder(int statusOrder) {
+        this.statusOrder = statusOrder;
+    }
+
     @Override
     public String toString() {
-        return "Cart{" + "idCart=" + idCart + ", buyer=" + buyer + ", buyDate=" + buyDate + '}';
+        return "Cart{" + "idCart=" + idCart + ", buyer=" + buyer + ", buyDate=" + buyDate + ", statusOrder=" + statusOrder + '}';
     }
+
+    
     
     
 }

@@ -3,9 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package controller_admin;
 
-import dal.impl.CategoryProductDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,15 +12,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.CategoryProduct;
+import model.Cart;
+import service.CartService;
+import service.impl.CartServiceImpl;
 
 /**
  *
  * @author Lenovo
  */
-@WebServlet(name="CartServlet", urlPatterns={"/member/cart"})
-public class CartServlet extends HttpServlet {
+@WebServlet(name="ProcessedOrderServlet", urlPatterns={"/admin/order/processed"})
+public class ProcessedOrderServlet extends HttpServlet {
+    
+    CartService cartService = new CartServiceImpl();
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +40,10 @@ public class CartServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CartServlet</title>");  
+            out.println("<title>Servlet ProcessedOrderServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CartServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ProcessedOrderServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,13 +60,12 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        // category
-        CategoryProductDAOImpl categoryProductDAO = new CategoryProductDAOImpl();
+        String cid = request.getParameter("cid");
         
-        List<CategoryProduct> listCategory = categoryProductDAO.getAll();
-        request.setAttribute("categoryProduct", listCategory);
+        Cart cart = cartService.get(cid);
+        cartService.processedOrder(cart);
         
-        request.getRequestDispatcher("/view/cart.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/admin/order/list_order");
     } 
 
     /** 

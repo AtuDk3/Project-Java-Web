@@ -22,8 +22,8 @@ import service.impl.UserServiceImpl;
  *
  * @author Lenovo
  */
-public class CartItemDaoImpl extends DBContext implements CartItemDao{
-    
+public class CartItemDaoImpl extends DBContext implements CartItemDao {
+
     UserService userService = new UserServiceImpl();
 
     @Override
@@ -31,14 +31,14 @@ public class CartItemDaoImpl extends DBContext implements CartItemDao{
         String sql = "insert into tab_cart_item(quantity, unit_price, id_product, id_cart) values(?, ?, ?, ?) ";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            
+
             ps.setInt(1, cartItem.getQuantity());
             ps.setDouble(2, cartItem.getUnitPrice());
             ps.setInt(3, cartItem.getProduct().getIdProduct());
             ps.setString(4, cartItem.getCart().getIdCart());
-            
+
             ResultSet rs = ps.executeQuery();
-            
+
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -49,15 +49,15 @@ public class CartItemDaoImpl extends DBContext implements CartItemDao{
         String sql = "update tab_cart_item set quantity = ?, unit_price = ?, id_product = ?, id_cart = ? where id_cart_item = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            
+
             ps.setInt(1, cartItem.getQuantity());
             ps.setDouble(2, cartItem.getUnitPrice());
             ps.setInt(3, cartItem.getProduct().getIdProduct());
             ps.setString(4, cartItem.getCart().getIdCart());
             ps.setInt(5, cartItem.getIdCartItem());
-            
+
             ResultSet rs = ps.executeQuery();
-            
+
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -70,7 +70,7 @@ public class CartItemDaoImpl extends DBContext implements CartItemDao{
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, cartItem);
             ResultSet rs = ps.executeQuery();
-            
+
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -85,128 +85,117 @@ public class CartItemDaoImpl extends DBContext implements CartItemDao{
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, idCartItem);
             ResultSet rs = ps.executeQuery();
-            
-            if (rs.next()){
-                Account user = userService.get(rs.getInt("a.id"));               
-                
+
+            if (rs.next()) {
+                Account user = userService.get(rs.getInt("a.id"));
+
                 Cart cart = new Cart();
                 cart.setBuyer(user);
                 cart.setBuyDate((Timestamp) rs.getTimestamp("c.buy_date"));
-                
+
                 Product product = new Product();
                 product.setTitleProduct(rs.getString("p.title_product"));
                 product.setPriceProduct(rs.getFloat("p.price_product"));
-                
-                CartItem cartItem = new CartItem();               
+
+                CartItem cartItem = new CartItem();
                 cartItem.setIdCartItem(rs.getInt("citem.id_cart_item"));
                 cartItem.setQuantity(rs.getInt("citem.quantity"));
                 cartItem.setUnitPrice(rs.getInt("citem.unit_price"));
                 cartItem.setProduct(product);
                 cartItem.setCart(cart);
-                
+
                 return cartItem;
             }
-            
+
         } catch (SQLException e) {
             System.out.println(e);
         }
         return null;
     }
-    
-    //check lại
+
     @Override
-    public CartItem getByCart(int idCart) {
-        String sql = "select citem.id_cart_item, citem.quantity, citem.unit_price, c.user_id, c.buy_date, p.title_product, p.price_product"
-                + " from tab_cart_item as citem inner join tab_cart as c on c.id_cart = citem.id_cart_item "
-                + " inner join tab_product as p on citem.id_product = p.id_product where c.id_cart = ?";
+    public List<CartItem> getByCart(String idCart) {
+        List<CartItem> listCartItems = new ArrayList<>();
+        String sql = "select citem.id_cart_item, citem.quantity, citem.unit_price, c.user_id, c.buy_date, p.title_product, p.price_product, p.img_product\n"
+                + "from tab_cart_item as citem inner join tab_cart as c on c.id_cart = citem.id_cart\n"
+                + "inner join tab_product as p on citem.id_product = p.id_product\n"
+                + " where c.id_cart = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, idCart);
+            ps.setString(1, idCart);
             ResultSet rs = ps.executeQuery();
-            
-            if (rs.next()){
-                Account user = userService.get(rs.getInt("user_id"));               
-                
+
+            while (rs.next()) {
+               Account buyer = userService.get(rs.getInt("user_id"));
+
                 Cart cart = new Cart();
-                cart.setBuyer(user);
+                cart.setBuyer(buyer);
                 cart.setBuyDate((Timestamp) rs.getTimestamp("buy_date"));
-                
+
                 Product product = new Product();
                 product.setTitleProduct(rs.getString("title_product"));
                 product.setPriceProduct(rs.getFloat("price_product"));
-                
-                CartItem cartItem = new CartItem();               
+                product.setImgProduct(rs.getString("img_product"));
+
+                CartItem cartItem = new CartItem();
                 cartItem.setIdCartItem(rs.getInt("id_cart_item"));
                 cartItem.setQuantity(rs.getInt("quantity"));
                 cartItem.setUnitPrice(rs.getInt("unit_price"));
                 cartItem.setProduct(product);
                 cartItem.setCart(cart);
-                
-                return cartItem;
+
+                listCartItems.add(cartItem);
             }
-            
+            return listCartItems;
+
         } catch (SQLException e) {
             System.out.println(e);
         }
         return null;
     }
-    
+
     public static void main(String[] args) {
         CartItemDaoImpl cartItemDaoImpl = new CartItemDaoImpl();
-        cartItemDaoImpl.getByCart(1);
-        System.out.println(cartItemDaoImpl.toString());
+        System.out.println(cartItemDaoImpl.getByCart("TRANS473089").toString());
     }
 
-    // viết sau
-    @Override
-    public CartItem get(String name) {
-        return null;
-    }
 
     @Override
     public List<CartItem> getAll() {
         List<CartItem> listCartItem = new ArrayList<>();
-        
+
         String sql = "select citem.id_cart_item, citem.quantity, citem.unit_price, c.user_id, c.buy_date, p.title_product, p.price_product"
                 + " from tab_cart_item as citem inner join tab_cart as c on c.id_cart = citem.id_cart_item "
                 + " inner join tab_product as p on citem.id_product = p.id_product";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
-            while (rs.next()){
-                Account user = userService.get(rs.getInt("a.id"));               
-                
+
+            while (rs.next()) {
+                Account user = userService.get(rs.getInt("a.id"));
+
                 Cart cart = new Cart();
                 cart.setBuyer(user);
                 cart.setBuyDate((Timestamp) rs.getTimestamp("c.buy_date"));
-                
+
                 Product product = new Product();
                 product.setTitleProduct(rs.getString("p.title_product"));
                 product.setPriceProduct(rs.getFloat("p.price_product"));
-                
-                CartItem cartItem = new CartItem();               
+
+                CartItem cartItem = new CartItem();
                 cartItem.setIdCartItem(rs.getInt("citem.id_cart_item"));
                 cartItem.setQuantity(rs.getInt("citem.quantity"));
                 cartItem.setUnitPrice(rs.getInt("citem.unit_price"));
                 cartItem.setProduct(product);
                 cartItem.setCart(cart);
-                
+
                 return listCartItem;
             }
-            
+
         } catch (SQLException e) {
             System.out.println(e);
         }
         return null;
     }
 
-    // viết sau
-    @Override
-    public List<CartItem> search(String txtSearch) {
-        return null;
-    }
-
-    
-    
 }

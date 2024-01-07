@@ -12,9 +12,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Account;
+import model.Cart;
 import model.CategoryProduct;
+import service.CartItemService;
+import service.CartService;
 import service.CategoryProductService;
+import service.impl.CartItemServiceImpl;
+import service.impl.CartServiceImpl;
 import service.impl.CategoryProductServiceImpl;
 
 /**
@@ -24,6 +31,9 @@ import service.impl.CategoryProductServiceImpl;
 @WebServlet(name="ProfileServlet", urlPatterns={"/member/profile"})
 public class ProfileServlet extends HttpServlet {
    
+    CartService cartService = new CartServiceImpl();
+    CartItemService cartItemService = new CartItemServiceImpl();
+    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -63,16 +73,13 @@ public class ProfileServlet extends HttpServlet {
         CategoryProductService categoryProductService = new CategoryProductServiceImpl();
         
         List<CategoryProduct> listCategory = categoryProductService.getAll();
-        request.setAttribute("categoryProduct", listCategory);
+        request.setAttribute("categoryProduct", listCategory);      
         
-        List<CategoryProduct> listCategoryAccessories = categoryProductService.getByDescCategoryProduct("Accessories");
-        request.setAttribute("categoryAccessories", listCategoryAccessories);
-        List<CategoryProduct> listCategoryPosters = categoryProductService.getByDescCategoryProduct("Posters");
-        request.setAttribute("categoryPosters", listCategoryPosters);
-        List<CategoryProduct> listCategoryFiguresToys = categoryProductService.getByDescCategoryProduct("Figures & Toys");
-        request.setAttribute("categoryFiguresToys", listCategoryFiguresToys);
-        List<CategoryProduct> listCategoryClothers = categoryProductService.getByDescCategoryProduct("Clothers");
-        request.setAttribute("categoryClothers", listCategoryClothers);
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
+        
+        List<Cart> listCarts = cartService.getByUser(account.getId());
+        request.setAttribute("listCarts", listCarts);
         
         request.getRequestDispatcher("/view/profile.jsp").forward(request, response);
     } 

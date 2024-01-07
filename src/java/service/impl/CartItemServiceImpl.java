@@ -51,12 +51,7 @@ public class CartItemServiceImpl implements CartItemService{
     }
 
     @Override
-    public List<CartItem> search(String txtSearch) {
-        return cartItemDao.search(txtSearch);
-    }
-
-    @Override
-    public CartItem getByCart(int idCart) {
+    public List<CartItem> getByCart(String idCart) {
         return cartItemDao.getByCart(idCart);
     }
 

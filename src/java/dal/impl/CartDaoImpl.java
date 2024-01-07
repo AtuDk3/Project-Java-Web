@@ -27,12 +27,13 @@ public class CartDaoImpl extends DBContext implements CartDao {
 
     @Override
     public void insert(Cart cart) {
-        String sql = "insert into tab_cart(id_cart, user_id, buy_date) values(?, ?, ?) ";
+        String sql = "insert into tab_cart(id_cart, user_id, buy_date, status_order) values(?, ?, ?, ?) ";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, cart.getIdCart());
             ps.setInt(2, cart.getBuyer().getId());
             ps.setTimestamp(3, new Timestamp(cart.getBuyDate().getTime()));
+            ps.setInt(4, cart.getStatusOrder());
             ResultSet rs = ps.executeQuery();
 
         } catch (SQLException e) {
@@ -56,11 +57,12 @@ public class CartDaoImpl extends DBContext implements CartDao {
     }
 
     @Override
-    public void delete(int idCart) {
-        String sql = "delete from tab_cart where id_cart = ?";
+    public void delete(String idCart) {
+        String sql = "delete from tab_cart_item where id_cart = ?; delete from tab_cart where id_cart = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, idCart);
+            ps.setString(1, idCart);
+            ps.setString(2, idCart);
             ResultSet rs = ps.executeQuery();
 
         } catch (SQLException e) {
@@ -69,21 +71,22 @@ public class CartDaoImpl extends DBContext implements CartDao {
     }
 
     @Override
-    public Cart get(int idCart) {
-        String sql = "select c.id_cart, c.buy_date, a.id, a.user_name, a.email from tab_cart as c "
+    public Cart get(String idCart) {
+        String sql = "select c.id_cart, c.buy_date, c.status_order, a.id, a.user_name, a.email from tab_cart as c "
                 + "inner join tab_account as a on c.user_id = a.id where c.id_cart = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, idCart);
+            ps.setString(1, idCart);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                Account user = userService.get(rs.getInt("a.id"));
+                Account user = userService.get(rs.getInt("id"));
                 Cart cart = new Cart();
 
-                cart.setIdCart(rs.getString("c.id_cart"));
+                cart.setIdCart(rs.getString("id_cart"));
                 cart.setBuyer(user);
-                cart.setBuyDate(rs.getTimestamp("c.buy_date"));
+                cart.setBuyDate(rs.getTimestamp("buy_date"));
+                cart.setStatusOrder(rs.getInt("status_order"));
 
                 return cart;
             }
@@ -93,17 +96,43 @@ public class CartDaoImpl extends DBContext implements CartDao {
         }
         return null;
     }
-
+    
+    
+    // Purchase History
     @Override
-    public Cart get(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Cart> getByUser(int id) {
+        List<Cart> listCart = new ArrayList<>();
+        
+        String sql = "select c.id_cart, c.buy_date, c.status_order, a.id, a.user_name, a.email from tab_cart as c "
+                + "inner join tab_account as a on c.user_id = a.id where c.user_id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Account user = userService.get(rs.getInt("id"));
+                Cart cart = new Cart();
+
+                cart.setIdCart(rs.getString("id_cart"));
+                cart.setBuyer(user);
+                cart.setBuyDate(rs.getTimestamp("buy_date"));
+                cart.setStatusOrder(rs.getInt("status_order"));
+
+                listCart.add(cart);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return listCart;
     }
 
     @Override
     public List<Cart> getAll() {
         List<Cart> listCart = new ArrayList<>();
 
-        String sql = "select c.id_cart, c.buy_date, a.id, a.user_name, a.email from tab_cart as c "
+        String sql = "select c.id_cart, c.buy_date, c.status_order, a.id, a.user_name, a.email from tab_cart as c "
                 + "inner join tab_account as a on c.user_id = a.id";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -116,6 +145,7 @@ public class CartDaoImpl extends DBContext implements CartDao {
                 cart.setIdCart(rs.getString("id_cart"));
                 cart.setBuyer(user);
                 cart.setBuyDate(rs.getTimestamp("buy_date"));
+                cart.setStatusOrder(rs.getInt("status_order"));
 
                 listCart.add(cart);
             }
@@ -153,6 +183,19 @@ public class CartDaoImpl extends DBContext implements CartDao {
             System.out.println(e);
         }
         return listCart;
+    }
+    
+    @Override
+    public void processedOrder(Cart cart) {
+        String sql = "update tab_cart set status_order = 1 where id_cart = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, cart.getIdCart());
+            ResultSet rs = ps.executeQuery();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
 }

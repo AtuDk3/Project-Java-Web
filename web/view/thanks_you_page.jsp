@@ -33,7 +33,7 @@
                 <div class="text-center">
                     <h1>Thank You !</h1>
                     <p>
-                        Thank you for ordering on our website. Click below to view your transaction history 
+                        Thank you <strong>${sessionScope.account.userName}</strong> for ordering on our website. Click below to view your transaction history 
                         or return to the home page.</p>
                     <a href="${pageContext.request.contextPath}/home"><button class="btn btn-outline-success"><i class="fa-solid fa-house"></i> Back Home</button></a>
                     <a href="${pageContext.request.contextPath}/member/profile"><button class="btn btn-outline-success"><i class="fa-solid fa-clock-rotate-left"></i> Purchase History</button></a>

@@ -143,59 +143,86 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card mb-4 mb-md-0">
-                                        <div class="card-body">
-                                            <p class="mb-4"><span class="text-primary font-italic me-1">Purchase</span> History
-                                            </p>
-                                            <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                                            <div class="progress rounded" style="height: 5px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                                            <div class="progress rounded" style="height: 5px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                                            <div class="progress rounded" style="height: 5px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                                            <div class="progress rounded" style="height: 5px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                                            <div class="progress rounded mb-2" style="height: 5px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
 
                         <div class="col-lg-8" id="update_info">
-                            <form action="${pageContext.request.contextPath}/member/update_profile" method="post" enctype="multipart/form-data">
-                                <input type="hidden" value="${sessionScope.account.userName}" name="userName">
-                                <div class="form-group">
-                                    <label for="fullName">Full Name</label>
-                                    <input value="${sessionScope.account.fullName}" type="text" name="fullName" class="form-control" required>
-                                </div>
-                                <div class="form-group">
-                                        <label for="image">Image</label>
-                                        <input type="file" name="image" class="form-control">
-                                        <p> <img class="image" src="${pageContext.request.contextPath}/assets/images/uploads/avatar/${sessionScope.account.avatar}" height="100px" width="100px"></p>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <form action="${pageContext.request.contextPath}/member/update_profile" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" value="${sessionScope.account.userName}" name="userName">
+                                        <div class="form-group">
+                                            <label for="fullName">Full Name</label>
+                                            <input value="${sessionScope.account.fullName}" type="text" name="fullName" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="image">Image</label>
+                                            <input type="file" name="image" class="form-control">
+                                            <p> <img class="image" src="${pageContext.request.contextPath}/assets/images/uploads/avatar/${sessionScope.account.avatar}" height="100px" width="100px"></p>
 
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="address">Address</label>
-                                        <input type="text" class="form-control" value="${sessionScope.account.address}" name="address" required>
-                                    </div> 
-                                    <button id="btn" type="submit" class="btn btn-primary">Update Profile</button>
-                                </form>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="address">Address</label>
+                                            <input type="text" class="form-control" value="${sessionScope.account.address}" name="address" required>
+                                        </div> 
+                                        <button id="btn" type="submit" class="btn btn-primary">Update Profile</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card mb-4 mb-md-0">
+                                <div class="card-body">
+                                    <p class="mb-4"><span class="text-primary font-italic me-1">Purchase</span> History
+                                    </p>
+
+                                    <table id="example" class="table table-striped" id="table_list" style="width:100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Id Order</th>
+                                                <th>Date Order</th>
+                                                <th>ID customer</th>
+                                                <th>Email</th>
+                                                <th>Status Order</th>
+                                                <th>Manager</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <c:forEach items="${requestScope.listCarts}" var="listCarts" varStatus="no" >
+                                                <tr>
+                                                    <td>${no.index + 1}</td>
+                                                    <td>${listCarts.idCart}</td> 
+                                                    <td>${listCarts.buyDate}</td>
+                                                    <td>${listCarts.buyer.id}</td>                             
+                                                    <td>${listCarts.buyer.email}</td>
+
+                                                    <c:choose>
+                                                        <c:when test="${listCarts.statusOrder eq  0}">
+                                                            <td><ion-icon name="close-outline"></ion-icon> Not yet processed</td>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                    <td><ion-icon name="checkmark-outline"></ion-icon> Processed</td>
+                                                    </c:otherwise>
+                                                </c:choose>                      
+
+                                            <td>
+                                                <a href="${pageContext.request.contextPath}/member/profile/order_details?cid=${listCarts.idCart}"><button type="button" class="btn btn-warning">View Orders</button></a>
+                                            </td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>                                       
+
                 </div>
             </section>
 
@@ -212,10 +239,11 @@
 
         <!--          - ionicon link-->
         <script>
-                                                function showUpdateInfo() {
-                                                    document.getElementById("update_info").style.display = "block";
-                                                    document.getElementById("show_info").style.display = "none";
-                                                }
+                                                    function showUpdateInfo() {
+                                                        document.getElementById("update_info").style.display = "block";
+                                                        document.getElementById("show_info").style.display = "none";
+                                                    }
+
         </script>
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

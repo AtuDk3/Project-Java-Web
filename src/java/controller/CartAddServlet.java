@@ -72,15 +72,6 @@ public class CartAddServlet extends HttpServlet {
         List<CategoryProduct> listCategory = categoryProductService.getAll();
         request.setAttribute("categoryProduct", listCategory);
         
-        List<CategoryProduct> listCategoryAccessories = categoryProductService.getByDescCategoryProduct("Accessories");
-        request.setAttribute("categoryAccessories", listCategoryAccessories);
-        List<CategoryProduct> listCategoryPosters = categoryProductService.getByDescCategoryProduct("Posters");
-        request.setAttribute("categoryPosters", listCategoryPosters);
-        List<CategoryProduct> listCategoryFiguresToys = categoryProductService.getByDescCategoryProduct("Figures & Toys");
-        request.setAttribute("categoryFiguresToys", listCategoryFiguresToys);
-        List<CategoryProduct> listCategoryClothers = categoryProductService.getByDescCategoryProduct("Clothers");
-        request.setAttribute("categoryClothers", listCategoryClothers);
-        
         String pid = request.getParameter("pid");
         String quantity = request.getParameter("quantity");
         int idProduct = Integer.parseInt(pid);
