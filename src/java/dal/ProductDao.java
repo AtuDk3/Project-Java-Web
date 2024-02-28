@@ -5,6 +5,7 @@
 package dal;
 
 import java.util.List;
+import java.util.Map;
 import model.Product;
 
 /**
@@ -34,7 +35,7 @@ public interface ProductDao {
     
     int countProduct();
 
-    List<Integer> numberProductsPerCategory();
+    Map<Integer, Integer> countProductsPerCategory();
     
     List<Product> pagingProduct(int indexP, int indexP1); 
 
@@ -45,4 +46,5 @@ public interface ProductDao {
     List<Product> getTop5HotProduct();
     
     List<Product> getTop5BestSellerProduct();
+    
 }

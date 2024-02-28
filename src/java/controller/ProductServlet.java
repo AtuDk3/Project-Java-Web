@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 import model.CategoryProduct;
 import model.Product;
 import service.CategoryProductService;
@@ -80,7 +81,7 @@ public class ProductServlet extends HttpServlet {
         int indexP1 = (indexPage1 == null) ? 0 : Integer.valueOf(indexPage1);
 
         int countProduct = productService.countProduct();
-        List<Integer> numberProductsPerCategory = productService.numberProductsPerCategory();
+        Map<Integer, Integer> countProductsPerCategory = productService.countProductsPerCategory();
 
         int pageSize = 0;
 
@@ -120,12 +121,11 @@ public class ProductServlet extends HttpServlet {
         request.setAttribute("tag1", indexP1);
         request.setAttribute("indexP2", indexPage1);
 
-//        if (idCate == 0) {
-//            request.setAttribute("countProductAll", countProduct);
-//        } else {
-//            request.setAttribute("countProductAll", numberProductsPerCategory);
-//        }
-        request.setAttribute("countProductAll", numberProductsPerCategory);
+        if (idCate == 0) {
+            request.setAttribute("countProductAll", countProduct);
+        } else {
+            request.setAttribute("countProductAll", countProductsPerCategory);
+        }
 
         request.getRequestDispatcher("/view/products.jsp").forward(request, response);
     }

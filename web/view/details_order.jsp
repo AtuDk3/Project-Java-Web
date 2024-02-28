@@ -87,10 +87,11 @@
 
                     </div>
                 </div>
-            </div>             
+            </div>    
+                                    </section>
         </main>
         <!-- MAIN -->
-    </section>
+
     <!-- NAVBAR -->
 
     <%@include file="footer.jsp" %>

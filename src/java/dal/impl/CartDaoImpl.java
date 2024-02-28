@@ -104,13 +104,13 @@ public class CartDaoImpl extends DBContext implements CartDao {
         List<Cart> listCart = new ArrayList<>();
         
         String sql = "select c.id_cart, c.buy_date, c.status_order, a.id, a.user_name, a.email from tab_cart as c "
-                + "inner join tab_account as a on c.user_id = a.id where c.user_id = ?";
+                + "inner join tab_account as a on c.user_id = a.id where c.user_id = ? order by c.buy_date desc";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 Account user = userService.get(rs.getInt("id"));
                 Cart cart = new Cart();
 
@@ -133,7 +133,7 @@ public class CartDaoImpl extends DBContext implements CartDao {
         List<Cart> listCart = new ArrayList<>();
 
         String sql = "select c.id_cart, c.buy_date, c.status_order, a.id, a.user_name, a.email from tab_cart as c "
-                + "inner join tab_account as a on c.user_id = a.id";
+                + "inner join tab_account as a on c.user_id = a.id order by c.buy_date desc";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();

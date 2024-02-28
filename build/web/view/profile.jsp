@@ -155,6 +155,17 @@
                                             <label for="fullName">Full Name</label>
                                             <input value="${sessionScope.account.fullName}" type="text" name="fullName" class="form-control" required>
                                         </div>
+                                        
+                                        <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="text" class="form-control" value="${sessionScope.account.email}" name="email" required>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                        <label for="phone">Phone</label>
+                                        <input type="text" class="form-control" value="${sessionScope.account.phone}" name="phone" required>
+                                        </div>
+                                        
                                         <div class="form-group">
                                             <label for="image">Image</label>
                                             <input type="file" name="image" class="form-control">
@@ -239,14 +250,20 @@
 
         <!--          - ionicon link-->
         <script>
-                                                    function showUpdateInfo() {
-                                                        document.getElementById("update_info").style.display = "block";
-                                                        document.getElementById("show_info").style.display = "none";
-                                                    }
+                                            function showUpdateInfo() {
+                                                document.getElementById("update_info").style.display = "block";
+                                                document.getElementById("show_info").style.display = "none";
+                                            }
 
         </script>
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+        <script>
+                                            new DataTable('#example');
+        </script>
     </body>
 
 </html>

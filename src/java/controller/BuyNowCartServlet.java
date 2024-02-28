@@ -128,6 +128,10 @@ public class BuyNowCartServlet extends HttpServlet {
                 cartItem.setCart(cart);
 
                 cartItemService.insert(cartItem);
+                
+                product.setQuantityProduct(product.getQuantityProduct() - quantity);
+                
+                productService.update(product);
             }
 
             session.removeAttribute("cart");

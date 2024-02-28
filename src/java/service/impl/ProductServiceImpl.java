@@ -7,6 +7,7 @@ package service.impl;
 import dal.ProductDao;
 import dal.impl.ProductDAOImpl;
 import java.util.List;
+import java.util.Map;
 import model.Product;
 import service.ProductService;
 
@@ -106,13 +107,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Integer> numberProductsPerCategory() {
-        return productDao.numberProductsPerCategory();
+    public List<Product> getTop5BestSellerProduct() {
+        return productDao.getTop5BestSellerProduct();
     }
 
     @Override
-    public List<Product> getTop5BestSellerProduct() {
-        return productDao.getTop5BestSellerProduct();
+    public Map<Integer, Integer> countProductsPerCategory() {
+        return productDao.countProductsPerCategory();
     }
 
     

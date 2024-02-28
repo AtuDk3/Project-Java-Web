@@ -80,9 +80,9 @@
                                             <a href="${editURL}&index1=-2" class="menu-title">${item.titleCategoryProduct}</a>
 
                                             <c:forEach var="countProductAll" items="${requestScope.countProductAll}">
-                                                <c:if test="countProductAll.idCategoryProduct == categoryProduct.idCategoryProduct">
+                                                <c:if test="countProductAll.idCategoryProduct == item.idCategoryProduct">
                                                 <div class="menu-title">
-                                                    1
+                                                    ${countProductAll.productCount}
                                                 </div>
                                                     </c:if>
                                             </c:forEach>

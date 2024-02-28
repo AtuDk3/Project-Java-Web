@@ -7,6 +7,8 @@ import model.CategoryProduct;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import model.Product;
 
 public class ProductDAOImpl extends DBContext implements ProductDao {
@@ -293,30 +295,30 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
         return 0;
     }
 
-    @Override
-    public List<Integer> numberProductsPerCategory() {
-        List<Integer> categoryProductCounts = new ArrayList<>();
-        String sql = "SELECT id_category_product, COUNT(*) as total FROM tab_product GROUP BY id_category_product";
+    public Map<Integer, Integer> countProductsPerCategory() {
+        Map<Integer, Integer> productCountMap = new HashMap<>();
 
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+        String sql = "SELECT id_category_product, COUNT(id_product) AS product_count FROM tab_product GROUP BY id_category_product";
 
-            while (rs.next()) {
-                int categoryId = rs.getInt("id_category_product");
-                int productCount = rs.getInt(2);
-                categoryProductCounts.add(productCount);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                int categoryId = resultSet.getInt("id_category_product");
+                int productCount = resultSet.getInt("product_count");
+                productCountMap.put(categoryId, productCount);
             }
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Handle the exception according to your needs
         }
 
-        return categoryProductCounts;
+        return productCountMap;
     }
 
     public static void main(String[] args) {
         ProductDAOImpl p = new ProductDAOImpl();
-        System.out.println(p.getTop5BestSellerProduct().toString());
+        System.out.println(p.countProductsPerCategory().toString());
     }
 
     @Override

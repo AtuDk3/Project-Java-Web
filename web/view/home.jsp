@@ -21,7 +21,7 @@
         <!--          - favicon-->
 
         <link rel="shortcut icon" href="<c:url value="/assets/images/logo/logo.png" />" type="image/x-icon">
-
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>      
 
         <!--          - custom css link-->
 
@@ -40,81 +40,81 @@
     <body>
 
 
-        <div class="overlay" data-overlay></div>
+        <!--        <div class="overlay" data-overlay></div>-->
 
         <!--          - MODAL-->
 
-        <div class="modal" data-modal>
-
-            <div class="modal-close-overlay" data-modal-overlay></div>
-
-            <div class="modal-content">
-
-                <button class="modal-close-btn" data-modal-close>
-                    <ion-icon name="close-outline"></ion-icon>
-                </button>
-
-                <div class="newsletter-img">
-                    <img src="./assets/images/newsletter.png" alt="subscribe newsletter" width="400" height="400">
-                </div>
-
-                <div class="newsletter">
-
-                    <form action="#">
-
-                        <div class="newsletter-header">
-
-                            <h3 class="newsletter-title">Subscribe Newsletter.</h3>
-
-                            <p class="newsletter-desc">
-                                Subscribe the <b>Anon</b> to get latest products and discount update.
-                            </p>
-
+        <!--        <div class="modal" data-modal>
+        
+                    <div class="modal-close-overlay" data-modal-overlay></div>
+        
+                    <div class="modal-content">
+        
+                        <button class="modal-close-btn" data-modal-close>
+                            <ion-icon name="close-outline"></ion-icon>
+                        </button>
+        
+                        <div class="newsletter-img">
+                            <img src="./assets/images/newsletter.png" alt="subscribe newsletter" width="400" height="400">
                         </div>
-
-                        <input type="email" name="email" class="email-field" placeholder="Email Address" required>
-
-                        <button type="submit" class="btn-newsletter">Subscribe</button>
-
-                    </form>
-
-                </div>
-
-            </div>
-
-        </div>
+        
+                        <div class="newsletter">
+        
+                            <form action="#">
+        
+                                <div class="newsletter-header">
+        
+                                    <h3 class="newsletter-title">Subscribe Newsletter.</h3>
+        
+                                    <p class="newsletter-desc">
+                                        Subscribe the <b>Anon</b> to get latest products and discount update.
+                                    </p>
+        
+                                </div>
+        
+                                <input type="email" name="email" class="email-field" placeholder="Email Address" required>
+        
+                                <button type="submit" class="btn-newsletter">Subscribe</button>
+        
+                            </form>
+        
+                        </div>
+        
+                    </div>
+        
+                </div>-->
 
 
         <!--          - NOTIFICATION TOAST-->
 
 
-        <div class="notification-toast" data-toast>
-
-            <button class="toast-close-btn" data-toast-close>
-                <ion-icon name="close-outline"></ion-icon>
-            </button>
-
-            <div class="toast-banner">
-                <img src="./assets/images/products/jewellery-1.jpg" alt="Rose Gold Earrings" width="80" height="70">
-            </div>
-
-            <div class="toast-detail">
-
-                <p class="toast-message">
-                    Someone in new just bought
-                </p>
-
-                <p class="toast-title">
-                    Rose Gold Earrings
-                </p>
-
-                <p class="toast-meta">
-                    <time datetime="PT2M">2 Minutes</time> ago
-                </p>
-
-            </div>
-
-        </div>
+        <!--        <div class="notification-toast" data-toast>
+        
+                    <button class="toast-close-btn" data-toast-close>
+                        <ion-icon name="close-outline"></ion-icon>
+                    </button>
+        
+                    <div class="toast-banner">
+                        <img src="./assets/images/products/jewellery-1.jpg" alt="Rose Gold Earrings" width="80" height="70">
+                    </div>
+        
+                    <div class="toast-detail">
+        
+                        <p class="toast-message">
+                            Someone in new just bought
+                        </p>
+        
+                        <p class="toast-title">
+                            Rose Gold Earrings
+                        </p>
+        
+                        <p class="toast-meta">
+                            <time datetime="PT2M">2 Minutes</time> ago
+                        </p>
+        
+                    </div>
+        
+                </div>-->
 
 
         <!--          - HEADER-->
@@ -153,148 +153,45 @@
 
                         <div class="sidebar-category">
 
-                            <div class="sidebar-top">
-                                <h2 class="sidebar-title">Category</h2>
+                            <div class="sidebar-category">
 
-                                <button class="sidebar-close-btn" data-mobile-menu-close-btn>
-                                    <ion-icon name="close-outline"></ion-icon>
-                                </button>
-                            </div>
+                                <div class="sidebar-top">
+                                    <h2 class="sidebar-title">Category</h2>
 
-
-                            <ul class="sidebar-menu-category-list">
-
-                                <li class="sidebar-menu-category">
-
-                                    <button class="sidebar-accordion-menu" data-accordion-btn>
-
-                                        <div class="menu-title-flex">
-                                            <img src="./assets/images/icons/posters.png" alt="clothes" width="30" height="30"
-                                                 class="menu-title-img">
-
-                                            <p class="menu-title">Posters</p>
-                                        </div>
-
-                                        <div>
-                                            <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                                            <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-                                        </div>
-
+                                    <button class="sidebar-close-btn" data-mobile-menu-close-btn>
+                                        <ion-icon name="close-outline"></ion-icon>
                                     </button>
+                                </div>
 
-                                    <ul class="sidebar-submenu-category-list" data-accordion>
-                                        <c:forEach items="${requestScope.categoryPosters}" var="catePosters" >
-                                            <li class="sidebar-submenu-category">
-                                                <a href="#" class="sidebar-submenu-title">
-                                                    <p class="product-name">${catePosters.titleCategoryProduct}</p>
-                                                    <data value="300" class="stock" title="Available Stock">300</data>
-                                                </a>
-                                            </li>
 
-                                        </c:forEach>
-                                    </ul>
+                                <ul class="sidebar-menu-category-list">
+                                    <c:forEach var="item" items="${categoryProduct}">
+                                        <c:url var="editURL" value="/product/list">
+                                            <c:param name="cid" value="${item.idCategoryProduct}" /></c:url>
+                                        <li class="sidebar-menu-category ${tag == item.idCategoryProduct ? "active":""}">
 
-                                </li>
+                                            <button class="sidebar-accordion-menu" data-accordion-btn>
+                                                <a href="${editURL}&index1=-2" class="menu-title">${item.titleCategoryProduct}</a>
 
-                                <li class="sidebar-menu-category">
+                                                <c:forEach var="countProductAll" items="${requestScope.countProductAll}">
+                                                    <c:if test="countProductAll.idCategoryProduct == item.idCategoryProduct">
+                                                        <div class="menu-title">
+                                                            ${countProductAll.productCount}
+                                                        </div>
+                                                    </c:if>
+                                                </c:forEach>
 
-                                    <button class="sidebar-accordion-menu" data-accordion-btn>
+                                            </button>
 
-                                        <div class="menu-title-flex">
-                                            <img src="./assets/images/icons/toy.png" alt="clothes" width="30" height="30"
-                                                 class="menu-title-img">
+                                        </li>
+                                    </c:forEach>
 
-                                            <p class="menu-title">Figures & Toys</p>
-                                        </div>
+                                </ul>
 
-                                        <div>
-                                            <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                                            <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-                                        </div>
-
-                                    </button>
-
-                                    <ul class="sidebar-submenu-category-list" data-accordion>
-                                        <c:forEach items="${requestScope.categoryFiguresToys}" var="cateFiguresToys" >
-                                            <li class="sidebar-submenu-category">
-                                                <a href="#" class="sidebar-submenu-title">
-                                                    <p class="product-name">${cateFiguresToys.titleCategoryProduct}</p>
-                                                    <data value="300" class="stock" title="Available Stock">300</data>
-                                                </a>
-                                            </li>
-
-                                        </c:forEach>
-                                    </ul>
-
-                                </li>
-
-                                <li class="sidebar-menu-category">
-
-                                    <button class="sidebar-accordion-menu" data-accordion-btn>
-
-                                        <div class="menu-title-flex">
-                                            <img src="./assets/images/icons/clothers.png" alt="clothes" width="30" height="30"
-                                                 class="menu-title-img">
-
-                                            <p class="menu-title">Clothers</p>
-                                        </div>
-
-                                        <div>
-                                            <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                                            <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-                                        </div>
-
-                                    </button>
-
-                                    <ul class="sidebar-submenu-category-list" data-accordion>
-                                        <c:forEach items="${requestScope.categoryClothers}" var="cateClothers" >
-                                            <li class="sidebar-submenu-category">
-                                                <a href="#" class="sidebar-submenu-title">
-                                                    <p class="product-name">${cateClothers.titleCategoryProduct}</p>
-                                                    <data value="300" class="stock" title="Available Stock">300</data>
-                                                </a>
-                                            </li>
-
-                                        </c:forEach>
-                                    </ul>
-
-                                </li>
-
-                                <li class="sidebar-menu-category">
-
-                                    <button class="sidebar-accordion-menu" data-accordion-btn>
-
-                                        <div class="menu-title-flex">
-                                            <img src="./assets/images/icons/accessories.png" alt="clothes" width="30" height="30"
-                                                 class="menu-title-img">
-
-                                            <p class="menu-title">Accessories</p>
-                                        </div>
-
-                                        <div>
-                                            <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                                            <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-                                        </div>
-
-                                    </button>
-
-                                    <ul class="sidebar-submenu-category-list" data-accordion>
-                                        <c:forEach items="${requestScope.categoryAccessories}" var="cateAccessories" >
-                                            <li class="sidebar-submenu-category">
-                                                <a href="#" class="sidebar-submenu-title">
-                                                    <p class="product-name">${cateAccessories.titleCategoryProduct}</p>
-                                                    <data value="300" class="stock" title="Available Stock">300</data>
-                                                </a>
-                                            </li>
-
-                                        </c:forEach>
-                                    </ul>
-
-                                </li>
-
-                            </ul>
+                            </div>   
 
                         </div>
+
 
                         <div class="product-showcase">
 
@@ -402,22 +299,22 @@
                                         <c:forEach items="${requestScope.productModel}" var="proModel" >
                                             <div class="showcase">
 
-                                                <a href="#" class="showcase-img-box">
-                                                    <img src="./assets/images/product/${proModel.imgProduct}" alt="running & trekking shoes - white" class="showcase-img"
+                                                <a href="${pageContext.request.contextPath}/product_details?pid=${proModel.idProduct}&cid=${proModel.categoryProduct.idCategoryProduct}" class="showcase-img-box">
+                                                    <img src="${pageContext.request.contextPath}/assets/images/product/${proModel.imgProduct}" alt="running & trekking shoes - white" class="showcase-img"
                                                          width="70" height="70">
                                                 </a>
 
                                                 <div class="showcase-content">
 
-                                                    <a href="#">
+                                                    <a href="${pageContext.request.contextPath}/product_details?pid=${proModel.idProduct}&cid=${proModel.categoryProduct.idCategoryProduct}">
                                                         <h4 class="showcase-title">${proModel.titleProduct}</h4>
                                                     </a>
 
-                                                    <a href="#" class="showcase-category">${proModel.categoryProduct.titleCategoryProduct}</a>
+                                                    <a href="${pageContext.request.contextPath}/product_details?pid=${proModel.idProduct}&cid=${proModel.categoryProduct.idCategoryProduct}" class="showcase-category">${proModel.categoryProduct.titleCategoryProduct}</a>
 
                                                     <div class="price-box">
-                                                        <p class="price">${proModel.priceProduct}</p>
-                                                        <del>${proModel.priceProduct}</del>
+                                                        <p class="price"><fmt:formatNumber type="currency" value="${proModel.priceProduct * 0.9}" pattern="###,###đ" /></p>
+                                                        <del><fmt:formatNumber type="currency" value="${proModel.priceProduct}" pattern="###,###đ" /></del>
                                                     </div>
 
                                                 </div>
@@ -658,7 +555,7 @@
                                     <div class="showcase">
 
                                         <div class="showcase-banner">
-                                            <img src="./assets/images/products/shampoo.jpg" alt="shampoo, conditioner & facewash packs" class="showcase-img">
+                                            <img src="${pageContext.request.contextPath}/assets/images/uploads/product/16CM Roronoa Zoro Action Figure.webp" alt="16CM Roronoa Zoro Action Figure" class="showcase-img">
                                         </div>
 
                                         <div class="showcase-content">
@@ -672,18 +569,17 @@
                                             </div>
 
                                             <a href="#">
-                                                <h3 class="showcase-title">shampoo, conditioner & facewash packs</h3>
+                                                <h3 class="showcase-title">Roronoa Zoro Action Figure</h3>
                                             </a>
 
                                             <p class="showcase-desc">
-                                                Lorem ipsum dolor sit amet consectetur Lorem ipsum
-                                                dolor dolor sit amet consectetur Lorem ipsum dolor
+                                                Zoro is the first mate and swordsman of the Straw Hat Pirates and one of the main protagonists of the One Piece series. He also serves as the co-vice captain of the group after the promotion in the timeskip. He has a bounty of over 30,000,000 Berries due to his actions at Enies Lobby that led to the downfall of Baroque Works.
                                             </p>
 
                                             <div class="price-box">
-                                                <p class="price">$150.00</p>
+                                                <p class="price">897,000₫</p>
 
-                                                <del>$200.00</del>
+                                                <del>950,000₫</del>
                                             </div>
 
                                             <button class="add-cart-btn">add to cart</button>
@@ -733,84 +629,6 @@
                                                         <p class="display-text">Sec</p>
                                                     </div>
 
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="showcase-container">
-
-                                    <div class="showcase">
-
-                                        <div class="showcase-banner">
-                                            <img src="./assets/images/products/jewellery-1.jpg" alt="Rose Gold diamonds Earring" class="showcase-img">
-                                        </div>
-
-                                        <div class="showcase-content">
-
-                                            <div class="showcase-rating">
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star"></ion-icon>
-                                                <ion-icon name="star-outline"></ion-icon>
-                                                <ion-icon name="star-outline"></ion-icon>
-                                            </div>
-
-                                            <h3 class="showcase-title">
-                                                <a href="#" class="showcase-title">Rose Gold diamonds Earring</a>
-                                            </h3>
-
-                                            <p class="showcase-desc">
-                                                Lorem ipsum dolor sit amet consectetur Lorem ipsum
-                                                dolor dolor sit amet consectetur Lorem ipsum dolor
-                                            </p>
-
-                                            <div class="price-box">
-                                                <p class="price">$1990.00</p>
-                                                <del>$2000.00</del>
-                                            </div>
-
-                                            <button class="add-cart-btn">add to cart</button>
-
-                                            <div class="showcase-status">
-                                                <div class="wrapper">
-                                                    <p> already sold: <b>15</b> </p>
-
-                                                    <p> available: <b>40</b> </p>
-                                                </div>
-
-                                                <div class="showcase-status-bar"></div>
-                                            </div>
-
-                                            <div class="countdown-box">
-
-                                                <p class="countdown-desc">Hurry Up! Offer ends in:</p>
-
-                                                <div class="countdown">
-                                                    <div class="countdown-content">
-                                                        <p class="display-number">360</p>
-                                                        <p class="display-text">Days</p>
-                                                    </div>
-
-                                                    <div class="countdown-content">
-                                                        <p class="display-number">24</p>
-                                                        <p class="display-text">Hours</p>
-                                                    </div>
-
-                                                    <div class="countdown-content">
-                                                        <p class="display-number">59</p>
-                                                        <p class="display-text">Min</p>
-                                                    </div>
-
-                                                    <div class="countdown-content">
-                                                        <p class="display-number">00</p>
-                                                        <p class="display-text">Sec</p>
-                                                    </div>
                                                 </div>
 
                                             </div>
@@ -944,17 +762,16 @@
 
                             <div class="testimonial-card">
 
-                                <img src="./assets/images/testimonial-1.jpg" alt="alan doe" class="testimonial-banner" width="80" height="80">
+                                <img src="${pageContext.request.contextPath}/assets/images/logo/logo.png" alt="One Piece Shop" class="testimonial-banner" width="80" height="80">
 
-                                <p class="testimonial-name">Alan Doe</p>
+                                <p class="testimonial-name">One Piece Shop</p>
 
-                                <p class="testimonial-title">CEO & Founder Invision</p>
+                                <p class="testimonial-title">Online Model Store</p>
 
-                                <img src="./assets/images/icons/quotes.svg" alt="quotation" class="quotation-img" width="26">
+                                <img src="${pageContext.request.contextPath}/assets/images/icons/quotes.svg" alt="quotation" class="quotation-img" width="26">
 
                                 <p class="testimonial-desc">
-                                    Lorem ipsum dolor sit amet consectetur Lorem ipsum
-                                    dolor dolor sit amet.
+                                    One Piece Shop is a paradise for Manga Anime fans, so the shop gathers most typical products of Japanese comics and animation.
                                 </p>
 
                             </div>
@@ -969,7 +786,7 @@
 
                         <div class="cta-container">
 
-                            <img src="./assets/images/cta-banner.jpg" alt="summer collection" class="cta-banner">
+                            <img src="${pageContext.request.contextPath}/assets/images/banner2.webp" alt="summer collection" class="cta-banner">
 
                             <a href="#" class="cta-content">
 
@@ -977,7 +794,7 @@
 
                                 <h2 class="cta-title">Summer collection</h2>
 
-                                <p class="cta-text">Starting @ $10</p>
+                                <p class="cta-text">Starting @ 99k</p>
 
                                 <button class="cta-btn">Shop now</button>
 
@@ -1083,116 +900,6 @@
             </div>
 
 
-
-
-
-
-            <!--              - BLOG-->
-
-
-            <div class="blog">
-
-                <div class="container">
-
-                    <div class="blog-container has-scrollbar">
-
-                        <div class="blog-card">
-
-                            <a href="#">
-                                <img src="./assets/images/blog-1.jpg" alt="Clothes Retail KPIs 2021 Guide for Clothes Executives" width="300" class="blog-banner">
-                            </a>
-
-                            <div class="blog-content">
-
-                                <a href="#" class="blog-category">Fashion</a>
-
-                                <a href="#">
-                                    <h3 class="blog-title">Clothes Retail KPIs 2021 Guide for Clothes Executives.</h3>
-                                </a>
-
-                                <p class="blog-meta">
-                                    By <cite>Mr Admin</cite> / <time datetime="2022-04-06">Apr 06, 2022</time>
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                        <div class="blog-card">
-
-                            <a href="#">
-                                <img src="./assets/images/blog-2.jpg" alt="Curbside fashion Trends: How to Win the Pickup Battle."
-                                     class="blog-banner" width="300">
-                            </a>
-
-                            <div class="blog-content">
-
-                                <a href="#" class="blog-category">Clothes</a>
-
-                                <h3>
-                                    <a href="#" class="blog-title">Curbside fashion Trends: How to Win the Pickup Battle.</a>
-                                </h3>
-
-                                <p class="blog-meta">
-                                    By <cite>Mr Robin</cite> / <time datetime="2022-01-18">Jan 18, 2022</time>
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                        <div class="blog-card">
-
-                            <a href="#">
-                                <img src="./assets/images/blog-3.jpg" alt="EBT vendors: Claim Your Share of SNAP Online Revenue."
-                                     class="blog-banner" width="300">
-                            </a>
-
-                            <div class="blog-content">
-
-                                <a href="#" class="blog-category">Shoes</a>
-
-                                <h3>
-                                    <a href="#" class="blog-title">EBT vendors: Claim Your Share of SNAP Online Revenue.</a>
-                                </h3>
-
-                                <p class="blog-meta">
-                                    By <cite>Mr Selsa</cite> / <time datetime="2022-02-10">Feb 10, 2022</time>
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                        <div class="blog-card">
-
-                            <a href="#">
-                                <img src="./assets/images/blog-4.jpg" alt="Curbside fashion Trends: How to Win the Pickup Battle."
-                                     class="blog-banner" width="300">
-                            </a>
-
-                            <div class="blog-content">
-
-                                <a href="#" class="blog-category">Electronics</a>
-
-                                <h3>
-                                    <a href="#" class="blog-title">Curbside fashion Trends: How to Win the Pickup Battle.</a>
-                                </h3>
-
-                                <p class="blog-meta">
-                                    By <cite>Mr Pawar</cite> / <time datetime="2022-03-15">Mar 15, 2022</time>
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
         </main>
 
 
@@ -1206,6 +913,25 @@
         <!--          - custom js link-->
 
         <script src="<c:url value="/assets/js/script.js" />"></script>
+        <script>
+            var myIndex = 0;
+            carousel();
+
+            function carousel() {
+                var i;
+                var x = document.getElementsByClassName("slider-item");
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                myIndex++;
+                if (myIndex > x.length) {
+                    myIndex = 1
+                }
+                x[myIndex - 1].style.display = "block";
+                setTimeout(carousel, 5000); // Change image every 2 seconds
+            }
+        </script>
+
 
 
         <!--          - ionicon link-->

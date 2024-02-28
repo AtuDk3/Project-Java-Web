@@ -29,12 +29,10 @@
 
             <!-- MAIN -->
             <main>
-                <section class="vh-100 gradient-custom-2" id="section">
-                    <div class="container py-5 h-100">
-                        <div class="row d-flex justify-content-center align-items-center h-100">
-                            <div class="col-md-10 col-lg-8 col-xl-6">
-
-                                <div class="card card-stepper" style="border-radius: 16px;">
+            <div class="row" style="margin-bottom: 40px; margin-top: 50px;">
+                <div class="col-md-12">
+                    <div class="card mb-4 mb-md-0">
+                        <div class="card-body">
 
                                     <div class="card-header p-4">
                                         <div class="d-flex justify-content-between align-items-center">
@@ -94,7 +92,6 @@
                             </div>
                         </div>
                     </div>
-                </section>
             </main>
             <!-- MAIN -->
         </section>

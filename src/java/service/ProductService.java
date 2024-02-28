@@ -5,6 +5,7 @@
 package service;
 
 import java.util.List;
+import java.util.Map;
 import model.Product;
 
 /**
@@ -35,7 +36,7 @@ public interface ProductService {
 
     int countProduct();
 
-    List<Integer> numberProductsPerCategory();
+    Map<Integer, Integer> countProductsPerCategory();
     
     List<Product> pagingProduct(int indexP, int indexP1); 
     
@@ -46,4 +47,5 @@ public interface ProductService {
     List<Product> getTop5HotProduct();
     
     List<Product> getTop5BestSellerProduct();
+    
 }

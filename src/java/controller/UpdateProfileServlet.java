@@ -85,6 +85,8 @@ public class UpdateProfileServlet extends HttpServlet {
     throws ServletException, IOException {
         String fullName = request.getParameter("fullName");
         String userName = request.getParameter("userName");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
         Part imagePart = request.getPart("image");
         String address = request.getParameter("address");
         
@@ -106,6 +108,8 @@ public class UpdateProfileServlet extends HttpServlet {
         if (!fileName.isEmpty()) {
             account.setAvatar(fileName);
         }
+        account.setPhone(phone);
+        account.setEmail(email);
         account.setAddress(address);
         
         userService.update(account);

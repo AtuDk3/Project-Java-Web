@@ -112,20 +112,39 @@
                     <div class="payment">
                         <div class="payment_quantity">
                             Quantity: <span>${productDetails.quantityProduct}</span>
-                            <br>(Status: Còn hàng)
+                            <br>
+                            <c:choose>
+                                <c:when test="${productDetails.quantityProduct > 0}">
+                                    <p class="showcase-rating">(Status: remaining!)</p>
+                                </c:when>
+                                <c:otherwise>
+                                    <p class="showcase-rating">(Status: out of stock!)</p>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
-                            <h5 style="font-weight: 600">Quantity purchased:</h5>
+                        <h5 style="font-weight: 600">Quantity purchased:</h5>
                         <div class="quantity-container">
                             <input type="number" class="quantity-input" min="1" id="quantity" value="1" oninput="updateTotal()">
 
                         </div>
                         <h3>Total amount:</h3>
                         <h2 id="totalAmount"><fmt:formatNumber type="currency" value="${productDetails.priceProduct}" pattern="###,###₫" /></h2>
-                        <button type="button" class="btn_buy" onclick="addToCart(${productDetails.idProduct})">Buy Now</button>
-                        <button  type="button" class="btn_add_to_cart" onclick="addToCart(${productDetails.idProduct})" >Add To Cart</button>
+
+                        <c:choose>
+                            <c:when test="${productDetails.quantityProduct > 0}">
+                                <button type="button" class="btn_buy" onclick="addToCart(${productDetails.idProduct})">Buy Now</button>
+                                <button  type="button" class="btn_add_to_cart" onclick="addToCart(${productDetails.idProduct})" >Add To Cart</button>
+                            </c:when>
+
+                        </c:choose>                           
+
                     </div>
 
                 </div>
+            </div>
+
+            <div class="comment_container">
+                <div class="fb-comments" data-href="${pageContext.request.contextPath}/product_details?pid=${productDetails.idProduct}&cid=${productDetails.categoryProduct.idCategoryProduct}" data-width="100%" data-numposts="5"></div>
             </div>
 
             <div class="product-container">
@@ -287,6 +306,10 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="${pageContext.request.contextPath}/assets/js/script_cart.js"></script>
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v18.0&appId=783425853828203" nonce="4M2kDfoK"></script>
+
 </body>
 
 </html>

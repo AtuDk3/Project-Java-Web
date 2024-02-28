@@ -123,9 +123,9 @@
                         </div>
 
                         <div class="block_info">
-                            <p>Full Name: ${sessionScope.account.fullName != null ? sessionScope.account.fullName : '(Please update your full name!)'}</p>
-                            <p>Phone: ${sessionScope.account.phone != null ? sessionScope.account.phone : '(Please update your phone number!)'}</p>
-                            <p>Address: ${sessionScope.account.address != null ? sessionScope.account.address : '(Please update your address!)'}</p>
+                            <p>Full Name: ${sessionScope.account.fullName != null ? sessionScope.account.fullName : '(Please update your full name to buy!)'}</p>
+                            <p>Phone: ${sessionScope.account.phone != null ? sessionScope.account.phone : '(Please update your phone number to buy!)'}</p>
+                            <p>Address: ${sessionScope.account.address != null ? sessionScope.account.address : '(Please update your address to buy!)'}</p>
                         </div>
                     </div>
 
@@ -134,11 +134,11 @@
                             <li>Temporary</li>
                             <li class="totalAmount"><fmt:formatNumber type="currency" value="${total}" pattern="###,###₫" /></li>
                         </ul>
-                        
+
                         <ul class="temporary">
                             <c:set var="shipFee" value="${30000}"></c:set>
-                            <li>Shipping Fee</li>
-                            <li><fmt:formatNumber type="currency" value="${shipFee}" pattern="###,###₫" /></li>
+                                <li>Shipping Fee</li>
+                                <li><fmt:formatNumber type="currency" value="${shipFee}" pattern="###,###₫" /></li>
                         </ul>
 
                         <ul class="into_money">
@@ -146,8 +146,13 @@
                             <li class="totalAmount"><fmt:formatNumber type="currency" value="${total + shipFee}" pattern="###,###₫" /><p>(VAT included if any)</p></li>
                         </ul>
                     </div>
+                    <c:choose>
+                        <c:when test="${account.address != null && account.phone != null && count>0}">
+                            <a href="${pageContext.request.contextPath}/member/cart/buy"><button class="btn_buy">Buy Now</button></a>
+                        </c:when>
 
-                        <a href="${pageContext.request.contextPath}/member/cart/buy"><button class="btn_buy">Buy Now</button></a>
+                    </c:choose>
+
                 </div>
             </div>
 
