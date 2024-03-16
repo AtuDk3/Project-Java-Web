@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 import model.CategoryProduct;
 import model.Product;
 import service.CategoryProductService;
@@ -82,6 +83,9 @@ public class HomeServlet extends HttpServlet {
         
         List<Product> top5BestSellerProduct = productService.getTop5BestSellerProduct();
         request.setAttribute("top5BestSellerProduct", top5BestSellerProduct);
+        
+        Map<String, Integer> mapCategoryProduct = categoryProductService.getCategoryProductsAndNumberProducts();
+        request.setAttribute("mapCategoryProduct", mapCategoryProduct); 
 
     request.getRequestDispatcher("/view/home.jsp").forward(request, response);
     } 

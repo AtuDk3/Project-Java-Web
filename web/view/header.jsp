@@ -89,19 +89,19 @@
                 </li>
 
                 <li class="menu-category">
-                    <a href="introduce" class="menu-title">Introduce</a>
+                    <a href="${pageContext.request.contextPath}/introduce" class="menu-title">Introduce</a>
                 </li>
 
 
                 <li class="menu-category">
                     
-                    <a href="${pageContext.request.contextPath}/product/list?cid=0&index1=-1" class="menu-title">Category Product</a>
+                    <a href="${pageContext.request.contextPath}/product/list" class="menu-title">Category Product</a>
                     <ul class="dropdown-list">
                         <c:forEach items="${requestScope.categoryProduct}" var="categoryProduct" >
                             <c:url var="editURL" value="/product/list">
                                         <c:param name="cid" value="${categoryProduct.idCategoryProduct}" /></c:url>
                             <li class="dropdown-item">
-                                <a href="${editURL}&index1=-2">${categoryProduct.titleCategoryProduct}</a>
+                                <a href="${editURL}">${categoryProduct.titleCategoryProduct}</a>
                             </li>
                         </c:forEach>
                     </ul>
@@ -109,19 +109,7 @@
                 </li>
 
                 <li class="menu-category">
-                    <a href="${pageContext.request.contextPath}/product?cid=${0}" class="menu-title">Products</a>
-                </li>
-
-                <li class="menu-category">
-                    <a href="#" class="menu-title">News</a>
-                    <ul class="dropdown-list">
-                        <c:forEach items="${requestScope.categoryProduct}" var="cateProduct" >
-                            <li class="dropdown-item">
-                                <a href="#">${cateProduct.titleCategoryProduct}</a>
-                            </li>
-                        </c:forEach>
-                    </ul>
-
+                    <a href="${pageContext.request.contextPath}/product/hot_product" class="menu-title">Hot Products</a>
                 </li>
 
             </ul>
@@ -176,95 +164,6 @@
 
             <li class="menu-category">
                 <a href="#" class="menu-title">Introduce</a>
-            </li>
-
-            <li class="menu-category">
-
-                <button class="accordion-menu" data-accordion-btn>
-                    <p class="menu-title">Accessories</p>
-
-                    <div>
-                        <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                        <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-                    </div>
-                </button>
-
-                <ul class="submenu-category-list" data-accordion>
-                    <c:forEach items="${requestScope.categoryAccessories}" var="cateAccessories" >
-                        <li class="submenu-category">
-                            <a href="#" class="submenu-title">${cateAccessories.titleCategoryProduct}</a>
-                        </li>
-                    </c:forEach>
-
-
-                </ul>
-
-            </li>
-
-            <li class="menu-category">
-
-                <button class="accordion-menu" data-accordion-btn>
-                    <p class="menu-title">Posters</p>
-
-                    <div>
-                        <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                        <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-                    </div>
-                </button>
-
-                <ul class="submenu-category-list" data-accordion>
-                    <c:forEach items="${requestScope.categoryPosters}" var="catePosters" >
-                        <li class="submenu-category">
-                            <a href="#" class="submenu-title">${catePosters.titleCategoryProduct}</a>
-                        </li>
-                    </c:forEach>
-
-
-                </ul>
-
-            </li>
-
-            <li class="menu-category">
-
-                <button class="accordion-menu" data-accordion-btn>
-                    <p class="menu-title">Figures & Toys</p>
-
-                    <div>
-                        <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                        <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-                    </div>
-                </button>
-
-                <ul class="submenu-category-list" data-accordion>
-                    <c:forEach items="${requestScope.categoryFiguresToys}" var="cateFiguresToys" >
-                        <li class="submenu-category">
-                            <a href="#" class="submenu-title">${cateFiguresToys.titleCategoryProduct}</a>
-                        </li>
-                    </c:forEach>
-
-                </ul>
-
-            </li>
-
-            <li class="menu-category">
-
-                <button class="accordion-menu" data-accordion-btn>
-                    <p class="menu-title">Clothers</p>
-
-                    <div>
-                        <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                        <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-                    </div>
-                </button>
-
-                <ul class="submenu-category-list" data-accordion>
-                    <c:forEach items="${requestScope.categoryClothers}" var="categoryClothers" >
-                        <li class="submenu-category">
-                            <a href="#" class="submenu-title">${categoryClothers.titleCategoryProduct}</a>
-                        </li>
-                    </c:forEach>
-                </ul>
-
             </li>
 
         </ul>

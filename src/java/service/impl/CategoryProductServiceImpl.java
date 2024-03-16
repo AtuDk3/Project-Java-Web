@@ -7,6 +7,7 @@ package service.impl;
 import dal.CategoryProductDAO;
 import dal.impl.CategoryProductDAOImpl;
 import java.util.List;
+import java.util.Map;
 import model.CategoryProduct;
 import service.CategoryProductService;
 
@@ -59,6 +60,11 @@ public class CategoryProductServiceImpl implements CategoryProductService {
     @Override
     public List<CategoryProduct> getByDescCategoryProduct(String descCategoryProduct) {
         return cDao.getByDescCategoryProduct(descCategoryProduct);
+    }
+    
+    @Override
+    public Map<String, Integer> getCategoryProductsAndNumberProducts(){
+        return cDao.getCategoryProductsAndNumberProducts();
     }
 
 }

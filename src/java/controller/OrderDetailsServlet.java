@@ -14,8 +14,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.CartItem;
+import model.CategoryProduct;
 import service.CartItemService;
+import service.CategoryProductService;
 import service.impl.CartItemServiceImpl;
+import service.impl.CategoryProductServiceImpl;
 
 /**
  *
@@ -25,6 +28,7 @@ import service.impl.CartItemServiceImpl;
 public class OrderDetailsServlet extends HttpServlet {
     
     CartItemService cartItemService = new CartItemServiceImpl();
+    CategoryProductService categoryProductService = new CategoryProductServiceImpl();
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -61,6 +65,9 @@ public class OrderDetailsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        List<CategoryProduct> listCategory = categoryProductService.getAll();
+        request.setAttribute("categoryProduct", listCategory);
+        
         String cid = request.getParameter("cid");
         List<CartItem> listCartItems = cartItemService.getByCart(cid);
         request.setAttribute("listCartItems", listCartItems);

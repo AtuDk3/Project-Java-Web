@@ -7,7 +7,6 @@ package service.impl;
 import dal.ProductDao;
 import dal.impl.ProductDAOImpl;
 import java.util.List;
-import java.util.Map;
 import model.Product;
 import service.ProductService;
 
@@ -73,6 +72,11 @@ public class ProductServiceImpl implements ProductService {
     public int countProduct() {
         return productDao.countProduct();
     }
+    
+    @Override
+    public int countProductByCategory(int idCategoryProduct) {
+        return productDao.countProductByCategory(idCategoryProduct);
+    }
 
     @Override
     public List<Product> pagingProduct(int indexP, int indexP1) {
@@ -105,6 +109,11 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getTop5HotProduct() {
         return productDao.getTop5HotProduct();
     }
+    
+    @Override
+    public List<Product> getHotProduct() {
+        return productDao.getHotProduct();
+    }
 
     @Override
     public List<Product> getTop5BestSellerProduct() {
@@ -112,8 +121,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Map<Integer, Integer> countProductsPerCategory() {
-        return productDao.countProductsPerCategory();
+    public List<Product> getProductFilter(float minPrice, float maxPrice, String sortBy, String sortOrder) {
+        return productDao.getProductFilter(minPrice, maxPrice, sortBy, sortOrder);
     }
 
     

@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Map;
 import model.CategoryProduct;
 import model.Product;
 import service.CategoryProductService;
@@ -72,60 +71,42 @@ public class ProductServlet extends HttpServlet {
         List<CategoryProduct> listCategory = categoryProductService.getAll();
         request.setAttribute("categoryProduct", listCategory);
 
+        String cid = request.getParameter("cid");
         String indexPage = request.getParameter("index");
-        String indexPage1 = request.getParameter("index1");
-        String cID = request.getParameter("cid");
+        int countProduct = 0;
 
-        int idCate = (cID == null) ? 0 : Integer.valueOf(cID);
-        int indexP = (indexPage == null) ? 1 : Integer.valueOf(indexPage);
-        int indexP1 = (indexPage1 == null) ? 0 : Integer.valueOf(indexPage1);
+        int idCate = 0;
 
-        int countProduct = productService.countProduct();
-        Map<Integer, Integer> countProductsPerCategory = productService.countProductsPerCategory();
-
-        int pageSize = 0;
-
-        switch (indexP1) {
-            case 8:
-                pageSize = 8;
-                break;
-            case 12:
-                pageSize = 12;
-                break;
-            case 16:
-                pageSize = 16;
-                break;
-            case -2:
-                pageSize = 8;
-                break;
-            default:
-                pageSize = 8; // Giả sử mặc định là 8 nếu không khớp
-                break;
+        if (cid == null) {
+            cid = "0";
+            countProduct = productService.countProduct();
+        } else {
+            idCate = Integer.parseInt(cid);
+            countProduct = productService.countProductByCategory(idCate);
         }
 
-        int endPage = (countProduct / pageSize) + ((countProduct % pageSize != 0) ? 1 : 0);
+        if (indexPage == null) {
+            indexPage = "1";
+        }
+        int indexP = Integer.parseInt(indexPage);
+
+        int endPage = countProduct / 8;
+        if (countProduct % 8 != 0) {
+            endPage++;
+        }
 
         List<Product> listProductPagination;
 
-        if ("-1".equals(indexPage1)) {
-            listProductPagination = productService.getAll();
-        } else if ("-2".equals(indexPage1)) {
-            listProductPagination = productService.pagingProduct(idCate, indexP, pageSize);
+        if (idCate == 0) {
+            listProductPagination = productService.pagingProduct(indexP, 8);
         } else {
-            listProductPagination = productService.pagingProduct(indexP, pageSize);
+            listProductPagination = productService.pagingProduct(idCate, indexP, 8);
         }
 
         request.setAttribute("productList", listProductPagination);
         request.setAttribute("endPage", endPage);
         request.setAttribute("tag", indexP);
-        request.setAttribute("tag1", indexP1);
-        request.setAttribute("indexP2", indexPage1);
-
-        if (idCate == 0) {
-            request.setAttribute("countProductAll", countProduct);
-        } else {
-            request.setAttribute("countProductAll", countProductsPerCategory);
-        }
+        request.setAttribute("cid", idCate);
 
         request.getRequestDispatcher("/view/products.jsp").forward(request, response);
     }

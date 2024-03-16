@@ -20,7 +20,7 @@
 
                 <c:forEach items="${requestScope.categoryProduct}" var="categoryProduct" >
                     <li class="footer-nav-item">
-                        <a href="#" class="footer-nav-link">${categoryProduct.titleCategoryProduct}</a>
+                        <a href="${pageContext.request.contextPath}/product/list?cid=${categoryProduct.idCategoryProduct}" class="footer-nav-link">${categoryProduct.titleCategoryProduct}</a>
                     </li>
                 </c:forEach>
             </ul>

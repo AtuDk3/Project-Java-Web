@@ -26,7 +26,7 @@ import service.impl.ProductServiceImpl;
  */
 @WebServlet(name="SearchAjaxServlet", urlPatterns={"/search"})
 public class SearchServlet extends HttpServlet {
-   
+   ProductService productService = new ProductServiceImpl();
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -68,9 +68,7 @@ public class SearchServlet extends HttpServlet {
         List<CategoryProduct> listCategory = categoryProductService.getAll();
         request.setAttribute("categoryProduct", listCategory);
 
-        // product
-        ProductService productService = new ProductServiceImpl();
-        
+        // product      
         String txtSearch = request.getParameter("txtSearch");
         List<Product> listProduct = productService.searchProductByName(txtSearch);
         request.setAttribute("productList", listProduct);
@@ -89,7 +87,17 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String minPrice = request.getParameter("minPrice");
+        float min = Float.parseFloat(minPrice);
+        String maxPrice = request.getParameter("maxPrice");
+        float max = Float.parseFloat(maxPrice);
+        String sort = request.getParameter("sort");
+        String order = request.getParameter("order");
+        List<Product> filteredProducts = productService.getProductFilter(min, max, sort, order);
+        
+        request.setAttribute("productList", filteredProducts);
+        
+        request.getRequestDispatcher("/view/products.jsp").forward(request, response);
     }
 
     /** 

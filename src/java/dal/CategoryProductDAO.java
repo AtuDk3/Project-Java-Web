@@ -5,6 +5,7 @@
 package dal;
 
 import java.util.List;
+import java.util.Map;
 import model.CategoryProduct;
 
 /**
@@ -27,4 +28,8 @@ public interface CategoryProductDAO {
     List<CategoryProduct> search(String txtSearch);
     
     List<CategoryProduct> getByDescCategoryProduct(String descCategoryProduct);
+    
+    Map<String, Integer> getCategoryProductsAndNumberProducts();
+    
+    
 }

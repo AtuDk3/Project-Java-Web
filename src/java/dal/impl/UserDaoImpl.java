@@ -211,10 +211,14 @@ public class UserDaoImpl extends DBContext implements UserDAO {
 
     @Override
     public void delete(int id) {
-        String sql = "delete from tab_account where id = ?";
+        String sql = "delete from tab_cart_item where id_cart in (SELECT id_cart FROM tab_cart WHERE user_id = ?);"
+                + "delete from tab_cart where user_id = ?; "
+                + "delete from tab_account where id = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
+            ps.setInt(2, id);
+            ps.setInt(3, id);
             ResultSet rs = ps.executeQuery();
 
         } catch (SQLException e) {

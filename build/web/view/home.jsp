@@ -156,6 +156,54 @@
                             <div class="sidebar-category">
 
                                 <div class="sidebar-top">
+                                    <h2 class="sidebar-title">SEARCH FILTER</h2>
+
+                                    <button class="sidebar-close-btn" data-mobile-menu-close-btn>
+                                        <ion-icon name="close-outline"></ion-icon>
+                                    </button>
+                                </div>
+
+
+                                <ul class="sidebar-menu-category-list">
+                                    <form class="form-filter" action="${pageContext.request.contextPath}/search" method="post">
+                                        <input type="hidden" name="action" value="filter">
+
+                                        <!-- Filter by price range -->
+                                        <div class="form-group">
+                                            <label class="showcase-title" for="minPrice">Min Price:</label>
+                                            <input type="number" name="minPrice" id="minPrice" style="font-size: 0.8rem;" placeholder="Enter min price ...">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="showcase-title" for="maxPrice">Max Price:</label>
+                                            <input type="number" name="maxPrice" id="maxPrice" style="font-size: 0.8rem;" placeholder="Enter max price ...">
+                                        </div>
+
+                                        <!-- Sort options -->
+                                        <div class="form-group">
+                                            <label class="showcase-title" for="sort">Sort By:</label>
+                                            <select name="sort" id="sort">
+                                                <option value="title_product">Name Product</option>
+                                                <option value="price_product">Price Product</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="order" class="showcase-title">Order:</label>
+                                            <select name="order" id="order">
+                                                <option value="asc">Low to High</option>
+                                                <option value="desc">High to Low</option>
+                                            </select>
+                                        </div>
+
+                                        <button class="btn_filter" type="submit">Filter Product</button>
+                                    </form>
+
+                                </ul>
+
+                            </div>  
+
+                            <div class="sidebar-category">
+
+                                <div class="sidebar-top">
                                     <h2 class="sidebar-title">Category</h2>
 
                                     <button class="sidebar-close-btn" data-mobile-menu-close-btn>
@@ -171,15 +219,11 @@
                                         <li class="sidebar-menu-category ${tag == item.idCategoryProduct ? "active":""}">
 
                                             <button class="sidebar-accordion-menu" data-accordion-btn>
-                                                <a href="${editURL}&index1=-2" class="menu-title">${item.titleCategoryProduct}</a>
+                                                <a href="${editURL}" class="menu-title">${item.titleCategoryProduct}</a>
 
-                                                <c:forEach var="countProductAll" items="${requestScope.countProductAll}">
-                                                    <c:if test="countProductAll.idCategoryProduct == item.idCategoryProduct">
-                                                        <div class="menu-title">
-                                                            ${countProductAll.productCount}
-                                                        </div>
-                                                    </c:if>
-                                                </c:forEach>
+                                                <div class="menu-title">
+                                                    10
+                                                </div>
 
                                             </button>
 
@@ -187,6 +231,25 @@
                                     </c:forEach>
 
                                 </ul>
+                                <table border="1">
+                                    <thead>
+                                        <tr>
+                                            <th>Category Title</th>
+                                            <th>Number of Products</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="map" items="${mapCategoryProduct}">
+                                            <tr>
+
+                                                <td>${map.key}</td>
+                                                <td>${map.value}</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+
+
 
                             </div>   
 
@@ -941,8 +1004,8 @@
         <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <df-messenger
         intent="WELCOME"
-        chat-title="Chat Bot One Piece Shop"
-        agent-id="a5ff5270-615e-45c8-9577-8776b8221e70"
+        chat-title="OnePieceShop"
+        agent-id="0a938ee0-485f-4ef4-abf3-b8de81e8cc6a"
         language-code="vi"
         ></df-messenger>
 

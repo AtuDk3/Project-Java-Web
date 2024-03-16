@@ -7,8 +7,6 @@ import model.CategoryProduct;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 import model.Product;
 
 public class ProductDAOImpl extends DBContext implements ProductDao {
@@ -285,6 +283,7 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
                 return rs.getInt(1);
             }
@@ -295,30 +294,21 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
         return 0;
     }
 
-    public Map<Integer, Integer> countProductsPerCategory() {
-        Map<Integer, Integer> productCountMap = new HashMap<>();
-
-        String sql = "SELECT id_category_product, COUNT(id_product) AS product_count FROM tab_product GROUP BY id_category_product";
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-
-            while (resultSet.next()) {
-                int categoryId = resultSet.getInt("id_category_product");
-                int productCount = resultSet.getInt("product_count");
-                productCountMap.put(categoryId, productCount);
+    @Override
+    public int countProductByCategory(int idCategoryProduct) {
+        String sql = "select count(*) from tab_product where id_category_product = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idCategoryProduct);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
             }
 
         } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception according to your needs
+            System.out.println(e);
         }
-
-        return productCountMap;
-    }
-
-    public static void main(String[] args) {
-        ProductDAOImpl p = new ProductDAOImpl();
-        System.out.println(p.countProductsPerCategory().toString());
+        return 0;
     }
 
     @Override
@@ -452,6 +442,35 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
         return listProduct;
     }
 
+    public List<Product> getHotProduct() {
+        List<Product> listProduct = new ArrayList<>();
+        String sql = "select * from tab_product where hot_product = 1 order by id_product desc";
+
+        try {
+            PreparedStatement pt = connection.prepareStatement(sql);
+
+            ResultSet rs = pt.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                CategoryProductDAOImpl cDAO = new CategoryProductDAOImpl();
+
+                p.setIdProduct(rs.getInt("id_product"));
+                p.setTitleProduct(rs.getString("title_product"));
+                p.setPriceProduct(rs.getFloat("price_product"));
+                p.setDescProduct(rs.getString("desc_product"));
+                p.setQuantityProduct(rs.getInt("quantity_product"));
+                p.setImgProduct(rs.getString("img_product"));
+                p.setHotProduct(rs.getInt("hot_product"));
+                CategoryProduct c = cDAO.getCategoryProductByID(rs.getInt("id_category_product"));
+                p.setCategoryProduct(c);
+                listProduct.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return listProduct;
+    }
+
     // Best Seller
     public List<Product> getTop5BestSellerProduct() {
         List<Product> listProduct = new ArrayList<>();
@@ -480,6 +499,62 @@ public class ProductDAOImpl extends DBContext implements ProductDao {
             System.out.println(e);
         }
         return listProduct;
+    }
+
+    public List<Product> getProductFilter(float minPrice, float maxPrice, String sortBy, String sortOrder) {
+        List<Product> filteredProducts = new ArrayList<>();
+        String sql = "SELECT * FROM tab_product WHERE price_product >= ? AND price_product <= ?";
+
+        // Nếu có yêu cầu sắp xếp, thêm vào câu SQL ORDER BY
+        if (sortBy != null && !sortBy.isEmpty()) {
+            sql += " ORDER BY " + sortBy;
+            if (sortOrder != null && !sortOrder.isEmpty()) {
+                sql += " " + sortOrder;
+            }
+        }
+
+        try {
+            PreparedStatement pt = connection.prepareStatement(sql);
+            pt.setFloat(1, minPrice);
+            pt.setFloat(2, maxPrice);
+            ResultSet rs = pt.executeQuery();
+
+            while (rs.next()) {
+                CategoryProductDAOImpl cDAO = new CategoryProductDAOImpl();
+                CategoryProduct c = cDAO.getCategoryProductByID(rs.getInt("id_category_product"));
+                Product p = new Product(rs.getInt("id_product"),
+                        rs.getString("title_product"),
+                        rs.getFloat("price_product"),
+                        rs.getString("desc_product"),
+                        rs.getInt("quantity_product"),
+                        rs.getString("img_product"),
+                        rs.getInt("hot_product"),
+                        c);
+                filteredProducts.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return filteredProducts;
+    }
+
+    public static void main(String[] args) {
+        ProductDAOImpl dao = new ProductDAOImpl();
+        List<Product> filteredProducts = dao.getProductFilter(0, 1000000, "price_product", "ASC");
+
+        // In ra kết quả
+        for (Product product : filteredProducts) {
+            System.out.println("ID: " + product.getIdProduct());
+            System.out.println("Title: " + product.getTitleProduct());
+            System.out.println("Price: " + product.getPriceProduct());
+            System.out.println("Description: " + product.getDescProduct());
+            System.out.println("Quantity: " + product.getQuantityProduct());
+            System.out.println("Image: " + product.getImgProduct());
+            System.out.println("Hot: " + product.getHotProduct());
+            System.out.println("Category ID: " + product.getCategoryProduct().getIdCategoryProduct());
+            System.out.println("Category Title: " + product.getCategoryProduct().getTitleCategoryProduct());
+            System.out.println();
+        }
     }
 
 }

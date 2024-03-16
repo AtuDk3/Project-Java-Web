@@ -7,6 +7,8 @@ import model.CategoryProduct;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CategoryProductDAOImpl extends DBContext implements CategoryProductDAO {
 
@@ -183,4 +185,34 @@ public class CategoryProductDAOImpl extends DBContext implements CategoryProduct
         }
         return listCategoryProduct;
     }
+    
+    @Override
+    public Map<String, Integer> getCategoryProductsAndNumberProducts() {
+        Map<String, Integer> categoryProductMap = new HashMap<>();
+        String sql = "SELECT c.title_category_product, COUNT(p.id_product) AS product_count\n"
+                + "FROM tab_product AS p\n"
+                + "INNER JOIN tab_category_product AS c ON p.id_category_product = c.id_category_product\n"
+                + "GROUP BY c.title_category_product;";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String titleCategoryProduct = rs.getString("title_category_product");
+                int productCount = rs.getInt("product_count");
+                categoryProductMap.put(titleCategoryProduct, productCount);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return categoryProductMap;
+    }
+    
+    
+    public static void main(String[] args) {
+        CategoryProductDAOImpl dao = new CategoryProductDAOImpl();
+        System.out.println(dao.getCategoryProductsAndNumberProducts().toString());
+        
+    }
+    
+    
 }

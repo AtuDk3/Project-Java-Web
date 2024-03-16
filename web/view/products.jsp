@@ -77,15 +77,7 @@
                                     <li class="sidebar-menu-category ${tag == item.idCategoryProduct ? "active":""}">
 
                                         <button class="sidebar-accordion-menu" data-accordion-btn>
-                                            <a href="${editURL}&index1=-2" class="menu-title">${item.titleCategoryProduct}</a>
-
-                                            <c:forEach var="countProductAll" items="${requestScope.countProductAll}">
-                                                <c:if test="countProductAll.idCategoryProduct == item.idCategoryProduct">
-                                                <div class="menu-title">
-                                                    ${countProductAll.productCount}
-                                                </div>
-                                                    </c:if>
-                                            </c:forEach>
+                                            <a href="${editURL}" class="menu-title">${item.titleCategoryProduct}</a>
 
                                         </button>
 
@@ -103,7 +95,7 @@
                         <!--                          - PRODUCT GRID-->
 
                         <div class="product-main">
-                            <div class="product-main-top">
+<!--                            <div class="product-main-top">
                                 <h2 class="title">All Products</h2>
                                 <div class="select-menu">
                                     <div class="select-btn">
@@ -133,7 +125,7 @@
                                         </a>
                                     </ul>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="product-grid">
 
                                 <c:forEach items="${requestScope.productList}" var="productList" >
@@ -148,21 +140,21 @@
                                             <p class="showcase-badge angle pink">new</p>
 
                                             <div class="showcase-actions">
-                                                <button class="btn-action">
-                                                    <ion-icon name="heart-outline"></ion-icon>
-                                                </button>
+                                                <a href="#"><button class="btn-action">
+                                                                <ion-icon name="heart-outline"></ion-icon>
+                                                            </button></a>
 
-                                                <button class="btn-action">
-                                                    <ion-icon name="eye-outline"></ion-icon>
-                                                </button>
+                                                        <a href="${pageContext.request.contextPath}/product_details?pid=${productList.idProduct}&cid=${productList.categoryProduct.idCategoryProduct}"><button class="btn-action">
+                                                                <ion-icon name="eye-outline"></ion-icon>
+                                                            </button></a>
 
-                                                <button class="btn-action">
-                                                    <ion-icon name="repeat-outline"></ion-icon>
-                                                </button>
+                                                        <a href="url"><button class="btn-action">
+                                                                <ion-icon name="repeat-outline"></ion-icon>
+                                                            </button></a>
 
-                                                <button class="btn-action">
-                                                    <ion-icon name="bag-add-outline"></ion-icon>
-                                                </button>
+                                                        <a href="${pageContext.request.contextPath}/member/cart_add?pid=${productList.idProduct}&quantity=1"><button class="btn-action">
+                                                                <ion-icon name="bag-add-outline"></ion-icon>
+                                                            </button></a>
                                             </div>
                                         </div>
 
@@ -203,52 +195,7 @@
 
             </div>
 
-            <c:if test="${indexP2 != -1}">
-                <div class="container-paging">
-                    <button class="button" id="startBtn" disabled>
-                        <i class="fa-solid fa-angles-left"></i>
-                    </button>
-                    <button class="button prevNext" id="prev" disabled>
-                        <i class="fa-solid fa-angle-left"></i>
-                    </button>
-                    <div class="links">
-                        <c:forEach begin="1" end="${endPage}" var="i" >
-                            <a href="${pageContext.request.contextPath}/product/list?index=${i}&index1=${tag1}" class="link ${tag == i ? "active":""}">${i}</a>
-                        </c:forEach>
-                    </div>
-                    <button class="button prevNext" id="next">
-                        <i class="fa-solid fa-angle-right"></i>
-                    </button>
-                    <button class="button" id="endBtn">
-                        <i class="fa-solid fa-angles-right"></i>
-                    </button>
-                </div>
-            </c:if>
 
-            <c:choose>
-                <c:when test="${indexP2 == -2}">
-                    <div class="container-paging">
-                        <button class="button" id="startBtn" disabled>
-                            <i class="fa-solid fa-angles-left"></i>
-                        </button>
-                        <button class="button prevNext" id="prev" disabled>
-                            <i class="fa-solid fa-angle-left"></i>
-                        </button>
-                        <div class="links">
-                            <c:forEach begin="1" end="${(countProductAll / 8) + ((countProductAll % 8 != 0) ? 1 : 0)}" var="i">
-                                <a href="${pageContext.request.contextPath}/product/list?index=${i}&index1=8" class="link ${tag == i ? 'active' : ''}">${i}</a>
-                            </c:forEach>
-                        </div>
-                        <button class="button prevNext" id="next">
-                            <i class="fa-solid fa-angle-right"></i>
-                        </button>
-                        <button class="button" id="endBtn">
-                            <i class="fa-solid fa-angles-right"></i>
-                        </button>
-                    </div>
-                </c:when>
-
-                <c:when test="${indexP2 != -1}">
                     <div class="container-paging">
                         <button class="button" id="startBtn" disabled>
                             <i class="fa-solid fa-angles-left"></i>
@@ -258,8 +205,8 @@
                         </button>
                         <div class="links">
                             <c:forEach begin="1" end="${endPage}" var="i">
-                                <a href="${pageContext.request.contextPath}/product/list?index=${i}&index1=${tag1}" class="link ${tag == i ? 'active' : ''}">${i}</a>
-                            </c:forEach>
+                                <a href="${pageContext.request.contextPath}/product/list?cid=${cid}&index=${i}" class="link ${tag == i ? 'active' : ''}">${i}</a>
+                                 </c:forEach>
                         </div>
                         <button class="button prevNext" id="next">
                             <i class="fa-solid fa-angle-right"></i>
@@ -268,12 +215,7 @@
                             <i class="fa-solid fa-angles-right"></i>
                         </button>
                     </div>
-                </c:when>
-
-                <c:otherwise>
-                    <!-- Code cho trường hợp khác (nếu cần) -->
-                </c:otherwise>
-            </c:choose>
+                
 
 
 
