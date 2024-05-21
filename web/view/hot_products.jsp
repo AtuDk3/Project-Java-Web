@@ -137,7 +137,7 @@
                                             <img src="${pageContext.request.contextPath}/assets/images/uploads/product/${listHotProducts.imgProduct}" alt="${listHotProducts.titleProduct}" class="product-img hover"
                                                  width="300" style="object-fit: cover; height: 250px">
 
-                                            <p class="showcase-badge angle pink">new</p>
+                                            <p class="showcase-badge angle pink">hot</p>
 
                                             <div class="showcase-actions">
                                                 <a href="#"><button class="btn-action">

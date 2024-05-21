@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="Java_Web">
-            <file>file:/D:/NetBeansProjects/Ecommer_Website/src/java/controller/WaitingServlet.java</file>
-            <file>file:/D:/NetBeansProjects/Ecommer_Website/src/java/controller/LoginServlet.java</file>
-            <file>file:/D:/NetBeansProjects/Ecommer_Website/src/java/dal/impl/LoginDAOImpl.java</file>
-            <file>file:/D:/NetBeansProjects/Ecommer_Website/src/java/controller/LogoutServlet.java</file>
-            <file>file:/D:/NetBeansProjects/Ecommer_Website/web/view/login.jsp</file>
+            <file>file:/D:/NetBeansProjects/Ecommer_Website/web/view/admin/product/add_product.jsp</file>
+            <file>file:/D:/NetBeansProjects/Ecommer_Website/src/java/controller/LoginFacebookServlet.java</file>
+            <file>file:/D:/NetBeansProjects/Ecommer_Website/src/java/controller/PaymentVNPayServlet.java</file>
+            <file>file:/D:/NetBeansProjects/Ecommer_Website/web/view/admin/product/update_product.jsp</file>
+            <file>file:/D:/NetBeansProjects/Ecommer_Website/src/java/dal/impl/DBContext.java</file>
         </group>
     </open-files>
 </project-private>

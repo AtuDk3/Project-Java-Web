@@ -171,11 +171,11 @@
                                         <!-- Filter by price range -->
                                         <div class="form-group">
                                             <label class="showcase-title" for="minPrice">Min Price:</label>
-                                            <input type="number" name="minPrice" id="minPrice" style="font-size: 0.8rem;" placeholder="Enter min price ...">
+                                            <input type="number" name="minPrice" id="minPrice" style="font-size: 0.8rem;" placeholder="Enter min price ..." required>
                                         </div>
                                         <div class="form-group">
                                             <label class="showcase-title" for="maxPrice">Max Price:</label>
-                                            <input type="number" name="maxPrice" id="maxPrice" style="font-size: 0.8rem;" placeholder="Enter max price ...">
+                                            <input type="number" name="maxPrice" id="maxPrice" style="font-size: 0.8rem;" placeholder="Enter max price ..." required>
                                         </div>
 
                                         <!-- Sort options -->
@@ -231,23 +231,6 @@
                                     </c:forEach>
 
                                 </ul>
-                                <table border="1">
-                                    <thead>
-                                        <tr>
-                                            <th>Category Title</th>
-                                            <th>Number of Products</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach var="map" items="${mapCategoryProduct}">
-                                            <tr>
-
-                                                <td>${map.key}</td>
-                                                <td>${map.value}</td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
 
 
 
@@ -392,208 +375,37 @@
 
                             <div class="product-showcase">
 
-                                <h2 class="title">Top Rated</h2>
+                                <h2 class="title">Best Seller</h2>
 
                                 <div class="showcase-wrapper  has-scrollbar">
 
                                     <div class="showcase-container">
+                                        <c:forEach items="${requestScope.top5BestSellerProduct}" var="top5BestSellerProduct" >
+                                            <div class="showcase">
 
-                                        <div class="showcase">
-
-                                            <a href="#" class="showcase-img-box">
-                                                <img src="./assets/images/products/watch-3.jpg" alt="pocket watch leather pouch" class="showcase-img"
-                                                     width="70">
-                                            </a>
-
-                                            <div class="showcase-content">
-
-                                                <a href="#">
-                                                    <h4 class="showcase-title">Pocket Watch Leather Pouch</h4>
+                                                <a href="${pageContext.request.contextPath}/product_details?pid=${top5BestSellerProduct.idProduct}&cid=${top5BestSellerProduct.categoryProduct.idCategoryProduct}" class="showcase-img-box">
+                                                    <img src="${pageContext.request.contextPath}/assets/images/product/${top5BestSellerProduct.imgProduct}" alt="running & trekking shoes - white" class="showcase-img"
+                                                         width="70" height="70">
                                                 </a>
 
-                                                <a href="#" class="showcase-category">Watches</a>
+                                                <div class="showcase-content">
 
-                                                <div class="price-box">
-                                                    <p class="price">$50.00</p>
-                                                    <del>$34.00</del>
+                                                    <a href="${pageContext.request.contextPath}/product_details?pid=${top5BestSellerProduct.idProduct}&cid=${top5BestSellerProduct.categoryProduct.idCategoryProduct}">
+                                                        <h4 class="showcase-title">${top5BestSellerProduct.titleProduct}</h4>
+                                                    </a>
+
+                                                    <a href="${pageContext.request.contextPath}/product_details?pid=${top5BestSellerProduct.idProduct}&cid=${top5BestSellerProduct.categoryProduct.idCategoryProduct}" class="showcase-category">${top5BestSellerProduct.categoryProduct.titleCategoryProduct}</a>
+
+                                                    <div class="price-box">
+                                                        <p class="price"><fmt:formatNumber type="currency" value="${top5BestSellerProduct.priceProduct * 0.9}" pattern="###,###đ" /></p>
+                                                        <del><fmt:formatNumber type="currency" value="${top5BestSellerProduct.priceProduct}" pattern="###,###đ" /></del>
+                                                    </div>
+
                                                 </div>
 
                                             </div>
-
-                                        </div>
-
-                                        <div class="showcase">
-
-                                            <a href="#" class="showcase-img-box">
-                                                <img src="./assets/images/products/jewellery-3.jpg" alt="silver deer heart necklace" class="showcase-img"
-                                                     width="70">
-                                            </a>
-
-                                            <div class="showcase-content">
-
-                                                <a href="#">
-                                                    <h4 class="showcase-title">Silver Deer Heart Necklace</h4>
-                                                </a>
-
-                                                <a href="#" class="showcase-category">Jewellery</a>
-
-                                                <div class="price-box">
-                                                    <p class="price">$84.00</p>
-                                                    <del>$30.00</del>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="showcase">
-
-                                            <a href="#" class="showcase-img-box">
-                                                <img src="./assets/images/products/perfume.jpg" alt="titan 100 ml womens perfume" class="showcase-img"
-                                                     width="70">
-                                            </a>
-
-                                            <div class="showcase-content">
-
-                                                <a href="#">
-                                                    <h4 class="showcase-title">Titan 100 Ml Womens Perfume</h4>
-                                                </a>
-
-                                                <a href="#" class="showcase-category">Perfume</a>
-
-                                                <div class="price-box">
-                                                    <p class="price">$42.00</p>
-                                                    <del>$10.00</del>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="showcase">
-
-                                            <a href="#" class="showcase-img-box">
-                                                <img src="./assets/images/products/belt.jpg" alt="men's leather reversible belt" class="showcase-img"
-                                                     width="70">
-                                            </a>
-
-                                            <div class="showcase-content">
-
-                                                <a href="#">
-                                                    <h4 class="showcase-title">Men's Leather Reversible Belt</h4>
-                                                </a>
-
-                                                <a href="#" class="showcase-category">Belt</a>
-
-                                                <div class="price-box">
-                                                    <p class="price">$24.00</p>
-                                                    <del>$10.00</del>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="showcase-container">
-
-                                        <div class="showcase">
-
-                                            <a href="#" class="showcase-img-box">
-                                                <img src="./assets/images/products/jewellery-2.jpg" alt="platinum zircon classic ring" class="showcase-img"
-                                                     width="70">
-                                            </a>
-
-                                            <div class="showcase-content">
-
-                                                <a href="#">
-                                                    <h4 class="showcase-title">platinum Zircon Classic Ring</h4>
-                                                </a>
-
-                                                <a href="#" class="showcase-category">jewellery</a>
-
-                                                <div class="price-box">
-                                                    <p class="price">$62.00</p>
-                                                    <del>$65.00</del>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="showcase">
-
-                                            <a href="#" class="showcase-img-box">
-                                                <img src="./assets/images/products/watch-1.jpg" alt="smart watche vital plus" class="showcase-img" width="70">
-                                            </a>
-
-                                            <div class="showcase-content">
-
-                                                <a href="#">
-                                                    <h4 class="showcase-title">Smart watche Vital Plus</h4>
-                                                </a>
-
-                                                <a href="#" class="showcase-category">Watches</a>
-
-                                                <div class="price-box">
-                                                    <p class="price">$56.00</p>
-                                                    <del>$78.00</del>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="showcase">
-
-                                            <a href="#" class="showcase-img-box">
-                                                <img src="./assets/images/products/shampoo.jpg" alt="shampoo conditioner packs" class="showcase-img"
-                                                     width="70">
-                                            </a>
-
-                                            <div class="showcase-content">
-
-                                                <a href="#">
-                                                    <h4 class="showcase-title">shampoo conditioner packs</h4>
-                                                </a>
-
-                                                <a href="#" class="showcase-category">cosmetics</a>
-
-                                                <div class="price-box">
-                                                    <p class="price">$20.00</p>
-                                                    <del>$30.00</del>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="showcase">
-
-                                            <a href="#" class="showcase-img-box">
-                                                <img src="./assets/images/products/jewellery-1.jpg" alt="rose gold peacock earrings" class="showcase-img"
-                                                     width="70">
-                                            </a>
-
-                                            <div class="showcase-content">
-
-                                                <a href="#">
-                                                    <h4 class="showcase-title">Rose Gold Peacock Earrings</h4>
-                                                </a>
-
-                                                <a href="#" class="showcase-category">jewellery</a>
-
-                                                <div class="price-box">
-                                                    <p class="price">$20.00</p>
-                                                    <del>$30.00</del>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
+                                        </c:forEach>
+                                    </div>                                
 
                                 </div>
 

@@ -97,7 +97,7 @@ public class ChangePasswordServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("account", updateAccount);
             
-            response.sendRedirect(request.getContextPath() + "/home");
+            response.sendRedirect(request.getContextPath() + "/member/profile");
         }
     }
 

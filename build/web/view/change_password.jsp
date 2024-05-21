@@ -83,17 +83,17 @@
 
                                             <div class="form-outline mb-4">
                                                 <label class="form-label" for="form3Example4">Old Password <span style="color: red;">*</span></label>
-                                                <input type="text" id="oldPassword" class="form-control" name="oldPassword" required />
+                                                <input type="password" id="oldPassword" class="form-control" name="oldPassword" required />
                                             </div>
 
                                             <div class="form-outline mb-4">
                                                 <label class="form-label" for="form3Example4">New Password <span style="color: red;">*</span></label>
-                                                <input type="text" id="newPassword" class="form-control" name="newPassword" required />
+                                                <input type="password" id="newPassword" class="form-control" name="newPassword" required />
                                             </div>
 
                                             <div class="form-outline mb-4">
                                                 <label class="form-label" for="form3Example4">Confirm New Password <span style="color: red;">*</span></label>
-                                                <input type="text" id="confirmNewPassword" class="form-control" name="confirmNewPassword" required />
+                                                <input type="password" id="confirmNewPassword" class="form-control" name="confirmNewPassword" required />
                                             </div>
 
                                             <c:if test="${not empty alert}">
